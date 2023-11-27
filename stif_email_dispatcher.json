@@ -62,14 +62,21 @@
                             "index": 0
                         }
                     ],
-                    "id": "port_7_to_port_2",
+                    "id": "port_7_to_port_8",
                     "sourceNode": "7",
                     "sourcePort": "7_out",
+                    "targetNode": "8",
+                    "targetPort": "8_in"
+                },
+                {
+                    "id": "port_8_to_port_2",
+                    "sourceNode": "8",
+                    "sourcePort": "8_out",
                     "targetNode": "2",
                     "targetPort": "2_in"
                 }
             ],
-            "hash": "256171ec564164ceb794698c0b67a365d68c48b7",
+            "hash": "2b916e7c6b19113e7883daee0bdcf114c29ffdca",
             "nodes": {
                 "0": {
                     "data": {
@@ -84,8 +91,8 @@
                     "id": "0",
                     "type": "start",
                     "warnings": {},
-                    "x": 1000,
-                    "y": 340
+                    "x": 190,
+                    "y": 0
                 },
                 "1": {
                     "data": {
@@ -100,8 +107,8 @@
                     "id": "1",
                     "type": "end",
                     "warnings": {},
-                    "x": 1040,
-                    "y": 1360
+                    "x": 600,
+                    "y": 960
                 },
                 "2": {
                     "data": {
@@ -134,8 +141,8 @@
                     "id": "2",
                     "type": "filter",
                     "warnings": {},
-                    "x": 1040,
-                    "y": 560
+                    "x": 230,
+                    "y": 328
                 },
                 "3": {
                     "data": {
@@ -197,8 +204,8 @@
                     "id": "3",
                     "type": "utility",
                     "warnings": {},
-                    "x": 980,
-                    "y": 720
+                    "x": 170,
+                    "y": 508
                 },
                 "4": {
                     "data": {
@@ -246,8 +253,8 @@
                     "id": "4",
                     "type": "decision",
                     "warnings": {},
-                    "x": 1060,
-                    "y": 884.5
+                    "x": 250,
+                    "y": 672
                 },
                 "5": {
                     "data": {
@@ -399,8 +406,8 @@
                     "id": "5",
                     "type": "utility",
                     "warnings": {},
-                    "x": 820,
-                    "y": 1024.5
+                    "x": 0,
+                    "y": 852
                 },
                 "6": {
                     "data": {
@@ -422,8 +429,8 @@
                     "id": "6",
                     "type": "format",
                     "warnings": {},
-                    "x": 1120,
-                    "y": 1024.5
+                    "x": 340,
+                    "y": 852
                 },
                 "7": {
                     "data": {
@@ -456,8 +463,60 @@
                     "id": "7",
                     "type": "filter",
                     "warnings": {},
-                    "x": 1060,
-                    "y": 460
+                    "x": 240,
+                    "y": 100
+                },
+                "8": {
+                    "data": {
+                        "advanced": {
+                            "customName": "exctract email ",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "regex_extract_email",
+                            "repoName": "community"
+                        },
+                        "functionId": 3,
+                        "functionName": "exctract_email",
+                        "id": "8",
+                        "selectMore": false,
+                        "type": "utility",
+                        "utilities": {
+                            "regex_extract_email": {
+                                "description": "Provide a string with one or more email addresses in it to be extracted.\nCan be helpful with strings from the To or CC fields of an email: \"<other_email@domain.com>, 'Name' <e-mail@domain.com>\"",
+                                "fields": [
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "String containing email addresses",
+                                        "inputType": "item",
+                                        "label": "input_string",
+                                        "name": "input_string",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "regex_extract_email",
+                                "name": "regex_extract_email"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "regex_extract_email": {
+                                "input_string": "filtered-data:filter_email_artifact:condition_1:artifact:*.cef.fromEmail"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "8",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 260,
+                    "y": 244.5
                 }
             },
             "notes": ""
@@ -469,7 +528,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-27T12:25:49.018607+00:00",
+    "create_time": "2023-11-27T12:27:09.656033+00:00",
     "draft_mode": false,
     "labels": [
         "*"
