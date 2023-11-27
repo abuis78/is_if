@@ -86,7 +86,7 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
         return
 
     # check for 'else' condition 2
-    format_email_body(action=action, success=success, container=container, results=results, handle=handle)
+    format_email_body_ohne_passwort(action=action, success=success, container=container, results=results, handle=handle)
 
     return
 
@@ -124,20 +124,21 @@ def artifact_update_2(action=None, success=None, container=None, results=None, h
     ## Custom Code End
     ################################################################################
 
-    phantom.custom_function(custom_function="community/artifact_update", parameters=parameters, name="artifact_update_2")
+    phantom.custom_function(custom_function="community/artifact_update", parameters=parameters, name="artifact_update_2", callback=format_json_schema)
 
     return
 
 
 @phantom.playbook_block()
-def format_email_body(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
-    phantom.debug("format_email_body() called")
+def format_email_body_ohne_passwort(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("format_email_body_ohne_passwort() called")
 
-    template = """Hallo,\n\nwir möchten Sie darüber informieren, dass wir eine E-Mail mit einem potenziell verdächtigen Anhang zurückgehalten haben. Es handelt sich um die folgende Datei:\n\nDatei Name: {0}\n\nDiese wurde \n"""
+    template = """Hallo,\n\nwir möchten Sie darüber informieren, dass wir eine E-Mail mit einem potenziell verdächtigen Anhang zurückgehalten haben. Es handelt sich um die folgende Datei:\n\nDatei Name: {0}\n\nDer Absender der E-Mail mit dem potenziell verdächtigen Anhang, der an Sie adressiert war, lautet wie folgt:\n\nE-Mail: {1}\n\nFalls Ihnen weitere verdächtige Aktivitäten auffallen sollten, zögern Sie bitte nicht, uns zu kontaktieren. Nach Überprüfung des Inhalts werden wir Sie über die nächsten Schritte informieren.\n\nVielen Dank für Ihre Aufmerksamkeit.\n\nMit freundlichen Grüßen\nIT-Security\n\n\n"""
 
     # parameter list for template variable replacement
     parameters = [
-        "filtered-data:filter_check_if_artifact_name_is_vault_artifact:condition_1:artifact:*.cef.fileName"
+        "filtered-data:filter_check_if_artifact_name_is_vault_artifact:condition_1:artifact:*.cef.fileName",
+        "exctract_email:custom_function_result.data.*.email_address"
     ]
 
     ################################################################################
@@ -150,7 +151,7 @@ def format_email_body(action=None, success=None, container=None, results=None, h
     ## Custom Code End
     ################################################################################
 
-    phantom.format(container=container, template=template, parameters=parameters, name="format_email_body")
+    phantom.format(container=container, template=template, parameters=parameters, name="format_email_body_ohne_passwort")
 
     return
 
@@ -200,6 +201,92 @@ def exctract_email(action=None, success=None, container=None, results=None, hand
     ################################################################################
 
     phantom.custom_function(custom_function="community/regex_extract_email", parameters=parameters, name="exctract_email", callback=filter_check_if_artifact_name_is_vault_artifact)
+
+    return
+
+
+@phantom.playbook_block()
+def format_email_body_mit_passwort(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("format_email_body_mit_passwort() called")
+
+    template = """Hallo,\n\nwir möchten Sie darüber informieren, dass wir eine E-Mail mit einem potenziell verdächtigen Anhang zurückgehalten haben. Es handelt sich um die folgende Datei:\n\nDatei Name: {0}\n\nBei der ersten Überprüfung wurde festgestellt, dass der Anhang passwortgeschützt ist. Um eine gründliche Prüfung durchführen zu können, bitten wir Sie, uns das Passwort mitzuteilen. Bitte verwenden Sie dafür das sichere Formular, welches Sie über den nachstehenden Link erreichen können.\n\nLink: {2}\n\nDer Absender der E-Mail mit dem potenziell verdächtigen Anhang, der an Sie adressiert war, lautet wie folgt:\n\nE-Mail: {1}\n\nFalls Ihnen weitere verdächtige Aktivitäten auffallen sollten, zögern Sie bitte nicht, uns zu kontaktieren. Nach Überprüfung des Inhalts werden wir Sie über die nächsten Schritte informieren.\n\nVielen Dank für Ihre Aufmerksamkeit.\n\nMit freundlichen Grüßen\nIT-Security\n"""
+
+    # parameter list for template variable replacement
+    parameters = [
+        "filtered-data:filter_check_if_artifact_name_is_vault_artifact:condition_1:artifact:*.cef.fileName",
+        "exctract_email:custom_function_result.data.*.email_address",
+        "create_magic_link:action_result.data.*.web_url"
+    ]
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.format(container=container, template=template, parameters=parameters, name="format_email_body_mit_passwort")
+
+    return
+
+
+@phantom.playbook_block()
+def format_json_schema(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("format_json_schema() called")
+
+    template = """{0}\n"""
+
+    # parameter list for template variable replacement
+    parameters = [
+        ""
+    ]
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.format(container=container, template=template, parameters=parameters, name="format_json_schema")
+
+    create_magic_link(container=container)
+
+    return
+
+
+@phantom.playbook_block()
+def create_magic_link(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("create_magic_link() called")
+
+    # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+
+    format_json_schema = phantom.get_format_data(name="format_json_schema")
+
+    parameters = []
+
+    if format_json_schema is not None:
+        parameters.append({
+            "schema": format_json_schema,
+        })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.act("create json prompt", parameters=parameters, name="create_magic_link", assets=["urlprompt"], callback=format_email_body_mit_passwort)
 
     return
 
