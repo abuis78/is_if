@@ -76,7 +76,7 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
     found_match_1 = phantom.decision(
         container=container,
         conditions=[
-            ["checks_zip_or_tar_file_id_password_protected:custom_function_result.data.protected_status", "==", "yew"]
+            ["checks_zip_or_tar_file_id_password_protected:custom_function_result.data.protected_status", "==", "yes"]
         ],
         delimiter=None)
 

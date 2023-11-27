@@ -45,7 +45,7 @@
                     "targetPort": "5_in"
                 }
             ],
-            "hash": "fa7b38dfbe5b4cb23a95a3cfb39cb5a17320ce92",
+            "hash": "99409f88f4bc91fd04eed80ae6ee1315fe3318a1",
             "nodes": {
                 "0": {
                     "data": {
@@ -188,7 +188,7 @@
                                         "conditionIndex": 0,
                                         "op": "==",
                                         "param": "checks_zip_or_tar_file_id_password_protected:custom_function_result.data.protected_status",
-                                        "value": "yew"
+                                        "value": "yes"
                                     }
                                 ],
                                 "conditionIndex": 0,
@@ -200,6 +200,7 @@
                             {
                                 "comparisons": [
                                     {
+                                        "conditionIndex": 1,
                                         "op": "==",
                                         "param": "",
                                         "value": ""
@@ -387,7 +388,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-27T12:13:32.154172+00:00",
+    "create_time": "2023-11-27T12:18:18.957229+00:00",
     "draft_mode": false,
     "labels": [
         "*"
