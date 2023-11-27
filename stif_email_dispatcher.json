@@ -146,21 +146,28 @@
                     "targetPort": "9_in"
                 },
                 {
-                    "id": "port_15_to_port_1",
-                    "sourceNode": "15",
-                    "sourcePort": "15_out",
-                    "targetNode": "1",
-                    "targetPort": "1_in"
-                },
-                {
                     "id": "port_16_to_port_1",
                     "sourceNode": "16",
                     "sourcePort": "16_out",
                     "targetNode": "1",
                     "targetPort": "1_in"
+                },
+                {
+                    "id": "port_15_to_port_20",
+                    "sourceNode": "15",
+                    "sourcePort": "15_out",
+                    "targetNode": "20",
+                    "targetPort": "20_in"
+                },
+                {
+                    "id": "port_20_to_port_1",
+                    "sourceNode": "20",
+                    "sourcePort": "20_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
                 }
             ],
-            "hash": "2288956626aaab73805a235a00f127dec3866482",
+            "hash": "5f2af696c8a4ca419989211d99e20002a6a991ec",
             "nodes": {
                 "0": {
                     "data": {
@@ -191,8 +198,8 @@
                     "id": "1",
                     "type": "end",
                     "warnings": {},
-                    "x": 190,
-                    "y": 2396
+                    "x": 240,
+                    "y": 2720
                 },
                 "10": {
                     "data": {
@@ -647,6 +654,65 @@
                     "x": 230,
                     "y": 640
                 },
+                "20": {
+                    "data": {
+                        "action": "schedule playbook",
+                        "actionType": "generic",
+                        "advanced": {
+                            "join": []
+                        },
+                        "connector": "Runner",
+                        "connectorConfigs": [
+                            "runner-1"
+                        ],
+                        "connectorId": "3f141df7-4bf2-40de-8f68-6133a2cabf11",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "schedule_playbook_1",
+                        "id": "20",
+                        "parameters": {
+                            "container_id": "container:id",
+                            "delay_duration": "5",
+                            "delay_purpose": "waiting for the user's response",
+                            "duration_unit": "Minutes",
+                            "playbook": "Format: <repository>/<playbook>",
+                            "playbook_scope": "all"
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "default": "Format: <repository>/<playbook>",
+                                "field": "playbook"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "delay_purpose"
+                            },
+                            {
+                                "data_type": "string",
+                                "default": "Minutes",
+                                "field": "duration_unit"
+                            },
+                            {
+                                "data_type": "numeric",
+                                "default": "5",
+                                "field": "delay_duration"
+                            },
+                            {
+                                "data_type": "string",
+                                "default": "all",
+                                "field": "playbook_scope"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "20",
+                    "type": "action",
+                    "warnings": {},
+                    "x": 0,
+                    "y": 2400
+                },
                 "3": {
                     "data": {
                         "advanced": {
@@ -1057,7 +1123,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-27T15:07:23.360532+00:00",
+    "create_time": "2023-11-27T15:09:30.412243+00:00",
     "draft_mode": false,
     "labels": [
         "*"

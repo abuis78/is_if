@@ -405,19 +405,7 @@ def playbook_send_email_1(action=None, success=None, container=None, results=Non
     ################################################################################
 
     # call playbook "is_if/send_email", returns the playbook_run_id
-    playbook_run_id = phantom.playbook("is_if/send_email", container=container, name="playbook_send_email_1", callback=playbook_send_email_1_callback, inputs=inputs)
-
-    return
-
-
-@phantom.playbook_block()
-def playbook_send_email_1_callback(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
-    phantom.debug("playbook_send_email_1_callback() called")
-
-    
-    # Downstream End block cannot be called directly, since execution will call on_finish automatically.
-    # Using placeholder callback function so child playbook is run synchronously.
-
+    playbook_run_id = phantom.playbook("is_if/send_email", container=container, name="playbook_send_email_1", callback=schedule_playbook_1, inputs=inputs)
 
     return
 
@@ -528,6 +516,40 @@ def create_artifatc_prompt(action=None, success=None, container=None, results=No
     ################################################################################
 
     phantom.custom_function(custom_function="community/artifact_create", parameters=parameters, name="create_artifatc_prompt", callback=format_email_body_mit_passwort)
+
+    return
+
+
+@phantom.playbook_block()
+def schedule_playbook_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("schedule_playbook_1() called")
+
+    # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+
+    id_value = container.get("id", None)
+
+    parameters = []
+
+    parameters.append({
+        "playbook": "Format: <repository>/<playbook>",
+        "duration_unit": "Minutes",
+        "delay_duration": 5,
+        "playbook_scope": "all",
+        "delay_purpose": "waiting for the user's response",
+        "container_id": id_value,
+    })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.act("schedule playbook", parameters=parameters, name="schedule_playbook_1", assets=["runner-1"])
 
     return
 
