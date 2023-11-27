@@ -167,7 +167,7 @@
                     "targetPort": "1_in"
                 }
             ],
-            "hash": "483990dd8fb0c0997a52e0ed0f671ea48e1326a4",
+            "hash": "446d1a402680ad0068f05442082fc2970394b726",
             "nodes": {
                 "0": {
                     "data": {
@@ -212,7 +212,7 @@
                         "functionName": "format_json_schema",
                         "id": "10",
                         "parameters": [],
-                        "template": "{\n    \"schema\": {\n        \"title\": \"Archie Passwort\",\n        \"description\": \"\",\n        \"type\": \"object\",\n        \"required\": [\"password\"],\n        \"properties\": {\n            \"password\": {\"type\": \"integer\", \"title\": \"password\", \"minumum\": 0, \"maximum\": 10}\n        }\n    }\n}",
+                        "template": "{\n    \"schema\": {\n        \"title\": \"Archie Passwort\",\n        \"description\": \"\",\n        \"type\": \"object\",\n        \"required\": [\"password\"],\n        \"properties\": {\n            \"password\": {\"type\": \"string\", \"title\": \"password\", \"minumum\": 0, \"maximum\": 10}\n        }\n    }\n}",
                         "type": "format"
                     },
                     "errors": {},
@@ -220,7 +220,7 @@
                     "type": "format",
                     "warnings": {},
                     "x": 0,
-                    "y": 1312
+                    "y": 1340
                 },
                 "11": {
                     "data": {
@@ -1123,7 +1123,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-27T15:11:24.507526+00:00",
+    "create_time": "2023-11-27T15:34:04.496190+00:00",
     "draft_mode": false,
     "labels": [
         "*"
