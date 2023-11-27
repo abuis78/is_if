@@ -167,7 +167,7 @@
                     "targetPort": "1_in"
                 }
             ],
-            "hash": "5f2af696c8a4ca419989211d99e20002a6a991ec",
+            "hash": "483990dd8fb0c0997a52e0ed0f671ea48e1326a4",
             "nodes": {
                 "0": {
                     "data": {
@@ -675,7 +675,7 @@
                             "delay_duration": "5",
                             "delay_purpose": "waiting for the user's response",
                             "duration_unit": "Minutes",
-                            "playbook": "Format: <repository>/<playbook>",
+                            "playbook": "is_if/check_for_replay",
                             "playbook_scope": "all"
                         },
                         "requiredParameters": [
@@ -1123,7 +1123,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-27T15:09:30.412243+00:00",
+    "create_time": "2023-11-27T15:11:24.507526+00:00",
     "draft_mode": false,
     "labels": [
         "*"

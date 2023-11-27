@@ -531,7 +531,7 @@ def schedule_playbook_1(action=None, success=None, container=None, results=None,
     parameters = []
 
     parameters.append({
-        "playbook": "Format: <repository>/<playbook>",
+        "playbook": "is_if/check_for_replay",
         "duration_unit": "Minutes",
         "delay_duration": 5,
         "playbook_scope": "all",
