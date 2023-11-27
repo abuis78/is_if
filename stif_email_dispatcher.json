@@ -102,9 +102,37 @@
                     "sourcePort": "12_out",
                     "targetNode": "2",
                     "targetPort": "2_in"
+                },
+                {
+                    "id": "port_6_to_port_13",
+                    "sourceNode": "6",
+                    "sourcePort": "6_out",
+                    "targetNode": "13",
+                    "targetPort": "13_in"
+                },
+                {
+                    "id": "port_9_to_port_14",
+                    "sourceNode": "9",
+                    "sourcePort": "9_out",
+                    "targetNode": "14",
+                    "targetPort": "14_in"
+                },
+                {
+                    "id": "port_14_to_port_15",
+                    "sourceNode": "14",
+                    "sourcePort": "14_out",
+                    "targetNode": "15",
+                    "targetPort": "15_in"
+                },
+                {
+                    "id": "port_13_to_port_16",
+                    "sourceNode": "13",
+                    "sourcePort": "13_out",
+                    "targetNode": "16",
+                    "targetPort": "16_in"
                 }
             ],
-            "hash": "02d7db37326fc0a1b35f68ec7dc6c4ee76837b8d",
+            "hash": "d93a3082df921082779a9ac560fefbb97eaf9530",
             "nodes": {
                 "0": {
                     "data": {
@@ -135,8 +163,8 @@
                     "id": "1",
                     "type": "end",
                     "warnings": {},
-                    "x": 540,
-                    "y": 1580
+                    "x": 320,
+                    "y": 1920
                 },
                 "10": {
                     "data": {
@@ -249,6 +277,134 @@
                     "warnings": {},
                     "x": 170,
                     "y": 476
+                },
+                "13": {
+                    "data": {
+                        "advanced": {
+                            "customName": "email subject no action",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 4,
+                        "functionName": "email_subject_no_action",
+                        "id": "13",
+                        "parameters": [
+                            "container:id"
+                        ],
+                        "template": "[{0}] - Aktuelle \u00dcberpr\u00fcfung Ihres E-Mail-Anhangs \u2013 Status information",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "13",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 340,
+                    "y": 1304.5
+                },
+                "14": {
+                    "data": {
+                        "advanced": {
+                            "customName": "email subject action needed",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 5,
+                        "functionName": "email_subject_action_needed",
+                        "id": "14",
+                        "parameters": [
+                            "container:id"
+                        ],
+                        "template": "[{0}] - Aktuelle \u00dcberpr\u00fcfung Ihres E-Mail-Anhangs \u2013 Ihre Mitwirkung ist gefragt\n",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "14",
+                    "type": "format",
+                    "warnings": {},
+                    "x": -1.4210854715202004e-14,
+                    "y": 1764.5
+                },
+                "15": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "playbook_send_email_1",
+                        "id": "15",
+                        "inputs": {
+                            "email_body": {
+                                "datapaths": [
+                                    "format_email_body_mit_passwort:formatted_data"
+                                ],
+                                "deduplicate": false
+                            },
+                            "email_recipient": {
+                                "datapaths": [],
+                                "deduplicate": false
+                            },
+                            "email_subject": {
+                                "datapaths": [
+                                    "email_subject_action_needed:formatted_data"
+                                ],
+                                "deduplicate": false
+                            }
+                        },
+                        "playbookName": "send_email",
+                        "playbookRepo": 32,
+                        "playbookRepoName": "is_if",
+                        "playbookType": "data",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "15",
+                    "type": "playbook",
+                    "warnings": {},
+                    "x": 0,
+                    "y": 1900
+                },
+                "16": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 2,
+                        "functionName": "playbook_send_email_2",
+                        "id": "16",
+                        "inputs": {
+                            "email_body": {
+                                "datapaths": [
+                                    "format_email_body_ohne_passwort:formatted_data"
+                                ],
+                                "deduplicate": false
+                            },
+                            "email_recipient": {
+                                "datapaths": [
+                                    "extract_email_toemail:custom_function_result.data.*.email_address"
+                                ],
+                                "deduplicate": false
+                            },
+                            "email_subject": {
+                                "datapaths": [
+                                    "email_subject_no_action:formatted_data"
+                                ],
+                                "deduplicate": false
+                            }
+                        },
+                        "playbookName": "send_email",
+                        "playbookRepo": 32,
+                        "playbookRepoName": "is_if",
+                        "playbookType": "data",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "16",
+                    "type": "playbook",
+                    "warnings": {},
+                    "x": 340,
+                    "y": 1444.5
                 },
                 "2": {
                     "data": {
@@ -694,7 +850,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-27T12:39:33.747837+00:00",
+    "create_time": "2023-11-27T12:44:34.896100+00:00",
     "draft_mode": false,
     "labels": [
         "*"

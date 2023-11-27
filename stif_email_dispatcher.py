@@ -153,6 +153,8 @@ def format_email_body_ohne_passwort(action=None, success=None, container=None, r
 
     phantom.format(container=container, template=template, parameters=parameters, name="format_email_body_ohne_passwort")
 
+    email_subject_no_action(container=container)
+
     return
 
 
@@ -229,6 +231,8 @@ def format_email_body_mit_passwort(action=None, success=None, container=None, re
     ################################################################################
 
     phantom.format(container=container, template=template, parameters=parameters, name="format_email_body_mit_passwort")
+
+    email_subject_action_needed(container=container)
 
     return
 
@@ -316,6 +320,123 @@ def extract_email_toemail(action=None, success=None, container=None, results=Non
     ################################################################################
 
     phantom.custom_function(custom_function="community/regex_extract_email", parameters=parameters, name="extract_email_toemail", callback=filter_check_if_artifact_name_is_vault_artifact)
+
+    return
+
+
+@phantom.playbook_block()
+def email_subject_no_action(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("email_subject_no_action() called")
+
+    template = """[{0}] - Aktuelle Überprüfung Ihres E-Mail-Anhangs – Status information"""
+
+    # parameter list for template variable replacement
+    parameters = [
+        "container:id"
+    ]
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.format(container=container, template=template, parameters=parameters, name="email_subject_no_action")
+
+    playbook_send_email_2(container=container)
+
+    return
+
+
+@phantom.playbook_block()
+def email_subject_action_needed(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("email_subject_action_needed() called")
+
+    template = """[{0}] - Aktuelle Überprüfung Ihres E-Mail-Anhangs – Ihre Mitwirkung ist gefragt\n"""
+
+    # parameter list for template variable replacement
+    parameters = [
+        "container:id"
+    ]
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.format(container=container, template=template, parameters=parameters, name="email_subject_action_needed")
+
+    playbook_send_email_1(container=container)
+
+    return
+
+
+@phantom.playbook_block()
+def playbook_send_email_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("playbook_send_email_1() called")
+
+    format_email_body_mit_passwort = phantom.get_format_data(name="format_email_body_mit_passwort")
+    email_subject_action_needed = phantom.get_format_data(name="email_subject_action_needed")
+
+    inputs = {
+        "email_body": format_email_body_mit_passwort,
+        "email_subject": email_subject_action_needed,
+        "email_recipient": [],
+    }
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    # call playbook "is_if/send_email", returns the playbook_run_id
+    playbook_run_id = phantom.playbook("is_if/send_email", container=container, name="playbook_send_email_1", inputs=inputs)
+
+    return
+
+
+@phantom.playbook_block()
+def playbook_send_email_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("playbook_send_email_2() called")
+
+    extract_email_toemail_data = phantom.collect2(container=container, datapath=["extract_email_toemail:custom_function_result.data.*.email_address"])
+    format_email_body_ohne_passwort = phantom.get_format_data(name="format_email_body_ohne_passwort")
+    email_subject_no_action = phantom.get_format_data(name="email_subject_no_action")
+
+    extract_email_toemail_data___email_address = [item[0] for item in extract_email_toemail_data]
+
+    inputs = {
+        "email_body": format_email_body_ohne_passwort,
+        "email_subject": email_subject_no_action,
+        "email_recipient": extract_email_toemail_data___email_address,
+    }
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    # call playbook "is_if/send_email", returns the playbook_run_id
+    playbook_run_id = phantom.playbook("is_if/send_email", container=container, name="playbook_send_email_2", inputs=inputs)
 
     return
 
