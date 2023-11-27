@@ -69,13 +69,6 @@
                     "targetPort": "8_in"
                 },
                 {
-                    "id": "port_8_to_port_2",
-                    "sourceNode": "8",
-                    "sourcePort": "8_out",
-                    "targetNode": "2",
-                    "targetPort": "2_in"
-                },
-                {
                     "id": "port_5_to_port_10",
                     "sourceNode": "5",
                     "sourcePort": "5_out",
@@ -95,9 +88,23 @@
                     "sourcePort": "11_out",
                     "targetNode": "9",
                     "targetPort": "9_in"
+                },
+                {
+                    "id": "port_8_to_port_12",
+                    "sourceNode": "8",
+                    "sourcePort": "8_out",
+                    "targetNode": "12",
+                    "targetPort": "12_in"
+                },
+                {
+                    "id": "port_12_to_port_2",
+                    "sourceNode": "12",
+                    "sourcePort": "12_out",
+                    "targetNode": "2",
+                    "targetPort": "2_in"
                 }
             ],
-            "hash": "77aae5c3dc58f19b41db8291a78ce4dd9c53dac0",
+            "hash": "02d7db37326fc0a1b35f68ec7dc6c4ee76837b8d",
             "nodes": {
                 "0": {
                     "data": {
@@ -128,8 +135,8 @@
                     "id": "1",
                     "type": "end",
                     "warnings": {},
-                    "x": 490,
-                    "y": 0
+                    "x": 540,
+                    "y": 1580
                 },
                 "10": {
                     "data": {
@@ -152,7 +159,7 @@
                     "type": "format",
                     "warnings": {},
                     "x": 0,
-                    "y": 1124.5
+                    "y": 1312
                 },
                 "11": {
                     "data": {
@@ -189,7 +196,59 @@
                     "type": "action",
                     "warnings": {},
                     "x": 0,
-                    "y": 1244.5
+                    "y": 1460
+                },
+                "12": {
+                    "data": {
+                        "advanced": {
+                            "customName": "extract email toEmail",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "regex_extract_email",
+                            "repoName": "community"
+                        },
+                        "functionId": 4,
+                        "functionName": "extract_email_toemail",
+                        "id": "12",
+                        "selectMore": false,
+                        "type": "utility",
+                        "utilities": {
+                            "regex_extract_email": {
+                                "description": "Provide a string with one or more email addresses in it to be extracted.\nCan be helpful with strings from the To or CC fields of an email: \"<other_email@domain.com>, 'Name' <e-mail@domain.com>\"",
+                                "fields": [
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "String containing email addresses",
+                                        "inputType": "item",
+                                        "label": "input_string",
+                                        "name": "input_string",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "regex_extract_email",
+                                "name": "regex_extract_email"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "regex_extract_email": {
+                                "input_string": "filtered-data:filter_email_artifact:condition_1:artifact:*.cef.toEmail"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "12",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 170,
+                    "y": 476
                 },
                 "2": {
                     "data": {
@@ -223,7 +282,7 @@
                     "type": "filter",
                     "warnings": {},
                     "x": 230,
-                    "y": 476
+                    "y": 624
                 },
                 "3": {
                     "data": {
@@ -286,7 +345,7 @@
                     "type": "utility",
                     "warnings": {},
                     "x": 170,
-                    "y": 656
+                    "y": 804
                 },
                 "4": {
                     "data": {
@@ -335,7 +394,7 @@
                     "type": "decision",
                     "warnings": {},
                     "x": 250,
-                    "y": 820
+                    "y": 968
                 },
                 "5": {
                     "data": {
@@ -488,7 +547,7 @@
                     "type": "utility",
                     "warnings": {},
                     "x": 0,
-                    "y": 1020
+                    "y": 1156
                 },
                 "6": {
                     "data": {
@@ -502,7 +561,7 @@
                         "id": "6",
                         "parameters": [
                             "filtered-data:filter_check_if_artifact_name_is_vault_artifact:condition_1:artifact:*.cef.fileName",
-                            "exctract_email:custom_function_result.data.*.email_address"
+                            "exctract_email_from:custom_function_result.data.*.email_address"
                         ],
                         "template": "Hallo,\n\nwir m\u00f6chten Sie dar\u00fcber informieren, dass wir eine E-Mail mit einem potenziell verd\u00e4chtigen Anhang zur\u00fcckgehalten haben. Es handelt sich um die folgende Datei:\n\nDatei Name: {0}\n\nDer Absender der E-Mail mit dem potenziell verd\u00e4chtigen Anhang, der an Sie adressiert war, lautet wie folgt:\n\nE-Mail: {1}\n\nFalls Ihnen weitere verd\u00e4chtige Aktivit\u00e4ten auffallen sollten, z\u00f6gern Sie bitte nicht, uns zu kontaktieren. Nach \u00dcberpr\u00fcfung des Inhalts werden wir Sie \u00fcber die n\u00e4chsten Schritte informieren.\n\nVielen Dank f\u00fcr Ihre Aufmerksamkeit.\n\nMit freundlichen Gr\u00fc\u00dfen\nIT-Security\n\n\n",
                         "type": "format"
@@ -512,7 +571,7 @@
                     "type": "format",
                     "warnings": {},
                     "x": 340,
-                    "y": 1000
+                    "y": 1148
                 },
                 "7": {
                     "data": {
@@ -551,7 +610,7 @@
                 "8": {
                     "data": {
                         "advanced": {
-                            "customName": "exctract email ",
+                            "customName": "exctract email  from",
                             "customNameId": 0,
                             "join": []
                         },
@@ -561,7 +620,7 @@
                             "repoName": "community"
                         },
                         "functionId": 3,
-                        "functionName": "exctract_email",
+                        "functionName": "exctract_email_from",
                         "id": "8",
                         "selectMore": false,
                         "type": "utility",
@@ -612,7 +671,7 @@
                         "id": "9",
                         "parameters": [
                             "filtered-data:filter_check_if_artifact_name_is_vault_artifact:condition_1:artifact:*.cef.fileName",
-                            "exctract_email:custom_function_result.data.*.email_address",
+                            "exctract_email_from:custom_function_result.data.*.email_address",
                             "create_magic_link:action_result.data.*.web_url"
                         ],
                         "template": "Hallo,\n\nwir m\u00f6chten Sie dar\u00fcber informieren, dass wir eine E-Mail mit einem potenziell verd\u00e4chtigen Anhang zur\u00fcckgehalten haben. Es handelt sich um die folgende Datei:\n\nDatei Name: {0}\n\nBei der ersten \u00dcberpr\u00fcfung wurde festgestellt, dass der Anhang passwortgesch\u00fctzt ist. Um eine gr\u00fcndliche Pr\u00fcfung durchf\u00fchren zu k\u00f6nnen, bitten wir Sie, uns das Passwort mitzuteilen. Bitte verwenden Sie daf\u00fcr das sichere Formular, welches Sie \u00fcber den nachstehenden Link erreichen k\u00f6nnen.\n\nLink: {2}\n\nDer Absender der E-Mail mit dem potenziell verd\u00e4chtigen Anhang, der an Sie adressiert war, lautet wie folgt:\n\nE-Mail: {1}\n\nFalls Ihnen weitere verd\u00e4chtige Aktivit\u00e4ten auffallen sollten, z\u00f6gern Sie bitte nicht, uns zu kontaktieren. Nach \u00dcberpr\u00fcfung des Inhalts werden wir Sie \u00fcber die n\u00e4chsten Schritte informieren.\n\nVielen Dank f\u00fcr Ihre Aufmerksamkeit.\n\nMit freundlichen Gr\u00fc\u00dfen\nIT-Security\n",
@@ -623,7 +682,7 @@
                     "type": "format",
                     "warnings": {},
                     "x": 0,
-                    "y": 1340
+                    "y": 1608
                 }
             },
             "notes": ""
@@ -635,7 +694,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-27T12:36:09.108268+00:00",
+    "create_time": "2023-11-27T12:39:33.747837+00:00",
     "draft_mode": false,
     "labels": [
         "*"

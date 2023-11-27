@@ -138,7 +138,7 @@ def format_email_body_ohne_passwort(action=None, success=None, container=None, r
     # parameter list for template variable replacement
     parameters = [
         "filtered-data:filter_check_if_artifact_name_is_vault_artifact:condition_1:artifact:*.cef.fileName",
-        "exctract_email:custom_function_result.data.*.email_address"
+        "exctract_email_from:custom_function_result.data.*.email_address"
     ]
 
     ################################################################################
@@ -171,20 +171,20 @@ def filter_email_artifact(action=None, success=None, container=None, results=Non
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        exctract_email(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+        exctract_email_from(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
 
 @phantom.playbook_block()
-def exctract_email(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
-    phantom.debug("exctract_email() called")
+def exctract_email_from(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("exctract_email_from() called")
 
     filtered_artifact_0_data_filter_email_artifact = phantom.collect2(container=container, datapath=["filtered-data:filter_email_artifact:condition_1:artifact:*.cef.fromEmail","filtered-data:filter_email_artifact:condition_1:artifact:*.id"])
 
     parameters = []
 
-    # build parameters list for 'exctract_email' call
+    # build parameters list for 'exctract_email_from' call
     for filtered_artifact_0_item_filter_email_artifact in filtered_artifact_0_data_filter_email_artifact:
         parameters.append({
             "input_string": filtered_artifact_0_item_filter_email_artifact[0],
@@ -200,7 +200,7 @@ def exctract_email(action=None, success=None, container=None, results=None, hand
     ## Custom Code End
     ################################################################################
 
-    phantom.custom_function(custom_function="community/regex_extract_email", parameters=parameters, name="exctract_email", callback=filter_check_if_artifact_name_is_vault_artifact)
+    phantom.custom_function(custom_function="community/regex_extract_email", parameters=parameters, name="exctract_email_from", callback=extract_email_toemail)
 
     return
 
@@ -214,7 +214,7 @@ def format_email_body_mit_passwort(action=None, success=None, container=None, re
     # parameter list for template variable replacement
     parameters = [
         "filtered-data:filter_check_if_artifact_name_is_vault_artifact:condition_1:artifact:*.cef.fileName",
-        "exctract_email:custom_function_result.data.*.email_address",
+        "exctract_email_from:custom_function_result.data.*.email_address",
         "create_magic_link:action_result.data.*.web_url"
     ]
 
@@ -287,6 +287,35 @@ def create_magic_link(action=None, success=None, container=None, results=None, h
     ################################################################################
 
     phantom.act("create json prompt", parameters=parameters, name="create_magic_link", assets=["urlprompt"], callback=format_email_body_mit_passwort)
+
+    return
+
+
+@phantom.playbook_block()
+def extract_email_toemail(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("extract_email_toemail() called")
+
+    filtered_artifact_0_data_filter_email_artifact = phantom.collect2(container=container, datapath=["filtered-data:filter_email_artifact:condition_1:artifact:*.cef.toEmail","filtered-data:filter_email_artifact:condition_1:artifact:*.id"])
+
+    parameters = []
+
+    # build parameters list for 'extract_email_toemail' call
+    for filtered_artifact_0_item_filter_email_artifact in filtered_artifact_0_data_filter_email_artifact:
+        parameters.append({
+            "input_string": filtered_artifact_0_item_filter_email_artifact[0],
+        })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.custom_function(custom_function="community/regex_extract_email", parameters=parameters, name="extract_email_toemail", callback=filter_check_if_artifact_name_is_vault_artifact)
 
     return
 
