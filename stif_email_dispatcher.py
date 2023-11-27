@@ -12,8 +12,8 @@ from datetime import datetime, timedelta
 def on_start(container):
     phantom.debug('on_start() called')
 
-    # call 'filter_check_if_artifact_name_is_vault_artifact' block
-    filter_check_if_artifact_name_is_vault_artifact(container=container)
+    # call 'filter_email_artifact' block
+    filter_email_artifact(container=container)
 
     return
 
@@ -85,6 +85,9 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
         artifact_update_2(action=action, success=success, container=container, results=results, handle=handle)
         return
 
+    # check for 'else' condition 2
+    format_email_body(action=action, success=success, container=container, results=results, handle=handle)
+
     return
 
 
@@ -122,6 +125,52 @@ def artifact_update_2(action=None, success=None, container=None, results=None, h
     ################################################################################
 
     phantom.custom_function(custom_function="community/artifact_update", parameters=parameters, name="artifact_update_2")
+
+    return
+
+
+@phantom.playbook_block()
+def format_email_body(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("format_email_body() called")
+
+    template = """Hallo,\n\nwir möchten Sie darüber informieren, dass wir eine E-Mail mit einem potenziell verdächtigen Anhang zurückgehalten haben. Es handelt sich um die folgende Datei:\n\nDatei Name: {0}\n\nDiese wurde \n"""
+
+    # parameter list for template variable replacement
+    parameters = [
+        "filtered-data:filter_check_if_artifact_name_is_vault_artifact:condition_1:artifact:*.cef.fileName"
+    ]
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.format(container=container, template=template, parameters=parameters, name="format_email_body")
+
+    return
+
+
+@phantom.playbook_block()
+def filter_email_artifact(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("filter_email_artifact() called")
+
+    # collect filtered artifact ids and results for 'if' condition 1
+    matched_artifacts_1, matched_results_1 = phantom.condition(
+        container=container,
+        conditions=[
+            ["artifact:*.name", "==", "Email Artifact"]
+        ],
+        name="filter_email_artifact:condition_1",
+        delimiter=None)
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_1 or matched_results_1:
+        filter_check_if_artifact_name_is_vault_artifact(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 

@@ -7,13 +7,6 @@
             "description": "",
             "edges": [
                 {
-                    "id": "port_0_to_port_2",
-                    "sourceNode": "0",
-                    "sourcePort": "0_out",
-                    "targetNode": "2",
-                    "targetPort": "2_in"
-                },
-                {
                     "conditions": [
                         {
                             "index": 0
@@ -43,9 +36,40 @@
                     "sourcePort": "4_out",
                     "targetNode": "5",
                     "targetPort": "5_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "id": "port_4_to_port_6",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "6",
+                    "targetPort": "6_in"
+                },
+                {
+                    "id": "port_0_to_port_7",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "7",
+                    "targetPort": "7_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_7_to_port_2",
+                    "sourceNode": "7",
+                    "sourcePort": "7_out",
+                    "targetNode": "2",
+                    "targetPort": "2_in"
                 }
             ],
-            "hash": "99409f88f4bc91fd04eed80ae6ee1315fe3318a1",
+            "hash": "256171ec564164ceb794698c0b67a365d68c48b7",
             "nodes": {
                 "0": {
                     "data": {
@@ -61,7 +85,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 1000,
-                    "y": 419.9999999999999
+                    "y": 340
                 },
                 "1": {
                     "data": {
@@ -76,8 +100,8 @@
                     "id": "1",
                     "type": "end",
                     "warnings": {},
-                    "x": 1020,
-                    "y": 1160
+                    "x": 1040,
+                    "y": 1360
                 },
                 "2": {
                     "data": {
@@ -377,6 +401,63 @@
                     "warnings": {},
                     "x": 820,
                     "y": 1024.5
+                },
+                "6": {
+                    "data": {
+                        "advanced": {
+                            "customName": "format email  body",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "format_email_body",
+                        "id": "6",
+                        "parameters": [
+                            "filtered-data:filter_check_if_artifact_name_is_vault_artifact:condition_1:artifact:*.cef.fileName"
+                        ],
+                        "template": "Hallo,\n\nwir m\u00f6chten Sie dar\u00fcber informieren, dass wir eine E-Mail mit einem potenziell verd\u00e4chtigen Anhang zur\u00fcckgehalten haben. Es handelt sich um die folgende Datei:\n\nDatei Name: {0}\n\nDiese wurde \n",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "6",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 1120,
+                    "y": 1024.5
+                },
+                "7": {
+                    "data": {
+                        "advanced": {
+                            "customName": "filter Email Artifact",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "==",
+                                        "param": "artifact:*.name",
+                                        "value": "Email Artifact"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "Email Artifact",
+                                "logic": "and"
+                            }
+                        ],
+                        "functionId": 2,
+                        "functionName": "filter_email_artifact",
+                        "id": "7",
+                        "type": "filter"
+                    },
+                    "errors": {},
+                    "id": "7",
+                    "type": "filter",
+                    "warnings": {},
+                    "x": 1060,
+                    "y": 460
                 }
             },
             "notes": ""
@@ -388,7 +469,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-27T12:18:18.957229+00:00",
+    "create_time": "2023-11-27T12:25:49.018607+00:00",
     "draft_mode": false,
     "labels": [
         "*"
