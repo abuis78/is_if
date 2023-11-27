@@ -288,7 +288,7 @@ def create_magic_link(action=None, success=None, container=None, results=None, h
     ## Custom Code End
     ################################################################################
 
-    phantom.act("create json prompt", parameters=parameters, name="create_magic_link", assets=["urlprompt"], callback=format_email_body_mit_passwort)
+    phantom.act("create json prompt", parameters=parameters, name="create_magic_link", assets=["urlprompt"], callback=format_json_artifact_create)
 
     return
 
@@ -405,7 +405,19 @@ def playbook_send_email_1(action=None, success=None, container=None, results=Non
     ################################################################################
 
     # call playbook "is_if/send_email", returns the playbook_run_id
-    playbook_run_id = phantom.playbook("is_if/send_email", container=container, name="playbook_send_email_1", inputs=inputs)
+    playbook_run_id = phantom.playbook("is_if/send_email", container=container, name="playbook_send_email_1", callback=playbook_send_email_1_callback, inputs=inputs)
+
+    return
+
+
+@phantom.playbook_block()
+def playbook_send_email_1_callback(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("playbook_send_email_1_callback() called")
+
+    
+    # Downstream End block cannot be called directly, since execution will call on_finish automatically.
+    # Using placeholder callback function so child playbook is run synchronously.
+
 
     return
 
@@ -437,7 +449,85 @@ def playbook_send_email_2(action=None, success=None, container=None, results=Non
     ################################################################################
 
     # call playbook "is_if/send_email", returns the playbook_run_id
-    playbook_run_id = phantom.playbook("is_if/send_email", container=container, name="playbook_send_email_2", inputs=inputs)
+    playbook_run_id = phantom.playbook("is_if/send_email", container=container, name="playbook_send_email_2", callback=playbook_send_email_2_callback, inputs=inputs)
+
+    return
+
+
+@phantom.playbook_block()
+def playbook_send_email_2_callback(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("playbook_send_email_2_callback() called")
+
+    
+    # Downstream End block cannot be called directly, since execution will call on_finish automatically.
+    # Using placeholder callback function so child playbook is run synchronously.
+
+
+    return
+
+
+@phantom.playbook_block()
+def format_json_artifact_create(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("format_json_artifact_create() called")
+
+    template = """{{ \"cef\": {{ \"web_url\": \"{0}\", \"prompt_id\": \"{1}\" }} }}\n"""
+
+    # parameter list for template variable replacement
+    parameters = [
+        "create_magic_link:action_result.data.*.web_url",
+        "create_magic_link:action_result.data.*.id"
+    ]
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.format(container=container, template=template, parameters=parameters, name="format_json_artifact_create")
+
+    create_artifatc_prompt(container=container)
+
+    return
+
+
+@phantom.playbook_block()
+def create_artifatc_prompt(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("create_artifatc_prompt() called")
+
+    id_value = container.get("id", None)
+    format_json_artifact_create = phantom.get_format_data(name="format_json_artifact_create")
+
+    parameters = []
+
+    parameters.append({
+        "container": id_value,
+        "name": "url prompt",
+        "label": None,
+        "severity": None,
+        "cef_field": None,
+        "cef_value": None,
+        "cef_data_type": None,
+        "tags": None,
+        "run_automation": None,
+        "input_json": format_json_artifact_create,
+    })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.custom_function(custom_function="community/artifact_create", parameters=parameters, name="create_artifatc_prompt", callback=format_email_body_mit_passwort)
 
     return
 
