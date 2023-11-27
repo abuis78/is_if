@@ -5,8 +5,59 @@
     "coa": {
         "data": {
             "description": "",
-            "edges": [],
-            "hash": "34f214649e27c33ea22c0dd6363172679b9d6dd0",
+            "edges": [
+                {
+                    "id": "port_0_to_port_3",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "3",
+                    "targetPort": "3_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_3_to_port_2",
+                    "sourceNode": "3",
+                    "sourcePort": "3_out",
+                    "targetNode": "2",
+                    "targetPort": "2_in"
+                },
+                {
+                    "id": "port_2_to_port_4",
+                    "sourceNode": "2",
+                    "sourcePort": "2_out",
+                    "targetNode": "4",
+                    "targetPort": "4_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_4_to_port_5",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "5",
+                    "targetPort": "5_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_5_to_port_6",
+                    "sourceNode": "5",
+                    "sourcePort": "5_out",
+                    "targetNode": "6",
+                    "targetPort": "6_in"
+                }
+            ],
+            "hash": "7721dcebe703e1b156b882631a478bcdd4b85918",
             "nodes": {
                 "0": {
                     "data": {
@@ -22,7 +73,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 1000,
-                    "y": 419.9999999999999
+                    "y": 280
                 },
                 "1": {
                     "data": {
@@ -37,8 +88,237 @@
                     "id": "1",
                     "type": "end",
                     "warnings": {},
-                    "x": 1000,
-                    "y": 1000
+                    "x": 960,
+                    "y": 1280
+                },
+                "2": {
+                    "data": {
+                        "action": "check status",
+                        "actionType": "contain",
+                        "advanced": {
+                            "customName": "check prompt status",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "connector": "URL Prompt",
+                        "connectorConfigs": [
+                            "urlprompt"
+                        ],
+                        "connectorId": "709b9d9a-fa75-4ab1-95c1-474f65ba6c43",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "check_prompt_status",
+                        "id": "2",
+                        "parameters": {
+                            "id": "filtered-data:filter_url_prompt_artifact:condition_1:artifact:*.cef.prompt_id"
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "field": "id"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "2",
+                    "type": "action",
+                    "warnings": {},
+                    "x": 980,
+                    "y": 600
+                },
+                "3": {
+                    "data": {
+                        "advanced": {
+                            "customName": "filter url prompt artifact",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "==",
+                                        "param": "artifact:*.name",
+                                        "value": "url prompt"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "url prompt",
+                                "logic": "and"
+                            }
+                        ],
+                        "functionId": 1,
+                        "functionName": "filter_url_prompt_artifact",
+                        "id": "3",
+                        "type": "filter"
+                    },
+                    "errors": {},
+                    "id": "3",
+                    "type": "filter",
+                    "warnings": {},
+                    "x": 1040,
+                    "y": 440
+                },
+                "4": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "==",
+                                        "param": "check_prompt_status:action_result.data.*.status",
+                                        "value": "complete"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "complete",
+                                "display": "If",
+                                "logic": "and",
+                                "type": "if"
+                            },
+                            {
+                                "comparisons": [
+                                    {
+                                        "op": "==",
+                                        "param": "",
+                                        "value": ""
+                                    }
+                                ],
+                                "conditionIndex": 1,
+                                "display": "Else",
+                                "logic": "and",
+                                "type": "else"
+                            }
+                        ],
+                        "functionId": 1,
+                        "functionName": "decision_1",
+                        "id": "4",
+                        "type": "decision"
+                    },
+                    "errors": {},
+                    "id": "4",
+                    "type": "decision",
+                    "warnings": {},
+                    "x": 1070,
+                    "y": 784.5
+                },
+                "5": {
+                    "data": {
+                        "advanced": {
+                            "customName": "filter file artifact with tag pwd_protected",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "==",
+                                        "param": "artifact:*.name",
+                                        "value": "Vault Artifact"
+                                    },
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "in",
+                                        "param": "pwd_protected",
+                                        "value": "artifact:*.tags"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": " Vault Artifact",
+                                "logic": "and"
+                            }
+                        ],
+                        "functionId": 2,
+                        "functionName": "filter_file_artifact_with_tag_pwd_protected",
+                        "id": "5",
+                        "type": "filter"
+                    },
+                    "errors": {},
+                    "id": "5",
+                    "type": "filter",
+                    "warnings": {},
+                    "x": 720,
+                    "y": 920
+                },
+                "6": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "zip_extract",
+                            "repoName": "community"
+                        },
+                        "functionId": 1,
+                        "functionName": "zip_extract_1",
+                        "id": "6",
+                        "selectMore": false,
+                        "type": "utility",
+                        "utilities": {
+                            "zip_extract": {
+                                "description": "Extract all files recursively from a .zip archive. Add the extracted files to the vault and return the vault IDs of the extracted files. Provide a password if needed to decrypt.",
+                                "fields": [
+                                    {
+                                        "dataTypes": [
+                                            "phantom container id"
+                                        ],
+                                        "description": "The container that extracted files will be added to. Should be a container ID or a container dictionary.",
+                                        "inputType": "item",
+                                        "label": "container",
+                                        "name": "container",
+                                        "placeholder": "container:id",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "The vault ID of the zip archive to be unzipped.",
+                                        "inputType": "item",
+                                        "label": "vault_id",
+                                        "name": "vault_id",
+                                        "placeholder": "artifact:*.cef.vaultId",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "The password to use for decryption of the zip archive if necessary.",
+                                        "inputType": "item",
+                                        "label": "password",
+                                        "name": "password",
+                                        "placeholder": "infected",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "zip_extract",
+                                "name": "zip_extract"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "zip_extract": {
+                                "container": "container:id",
+                                "password": "check_prompt_status:action_result.data.*.response.password",
+                                "vault_id": "filtered-data:filter_file_artifact_with_tag_pwd_protected:condition_1:artifact:*.cef.vaultId"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "6",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 660,
+                    "y": 1120
                 }
             },
             "notes": ""
@@ -50,7 +330,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-27T15:10:42.842040+00:00",
+    "create_time": "2023-11-27T15:33:03.702102+00:00",
     "draft_mode": false,
     "labels": [
         "*"
