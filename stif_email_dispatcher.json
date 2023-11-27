@@ -132,6 +132,7 @@
                     "targetPort": "16_in"
                 }
             ],
+            "hash": "022039dbf6b4a20e49de09014299ad3fbb966e88",
             "nodes": {
                 "0": {
                     "data": {
@@ -339,7 +340,9 @@
                                 "deduplicate": false
                             },
                             "email_recipient": {
-                                "datapaths": [],
+                                "datapaths": [
+                                    "exctract_email_fromemail:custom_function_result.data.*.email_address"
+                                ],
                                 "deduplicate": false
                             },
                             "email_subject": {
@@ -380,7 +383,7 @@
                             },
                             "email_recipient": {
                                 "datapaths": [
-                                    "extract_email_toemail:custom_function_result.data.*.email_address"
+                                    "exctract_email_fromemail:custom_function_result.data.*.email_address"
                                 ],
                                 "deduplicate": false
                             },
@@ -716,7 +719,7 @@
                         "id": "6",
                         "parameters": [
                             "filtered-data:filter_check_if_artifact_name_is_vault_artifact:condition_1:artifact:*.cef.fileName",
-                            "exctract_email_from:custom_function_result.data.*.email_address"
+                            "exctract_email_fromemail:custom_function_result.data.*.email_address"
                         ],
                         "template": "Hallo,\n\nwir m\u00f6chten Sie dar\u00fcber informieren, dass wir eine E-Mail mit einem potenziell verd\u00e4chtigen Anhang zur\u00fcckgehalten haben. Es handelt sich um die folgende Datei:\n\nDatei Name: {0}\n\nDer Absender der E-Mail mit dem potenziell verd\u00e4chtigen Anhang, der an Sie adressiert war, lautet wie folgt:\n\nE-Mail: {1}\n\nFalls Ihnen weitere verd\u00e4chtige Aktivit\u00e4ten auffallen sollten, z\u00f6gern Sie bitte nicht, uns zu kontaktieren. Nach \u00dcberpr\u00fcfung des Inhalts werden wir Sie \u00fcber die n\u00e4chsten Schritte informieren.\n\nVielen Dank f\u00fcr Ihre Aufmerksamkeit.\n\nMit freundlichen Gr\u00fc\u00dfen\nIT-Security\n\n\n",
                         "type": "format"
@@ -765,7 +768,7 @@
                 "8": {
                     "data": {
                         "advanced": {
-                            "customName": "exctract email  from",
+                            "customName": "exctract email  fromEmail",
                             "customNameId": 0,
                             "join": []
                         },
@@ -775,7 +778,7 @@
                             "repoName": "community"
                         },
                         "functionId": 3,
-                        "functionName": "exctract_email_from",
+                        "functionName": "exctract_email_fromemail",
                         "id": "8",
                         "selectMore": false,
                         "type": "utility",
@@ -812,7 +815,7 @@
                     "type": "utility",
                     "warnings": {},
                     "x": 170,
-                    "y": 328
+                    "y": 327.99999999999994
                 },
                 "9": {
                     "data": {
@@ -826,7 +829,7 @@
                         "id": "9",
                         "parameters": [
                             "filtered-data:filter_check_if_artifact_name_is_vault_artifact:condition_1:artifact:*.cef.fileName",
-                            "exctract_email_from:custom_function_result.data.*.email_address",
+                            "exctract_email_fromemail:custom_function_result.data.*.email_address",
                             "create_magic_link:action_result.data.*.web_url"
                         ],
                         "template": "Hallo,\n\nwir m\u00f6chten Sie dar\u00fcber informieren, dass wir eine E-Mail mit einem potenziell verd\u00e4chtigen Anhang zur\u00fcckgehalten haben. Es handelt sich um die folgende Datei:\n\nDatei Name: {0}\n\nBei der ersten \u00dcberpr\u00fcfung wurde festgestellt, dass der Anhang passwortgesch\u00fctzt ist. Um eine gr\u00fcndliche Pr\u00fcfung durchf\u00fchren zu k\u00f6nnen, bitten wir Sie, uns das Passwort mitzuteilen. Bitte verwenden Sie daf\u00fcr das sichere Formular, welches Sie \u00fcber den nachstehenden Link erreichen k\u00f6nnen.\n\nLink: {2}\n\nDer Absender der E-Mail mit dem potenziell verd\u00e4chtigen Anhang, der an Sie adressiert war, lautet wie folgt:\n\nE-Mail: {1}\n\nFalls Ihnen weitere verd\u00e4chtige Aktivit\u00e4ten auffallen sollten, z\u00f6gern Sie bitte nicht, uns zu kontaktieren. Nach \u00dcberpr\u00fcfung des Inhalts werden wir Sie \u00fcber die n\u00e4chsten Schritte informieren.\n\nVielen Dank f\u00fcr Ihre Aufmerksamkeit.\n\nMit freundlichen Gr\u00fc\u00dfen\nIT-Security\n",
@@ -849,7 +852,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-27T12:44:34.896100+00:00",
+    "create_time": "2023-11-27T12:48:13.683451+00:00",
     "draft_mode": false,
     "labels": [
         "*"
