@@ -241,12 +241,10 @@ def format_email_body_mit_passwort(action=None, success=None, container=None, re
 def format_json_schema(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("format_json_schema() called")
 
-    template = """{0}\n"""
+    template = """{\n    \"schema\": {\n        \"title\": \"Archie Passwort\",\n        \"description\": \"\",\n        \"type\": \"object\",\n        \"required\": [\"password\"],\n        \"properties\": {\n            \"password\": {\"type\": \"integer\", \"title\": \"password\", \"minumum\": 0, \"maximum\": 10}\n        }\n    }\n}"""
 
     # parameter list for template variable replacement
-    parameters = [
-        ""
-    ]
+    parameters = []
 
     ################################################################################
     ## Custom Code Start
