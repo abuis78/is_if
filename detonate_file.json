@@ -38,21 +38,21 @@
                             "index": 0
                         }
                     ],
-                    "id": "port_10_to_port_11",
+                    "id": "port_10_to_port_14",
                     "sourceNode": "10",
                     "sourcePort": "10_out",
-                    "targetNode": "11",
-                    "targetPort": "11_in"
+                    "targetNode": "14",
+                    "targetPort": "14_in"
                 },
                 {
-                    "id": "port_11_to_port_12",
-                    "sourceNode": "11",
-                    "sourcePort": "11_out",
-                    "targetNode": "12",
-                    "targetPort": "12_in"
+                    "id": "port_14_to_port_13",
+                    "sourceNode": "14",
+                    "sourcePort": "14_out",
+                    "targetNode": "13",
+                    "targetPort": "13_in"
                 }
             ],
-            "hash": "aa0fce52a10a5a635be97523cf26ced69aa15ea3",
+            "hash": "bb3827f56c4a3763e0fb95fd76d1e34422c6dd95",
             "nodes": {
                 "0": {
                     "data": {
@@ -89,7 +89,7 @@
                 "10": {
                     "data": {
                         "advanced": {
-                            "customName": "get right artifact",
+                            "customName": "filter get right artifact",
                             "customNameId": 0,
                             "join": []
                         },
@@ -109,7 +109,7 @@
                             }
                         ],
                         "functionId": 3,
-                        "functionName": "get_right_artifact",
+                        "functionName": "filter_get_right_artifact",
                         "id": "10",
                         "type": "filter"
                     },
@@ -119,28 +119,6 @@
                     "warnings": {},
                     "x": 1040,
                     "y": 1000
-                },
-                "11": {
-                    "data": {
-                        "advanced": {
-                            "join": []
-                        },
-                        "functionId": 2,
-                        "functionName": "format_2",
-                        "id": "11",
-                        "parameters": [
-                            "filtered-data:filter_unpacked_files:condition_1:artifact:*.cef.vaultId",
-                            "filtered-data:get_right_artifact:condition_1:vt_detonate_file:action_result.summary.scan_id"
-                        ],
-                        "template": "%%\n{{ \"cef\": {{\n\"vaultId\": \"{0}\",\n\"scan_id\": \"{1}\"\n}} }}\n%%\n",
-                        "type": "format"
-                    },
-                    "errors": {},
-                    "id": "11",
-                    "type": "format",
-                    "warnings": {},
-                    "x": 980,
-                    "y": 1160
                 },
                 "12": {
                     "data": {
@@ -307,9 +285,194 @@
                     "errors": {},
                     "id": "12",
                     "type": "utility",
+                    "warnings": {
+                        "config": [
+                            "Reconfigure invalid datapath."
+                        ],
+                        "context": [
+                            "Connect block to playbook flow."
+                        ]
+                    },
+                    "x": 1560,
+                    "y": 1240
+                },
+                "13": {
+                    "data": {
+                        "advanced": {
+                            "customName": "update artifact",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "artifact_update",
+                            "repoName": "community"
+                        },
+                        "functionId": 3,
+                        "functionName": "update_artifact",
+                        "id": "13",
+                        "selectMore": false,
+                        "type": "utility",
+                        "utilities": {
+                            "artifact_update": {
+                                "description": "Update an artifact with the specified attributes. All parameters are optional, except that an artifact_id must be provided and if one of cef_field or cef_value is provided then they must both be provided. Supports all fields available in /rest/artifact. Add any unlisted inputs as dictionary keys in input_json. Unsupported keys will automatically be dropped.",
+                                "fields": [
+                                    {
+                                        "dataTypes": [
+                                            "phantom artifact id"
+                                        ],
+                                        "description": "ID of the artifact to update, which is required unless artifact_id is a key within input_json",
+                                        "inputType": "item",
+                                        "label": "artifact_id",
+                                        "name": "artifact_id",
+                                        "placeholder": "1234",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "Change the name of the artifact.",
+                                        "inputType": "item",
+                                        "label": "name",
+                                        "name": "name",
+                                        "placeholder": "artifact",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            ""
+                                        ],
+                                        "description": "Change the label of the artifact.",
+                                        "inputType": "item",
+                                        "label": "label",
+                                        "name": "label",
+                                        "placeholder": "events",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "Change the severity of the artifact. Typically this is either \"High\", \"Medium\", or \"Low\".",
+                                        "inputType": "item",
+                                        "label": "severity",
+                                        "name": "severity",
+                                        "placeholder": "Medium",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "The name of the CEF field to populate in the artifact, such as \"destinationAddress\" or \"sourceDnsDomain\". Required only if cef_value is provided.",
+                                        "inputType": "item",
+                                        "label": "cef_field",
+                                        "name": "cef_field",
+                                        "placeholder": "destinationAddress",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "The value of the CEF field to populate in the artifact, such as the IP address, domain name, or file hash. Required only if cef_field is provided.",
+                                        "inputType": "item",
+                                        "label": "cef_value",
+                                        "name": "cef_value",
+                                        "placeholder": "192.0.2.192",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "The CEF data type of the data in cef_value. For example, this could be \"ip\", \"hash\", or \"domain\". Optional, but only operational if cef_field is provided.",
+                                        "inputType": "item",
+                                        "label": "cef_data_type",
+                                        "name": "cef_data_type",
+                                        "placeholder": "ip",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "A comma-separated list of tags to apply to the artifact, which is optional.",
+                                        "inputType": "item",
+                                        "label": "tags",
+                                        "name": "tags",
+                                        "placeholder": "tag1, tag2, tag3",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "Optional input. Either True or False with default as False. If set to True, existing tags on the indicator record will be replaced by the provided input. If set to False, the new tags will be appended to the existing indicator tags.",
+                                        "inputType": "item",
+                                        "label": "overwrite_tags",
+                                        "name": "overwrite_tags",
+                                        "placeholder": "True or False",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "Optional parameter to modify any extra attributes of the artifact. Input_json will be merged with other inputs. In the event of a conflict, input_json will take precedence.",
+                                        "inputType": "item",
+                                        "label": "input_json",
+                                        "name": "input_json",
+                                        "placeholder": "{\"source_data_identifier\": \"1234\", \"data\": \"5678\"}",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "artifact_update",
+                                "name": "artifact_update"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "artifact_update": {
+                                "artifact_id": "filtered-data:filter_get_right_artifact:condition_1:artifact:*.id",
+                                "cef_data_type": null,
+                                "cef_field": "scan_id",
+                                "cef_value": "filtered-data:filter_get_right_artifact:condition_1:vt_detonate_file:action_result.summary.scan_id",
+                                "input_json": null,
+                                "label": null,
+                                "name": null,
+                                "overwrite_tags": null,
+                                "severity": null,
+                                "tags": "format_tags:formatted_data"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "13",
+                    "type": "utility",
                     "warnings": {},
                     "x": 980,
-                    "y": 1400
+                    "y": 1240
+                },
+                "14": {
+                    "data": {
+                        "advanced": {
+                            "customName": "format tags",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 3,
+                        "functionName": "format_tags",
+                        "id": "14",
+                        "parameters": [
+                            "filtered-data:filter_get_right_artifact:condition_1:artifact:*.tags"
+                        ],
+                        "template": "{0}, pending_scan",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "14",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 990,
+                    "y": 1144.5
                 },
                 "2": {
                     "data": {
@@ -391,7 +554,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T20:52:37.069586+00:00",
+    "create_time": "2023-11-28T20:57:36.237325+00:00",
     "draft_mode": false,
     "labels": [
         "*"
