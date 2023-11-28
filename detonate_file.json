@@ -19,14 +19,14 @@
                             "index": 0
                         }
                     ],
-                    "id": "port_2_to_port_4",
+                    "id": "port_2_to_port_5",
                     "sourceNode": "2",
                     "sourcePort": "2_out",
-                    "targetNode": "4",
-                    "targetPort": "4_in"
+                    "targetNode": "5",
+                    "targetPort": "5_in"
                 }
             ],
-            "hash": "8987c508f5df3014c0bad073f7cec8bf9441780e",
+            "hash": "3c391e07650175ec7c36c8e0adae4c9a4daded39",
             "nodes": {
                 "0": {
                     "data": {
@@ -299,9 +299,48 @@
                     "errors": {},
                     "id": "4",
                     "type": "action",
+                    "warnings": {
+                        "context": [
+                            "Connect block to playbook flow."
+                        ]
+                    },
+                    "x": 1580,
+                    "y": 760
+                },
+                "5": {
+                    "data": {
+                        "action": "detonate file",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "join": []
+                        },
+                        "connector": "VirusTotal v3",
+                        "connectorConfigs": [
+                            "virustotal"
+                        ],
+                        "connectorId": "3fe4875d-a4a7-47d3-9ef1-f9e63a6653a4",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "detonate_file_1",
+                        "id": "5",
+                        "parameters": {
+                            "vault_id": "filtered-data:filter_unpacked_files:condition_1:artifact:*.cef.vaultId",
+                            "wait_time": "10"
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "field": "vault_id"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "5",
+                    "type": "action",
                     "warnings": {},
-                    "x": 990,
-                    "y": 784.5
+                    "x": 980,
+                    "y": 724.5
                 }
             },
             "notes": ""
@@ -313,7 +352,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T16:05:16.474788+00:00",
+    "create_time": "2023-11-28T16:06:54.382268+00:00",
     "draft_mode": false,
     "labels": [
         "*"

@@ -32,7 +32,7 @@ def filter_unpacked_files(action=None, success=None, container=None, results=Non
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        file_reputation_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+        detonate_file_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
@@ -104,6 +104,40 @@ def file_reputation_1(action=None, success=None, container=None, results=None, h
     ################################################################################
 
     phantom.act("file reputation", parameters=parameters, name="file_reputation_1", assets=["virustotal"])
+
+    return
+
+
+@phantom.playbook_block()
+def detonate_file_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("detonate_file_1() called")
+
+    # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+
+    filtered_artifact_0_data_filter_unpacked_files = phantom.collect2(container=container, datapath=["filtered-data:filter_unpacked_files:condition_1:artifact:*.cef.vaultId","filtered-data:filter_unpacked_files:condition_1:artifact:*.id"])
+
+    parameters = []
+
+    # build parameters list for 'detonate_file_1' call
+    for filtered_artifact_0_item_filter_unpacked_files in filtered_artifact_0_data_filter_unpacked_files:
+        if filtered_artifact_0_item_filter_unpacked_files[0] is not None:
+            parameters.append({
+                "vault_id": filtered_artifact_0_item_filter_unpacked_files[0],
+                "wait_time": 10,
+                "context": {'artifact_id': filtered_artifact_0_item_filter_unpacked_files[1]},
+            })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.act("detonate file", parameters=parameters, name="detonate_file_1", assets=["virustotal"])
 
     return
 
