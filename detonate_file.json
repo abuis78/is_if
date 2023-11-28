@@ -52,7 +52,7 @@
                     "targetPort": "12_in"
                 }
             ],
-            "hash": "e92421bec4e38ab799cf4c0b68f6f8e82ba56ab0",
+            "hash": "aa0fce52a10a5a635be97523cf26ced69aa15ea3",
             "nodes": {
                 "0": {
                     "data": {
@@ -132,7 +132,7 @@
                             "filtered-data:filter_unpacked_files:condition_1:artifact:*.cef.vaultId",
                             "filtered-data:get_right_artifact:condition_1:vt_detonate_file:action_result.summary.scan_id"
                         ],
-                        "template": "{{ \"cef\": {{\n%%\n\"vaultId\": \"{0}\",\n\"scan_id\": \"{1}\"\n%%\n}} }}",
+                        "template": "%%\n{{ \"cef\": {{\n\"vaultId\": \"{0}\",\n\"scan_id\": \"{1}\"\n}} }}\n%%\n",
                         "type": "format"
                     },
                     "errors": {},
@@ -391,7 +391,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T20:50:55.654661+00:00",
+    "create_time": "2023-11-28T20:52:37.069586+00:00",
     "draft_mode": false,
     "labels": [
         "*"
