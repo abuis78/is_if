@@ -105,7 +105,7 @@ def update_artifact(action=None, success=None, container=None, results=None, han
     ## Custom Code End
     ################################################################################
 
-    phantom.custom_function(custom_function="community/artifact_update", parameters=parameters, name="update_artifact")
+    phantom.custom_function(custom_function="community/artifact_update", parameters=parameters, name="update_artifact", callback=schedule_playbook_1)
 
     return
 
@@ -134,6 +134,37 @@ def format_tags(action=None, success=None, container=None, results=None, handle=
     phantom.format(container=container, template=template, parameters=parameters, name="format_tags")
 
     update_artifact(container=container)
+
+    return
+
+
+@phantom.playbook_block()
+def schedule_playbook_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("schedule_playbook_1() called")
+
+    # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+
+    parameters = []
+
+    parameters.append({
+        "playbook": "is_if/check_vt_scann",
+        "duration_unit": "Minutes",
+        "delay_duration": 5,
+        "playbook_scope": "all",
+        "delay_purpose": "Wait for VT scann report",
+    })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.act("schedule playbook", parameters=parameters, name="schedule_playbook_1", assets=["runner-1"])
 
     return
 

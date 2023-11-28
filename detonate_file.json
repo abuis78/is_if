@@ -38,9 +38,16 @@
                     "sourcePort": "14_out",
                     "targetNode": "13",
                     "targetPort": "13_in"
+                },
+                {
+                    "id": "port_13_to_port_16",
+                    "sourceNode": "13",
+                    "sourcePort": "13_out",
+                    "targetNode": "16",
+                    "targetPort": "16_in"
                 }
             ],
-            "hash": "181e98322f8a4a2b8fc2aa72afd43f55752f973d",
+            "hash": "00d33f00bd2db5940ab1932128419055fc503f13",
             "nodes": {
                 "0": {
                     "data": {
@@ -226,8 +233,8 @@
                     "id": "13",
                     "type": "utility",
                     "warnings": {},
-                    "x": 980,
-                    "y": 1060
+                    "x": 1020,
+                    "y": 1240
                 },
                 "14": {
                     "data": {
@@ -251,6 +258,64 @@
                     "warnings": {},
                     "x": 1020,
                     "y": 960
+                },
+                "16": {
+                    "data": {
+                        "action": "schedule playbook",
+                        "actionType": "generic",
+                        "advanced": {
+                            "join": []
+                        },
+                        "connector": "Runner",
+                        "connectorConfigs": [
+                            "runner-1"
+                        ],
+                        "connectorId": "3f141df7-4bf2-40de-8f68-6133a2cabf11",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "schedule_playbook_1",
+                        "id": "16",
+                        "parameters": {
+                            "delay_duration": "5",
+                            "delay_purpose": "Wait for VT scann report",
+                            "duration_unit": "Minutes",
+                            "playbook": "is_if/check_vt_scann",
+                            "playbook_scope": "all"
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "default": "Format: <repository>/<playbook>",
+                                "field": "playbook"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "delay_purpose"
+                            },
+                            {
+                                "data_type": "string",
+                                "default": "Minutes",
+                                "field": "duration_unit"
+                            },
+                            {
+                                "data_type": "numeric",
+                                "default": "5",
+                                "field": "delay_duration"
+                            },
+                            {
+                                "data_type": "string",
+                                "default": "all",
+                                "field": "playbook_scope"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "16",
+                    "type": "action",
+                    "warnings": {},
+                    "x": 1030,
+                    "y": 1404.5
                 },
                 "2": {
                     "data": {
@@ -332,7 +397,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T21:21:58.676095+00:00",
+    "create_time": "2023-11-28T21:45:45.075486+00:00",
     "draft_mode": false,
     "labels": [
         "*"
