@@ -121,7 +121,7 @@
                     "targetPort": "4_in"
                 }
             ],
-            "hash": "d0bb50e23167a0211763025f1b20e8524be7b624",
+            "hash": "585a4ea79e61528fddb3d34028988b2b8101d3e6",
             "nodes": {
                 "0": {
                     "data": {
@@ -176,7 +176,7 @@
                     "errors": {},
                     "id": "10",
                     "type": "code",
-                    "userCode": "\n    # Write your custom code here...\n    phantom.debug(filtered_result_0_summary_malicious)\n",
+                    "userCode": "\n    # Write your custom code here...\n    phantom.debug(filtered_result_0_summary_malicious[0])\n    x = filtered_result_0_summary_malicious[0]\n    # \u00dcberpr\u00fcfen, ob x > 1 und <= 20\n    if 1 < x <= 20:\n        phantom.debug(\"x ist gr\u00f6\u00dfer als 1 und kleiner oder gleich 20.\")\n        calculate_the_severity__new_severity = 'medium'\n    # \u00dcberpr\u00fcfen, ob x > 20 und < 50\n    elif 20 < x < 50:\n        phantom.debug(\"x ist \u00fcber 20 und unter 50.\")\n        calculate_the_severity__new_severity = 'high'\n    # \u00dcberpr\u00fcfen, ob x >= 50\n    elif x >= 50:\n        phantom.debug(\"x ist 50 oder mehr.\")\n        calculate_the_severity__new_severity = 'critical'\n    else:\n        phantom.debug(\"x erf\u00fcllt keine der Bedingungen.\")\n",
                     "warnings": {},
                     "x": 500,
                     "y": 1180
@@ -863,7 +863,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T21:56:28.408842+00:00",
+    "create_time": "2023-11-28T22:00:01.351439+00:00",
     "draft_mode": false,
     "labels": [
         "*"

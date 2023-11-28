@@ -281,7 +281,22 @@ def calculate_the_severity(action=None, success=None, container=None, results=No
     ################################################################################
 
     # Write your custom code here...
-    phantom.debug(filtered_result_0_summary_malicious)
+    phantom.debug(filtered_result_0_summary_malicious[0])
+    x = filtered_result_0_summary_malicious[0]
+    # Überprüfen, ob x > 1 und <= 20
+    if 1 < x <= 20:
+        phantom.debug("x ist größer als 1 und kleiner oder gleich 20.")
+        calculate_the_severity__new_severity = 'medium'
+    # Überprüfen, ob x > 20 und < 50
+    elif 20 < x < 50:
+        phantom.debug("x ist über 20 und unter 50.")
+        calculate_the_severity__new_severity = 'high'
+    # Überprüfen, ob x >= 50
+    elif x >= 50:
+        phantom.debug("x ist 50 oder mehr.")
+        calculate_the_severity__new_severity = 'critical'
+    else:
+        phantom.debug("x erfüllt keine der Bedingungen.")
     ################################################################################
     ## Custom Code End
     ################################################################################
