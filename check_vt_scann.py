@@ -75,23 +75,24 @@ def get_scann_report(action=None, success=None, container=None, results=None, ha
 def artifact_update_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("artifact_update_1() called")
 
-    filtered_result_0_data_filter_status_success = phantom.collect2(container=container, datapath=["filtered-data:filter_status_success:condition_1:get_scann_report:action_result.parameter.context.artifact_id","filtered-data:filter_status_success:condition_1:get_scann_report:action_result.summary.malicious"])
+    filtered_result_0_data_filter_status_success = phantom.collect2(container=container, datapath=["filtered-data:filter_status_success:condition_1:get_scann_report:action_result.summary.malicious","filtered-data:filter_status_success:condition_1:get_scann_report:action_result.parameter.context.artifact_id"])
+    calculate_the_severity__new_severity = json.loads(_ if (_ := phantom.get_run_data(key="calculate_the_severity:new_severity")) != "" else "null")  # pylint: disable=used-before-assignment
 
     parameters = []
 
     # build parameters list for 'artifact_update_1' call
     for filtered_result_0_item_filter_status_success in filtered_result_0_data_filter_status_success:
         parameters.append({
-            "artifact_id": filtered_result_0_item_filter_status_success[0],
             "name": None,
-            "label": None,
-            "severity": None,
-            "cef_field": "vt_malicious",
-            "cef_value": filtered_result_0_item_filter_status_success[1],
-            "cef_data_type": None,
             "tags": " unpacked,scan_successful",
-            "overwrite_tags": True,
+            "label": None,
+            "severity": calculate_the_severity__new_severity,
+            "cef_field": "vt_malicious",
+            "cef_value": filtered_result_0_item_filter_status_success[0],
             "input_json": None,
+            "artifact_id": filtered_result_0_item_filter_status_success[1],
+            "cef_data_type": None,
+            "overwrite_tags": True,
         })
 
     ################################################################################
@@ -149,7 +150,7 @@ def filter_status_success(action=None, success=None, container=None, results=Non
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        artifact_update_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+        calculate_the_severity(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     # collect filtered artifact ids and results for 'if' condition 2
     matched_artifacts_2, matched_results_2 = phantom.condition(
@@ -180,16 +181,16 @@ def artifact_update_2(action=None, success=None, container=None, results=None, h
     # build parameters list for 'artifact_update_2' call
     for filtered_result_0_item_filter_status_success in filtered_result_0_data_filter_status_success:
         parameters.append({
-            "artifact_id": filtered_result_0_item_filter_status_success[0],
             "name": None,
+            "tags": " unpacked,scan_successful",
             "label": None,
             "severity": "low",
             "cef_field": "vt_malicious",
             "cef_value": "no hit",
-            "cef_data_type": None,
-            "tags": " unpacked,scan_successful",
-            "overwrite_tags": True,
             "input_json": None,
+            "artifact_id": filtered_result_0_item_filter_status_success[0],
+            "cef_data_type": None,
+            "overwrite_tags": True,
         })
 
     ################################################################################
@@ -238,16 +239,16 @@ def artifact_update_3(action=None, success=None, container=None, results=None, h
     # build parameters list for 'artifact_update_3' call
     for filtered_artifact_0_item_filter_artifacts_pending_scan in filtered_artifact_0_data_filter_artifacts_pending_scan:
         parameters.append({
-            "artifact_id": filtered_artifact_0_item_filter_artifacts_pending_scan[0],
             "name": None,
+            "tags": None,
             "label": "pending",
             "severity": None,
             "cef_field": None,
             "cef_value": None,
-            "cef_data_type": None,
-            "tags": None,
-            "overwrite_tags": None,
             "input_json": None,
+            "artifact_id": filtered_artifact_0_item_filter_artifacts_pending_scan[0],
+            "cef_data_type": None,
+            "overwrite_tags": None,
         })
 
     ################################################################################
@@ -261,6 +262,33 @@ def artifact_update_3(action=None, success=None, container=None, results=None, h
     ################################################################################
 
     phantom.custom_function(custom_function="community/artifact_update", parameters=parameters, name="artifact_update_3")
+
+    return
+
+
+@phantom.playbook_block()
+def calculate_the_severity(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("calculate_the_severity() called")
+
+    filtered_result_0_data_filter_status_success = phantom.collect2(container=container, datapath=["filtered-data:filter_status_success:condition_1:get_scann_report:action_result.summary.malicious"])
+
+    filtered_result_0_summary_malicious = [item[0] for item in filtered_result_0_data_filter_status_success]
+
+    calculate_the_severity__new_severity = None
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+    phantom.debug(filtered_result_0_summary_malicious)
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.save_run_data(key="calculate_the_severity:new_severity", value=json.dumps(calculate_the_severity__new_severity))
+
+    artifact_update_1(container=container)
 
     return
 

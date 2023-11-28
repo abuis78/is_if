@@ -47,18 +47,6 @@
                 {
                     "conditions": [
                         {
-                            "index": 0
-                        }
-                    ],
-                    "id": "port_6_to_port_4",
-                    "sourceNode": "6",
-                    "sourcePort": "6_out",
-                    "targetNode": "4",
-                    "targetPort": "4_in"
-                },
-                {
-                    "conditions": [
-                        {
                             "index": 1
                         }
                     ],
@@ -112,8 +100,28 @@
                     "sourcePort": "9_out",
                     "targetNode": "1",
                     "targetPort": "1_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_6_to_port_10",
+                    "sourceNode": "6",
+                    "sourcePort": "6_out",
+                    "targetNode": "10",
+                    "targetPort": "10_in"
+                },
+                {
+                    "id": "port_10_to_port_4",
+                    "sourceNode": "10",
+                    "sourcePort": "10_out",
+                    "targetNode": "4",
+                    "targetPort": "4_in"
                 }
             ],
+            "hash": "d0bb50e23167a0211763025f1b20e8524be7b624",
             "nodes": {
                 "0": {
                     "data": {
@@ -129,7 +137,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 1205,
-                    "y": 419.9999999999999
+                    "y": 419.9999999999998
                 },
                 "1": {
                     "data": {
@@ -146,6 +154,32 @@
                     "warnings": {},
                     "x": 1480,
                     "y": 1520
+                },
+                "10": {
+                    "data": {
+                        "advanced": {
+                            "customName": "calculate the severity",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "calculate_the_severity",
+                        "id": "10",
+                        "inputParameters": [
+                            "filtered-data:filter_status_success:condition_1:get_scann_report:action_result.summary.malicious"
+                        ],
+                        "outputVariables": [
+                            "new_severity"
+                        ],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "10",
+                    "type": "code",
+                    "userCode": "\n    # Write your custom code here...\n    phantom.debug(filtered_result_0_summary_malicious)\n",
+                    "warnings": {},
+                    "x": 500,
+                    "y": 1180
                 },
                 "2": {
                     "data": {
@@ -359,7 +393,7 @@
                                 "label": null,
                                 "name": null,
                                 "overwrite_tags": "True",
-                                "severity": null,
+                                "severity": "calculate_the_severity:custom_function:new_severity",
                                 "tags": " unpacked,scan_successful"
                             }
                         }
@@ -368,8 +402,8 @@
                     "id": "4",
                     "type": "utility",
                     "warnings": {},
-                    "x": 640,
-                    "y": 1300
+                    "x": 500,
+                    "y": 1280
                 },
                 "5": {
                     "data": {
@@ -829,7 +863,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T21:49:05.897046+00:00",
+    "create_time": "2023-11-28T21:56:28.408842+00:00",
     "draft_mode": false,
     "labels": [
         "*"
