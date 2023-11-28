@@ -40,6 +40,11 @@ def count_severity(action=None, success=None, container=None, results=None, hand
     data = r.json()
     phantom.debug(data["count"])
     code_1__count = data["count"]
+    
+    if data["count"] == 0:
+        count_severity__count = "no"
+    else:
+        count_severity__count = "yes"
     ################################################################################
     ## Custom Code End
     ################################################################################
@@ -59,7 +64,7 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
     found_match_1 = phantom.decision(
         container=container,
         conditions=[
-            ["count_severity:custom_function:count", "!=", 0]
+            ["count_severity:custom_function:count", "==", "yes"]
         ],
         delimiter=None)
 
