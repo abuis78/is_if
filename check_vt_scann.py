@@ -66,7 +66,85 @@ def get_scann_report(action=None, success=None, container=None, results=None, ha
     ## Custom Code End
     ################################################################################
 
-    phantom.act("get report", parameters=parameters, name="get_scann_report", assets=["virustotal"])
+    phantom.act("get report", parameters=parameters, name="get_scann_report", assets=["virustotal"], callback=decision_1)
+
+    return
+
+
+@phantom.playbook_block()
+def artifact_update_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("artifact_update_1() called")
+
+    filtered_result_0_data_filter_status_success = phantom.collect2(container=container, datapath=["filtered-data:filter_status_success:condition_1:get_scann_report:action_result.parameter.context.artifact_id","filtered-data:filter_status_success:condition_1:get_scann_report:action_result.summary.malicious"])
+
+    parameters = []
+
+    # build parameters list for 'artifact_update_1' call
+    for filtered_result_0_item_filter_status_success in filtered_result_0_data_filter_status_success:
+        parameters.append({
+            "artifact_id": filtered_result_0_item_filter_status_success[0],
+            "name": None,
+            "label": None,
+            "severity": None,
+            "cef_field": "vt_malicious",
+            "cef_value": filtered_result_0_item_filter_status_success[1],
+            "cef_data_type": None,
+            "tags": " unpacked,scan_successful",
+            "overwrite_tags": True,
+            "input_json": None,
+        })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.custom_function(custom_function="community/artifact_update", parameters=parameters, name="artifact_update_1")
+
+    return
+
+
+@phantom.playbook_block()
+def decision_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("decision_1() called")
+
+    # check for 'if' condition 1
+    found_match_1 = phantom.decision(
+        container=container,
+        conditions=[
+            ["get_scann_report:action_result.status", "==", "success"]
+        ],
+        delimiter=None)
+
+    # call connected blocks if condition 1 matched
+    if found_match_1:
+        filter_status_success(action=action, success=success, container=container, results=results, handle=handle)
+        return
+
+    return
+
+
+@phantom.playbook_block()
+def filter_status_success(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("filter_status_success() called")
+
+    # collect filtered artifact ids and results for 'if' condition 1
+    matched_artifacts_1, matched_results_1 = phantom.condition(
+        container=container,
+        conditions=[
+            ["get_scann_report:action_result.status", "==", "success"]
+        ],
+        name="filter_status_success:condition_1",
+        delimiter=None)
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_1 or matched_results_1:
+        artifact_update_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
