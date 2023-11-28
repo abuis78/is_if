@@ -35,7 +35,7 @@
                     "targetPort": "6_in"
                 }
             ],
-            "hash": "fc0915c875819a25d6b2d3fbaa6ab9ab3b9e9b16",
+            "hash": "a24d8c9ac580557094f6327b9cb6a4647a3f2993",
             "nodes": {
                 "0": {
                     "data": {
@@ -256,10 +256,10 @@
                                 "cef_value": null,
                                 "container": "container:id",
                                 "input_json": "format_json_for_create_artifact:formatted_data",
-                                "label": null,
+                                "label": "events",
                                 "name": "DKIM-Signatur",
                                 "run_automation": null,
-                                "severity": null,
+                                "severity": "Low",
                                 "tags": null
                             }
                         }
@@ -268,8 +268,8 @@
                     "id": "5",
                     "type": "utility",
                     "warnings": {},
-                    "x": 990,
-                    "y": 844.5
+                    "x": 980,
+                    "y": 840
                 },
                 "6": {
                     "data": {
@@ -456,7 +456,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T15:22:07.315592+00:00",
+    "create_time": "2023-11-28T15:23:38.162468+00:00",
     "draft_mode": false,
     "labels": [
         "*"

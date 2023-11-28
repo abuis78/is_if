@@ -105,8 +105,8 @@ def artifact_create_1(action=None, success=None, container=None, results=None, h
     parameters.append({
         "container": id_value,
         "name": "DKIM-Signatur",
-        "label": None,
-        "severity": None,
+        "label": "events",
+        "severity": "Low",
         "cef_field": None,
         "cef_value": None,
         "cef_data_type": None,
