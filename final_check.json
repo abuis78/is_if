@@ -14,7 +14,7 @@
                     "targetPort": "2_in"
                 }
             ],
-            "hash": "4b13c58d6afcb7d68911510c8952d89d88ba0396",
+            "hash": "8a3e81253e4f671a1cf1fce273e2b7e3d616feed",
             "nodes": {
                 "0": {
                     "data": {
@@ -65,7 +65,7 @@
                     "errors": {},
                     "id": "2",
                     "type": "code",
-                    "userCode": "\n    # Write your custom code here...\n    # artifact?_filter_container=72293&_filter_name__icontains=\"Vault%20Artifact:\"&_exclude_severity=\"low\"\n    c_id = container['id']    \n    \n    u_filter = '?_filter_container=\"'+ str(c_id) +'\"&_filter_name__icontains=\"Vault Artifact:\"&_exclude_severity=\"low\"'\n    phantom.debug(u_filter)\n    \n    url = phantom.build_phantom_rest_url('artifact')\n    url_filter = url + u_filter\n    r = phantom.requests.get(url_filter,verify=False)\n    data = r.json()\n    phantom.debug(data[\"count\"])\n",
+                    "userCode": "\n    # Write your custom code here...\n    # artifact?_filter_container=72293&_filter_name__icontains=\"Vault%20Artifact:\"&_exclude_severity=\"low\"\n    c_id = container['id']    \n    \n    u_filter = '?_filter_container=\"'+ str(c_id) +'\"&_filter_name__icontains=\"Vault Artifact:\"&_exclude_severity=\"low\"'\n    phantom.debug(u_filter)\n    \n    url = phantom.build_phantom_rest_url('artifact')\n    url_filter = url + u_filter\n    r = phantom.requests.get(url_filter,verify=False)\n    data = r.json()\n    phantom.debug(data[\"count\"])\n    code_1__count = data[\"count\"]\n",
                     "warnings": {},
                     "x": 1000,
                     "y": 560
@@ -80,7 +80,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T22:28:38.901220+00:00",
+    "create_time": "2023-11-28T22:29:18.908313+00:00",
     "draft_mode": false,
     "labels": [
         "*"

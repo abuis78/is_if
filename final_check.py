@@ -39,6 +39,7 @@ def code_1(action=None, success=None, container=None, results=None, handle=None,
     r = phantom.requests.get(url_filter,verify=False)
     data = r.json()
     phantom.debug(data["count"])
+    code_1__count = data["count"]
     ################################################################################
     ## Custom Code End
     ################################################################################
