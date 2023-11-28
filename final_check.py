@@ -36,7 +36,7 @@ def code_1(action=None, success=None, container=None, results=None, handle=None,
     
     url = phantom.build_phantom_rest_url('indicator')
     url_filter = url + u_filter
-    r = phantom.requests.get(url,verify=False)
+    r = phantom.requests.get(url_filter,verify=False)
     data = r.json()
     phantom.debug(data)
     ################################################################################
