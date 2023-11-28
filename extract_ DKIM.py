@@ -44,6 +44,13 @@ def extract_dkim_signatur(action=None, success=None, container=None, results=Non
     dkim_parts = parse_dkim_signature(playbook_input_dkim_signatur_values)
     
     phantom.debug(f"dkim_parts: {dkim_parts}")
+    
+    cef_json = {}
+    
+    for key, value in dkim_parts.items():
+        cef_json[f"{key}"] = f"{value}"
+        
+    phantom.debug(cef_json)
     ################################################################################
     ## Custom Code End
     ################################################################################

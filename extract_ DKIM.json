@@ -14,7 +14,7 @@
                     "targetPort": "2_in"
                 }
             ],
-            "hash": "b634b8a7109feff98d8b394522b6b7e3b492e574",
+            "hash": "267a7f8ae28e89f8dd23540c871fc09a0a5cb4a3",
             "nodes": {
                 "0": {
                     "data": {
@@ -69,7 +69,7 @@
                     "errors": {},
                     "id": "2",
                     "type": "code",
-                    "userCode": "\n    # Write your custom code here...\n    def parse_dkim_signature(dkim_signature):\n        # Zerlegt die DKIM-Signatur und speichert die Elemente in einem Dictionary\n        dkim_parts = {}\n        for part in dkim_signature.split(\"; \"):\n            if \"=\" in part:\n                key, value = part.split(\"=\", 1)\n                dkim_parts[key.strip()] = value.strip()\n        return dkim_parts\n\n    dkim_parts = parse_dkim_signature(playbook_input_dkim_signatur_values)\n    \n    phantom.debug(f\"dkim_parts: {dkim_parts}\")\n",
+                    "userCode": "\n    # Write your custom code here...\n    def parse_dkim_signature(dkim_signature):\n        # Zerlegt die DKIM-Signatur und speichert die Elemente in einem Dictionary\n        dkim_parts = {}\n        for part in dkim_signature.split(\"; \"):\n            if \"=\" in part:\n                key, value = part.split(\"=\", 1)\n                dkim_parts[key.strip()] = value.strip()\n        return dkim_parts\n\n    dkim_parts = parse_dkim_signature(playbook_input_dkim_signatur_values)\n    \n    phantom.debug(f\"dkim_parts: {dkim_parts}\")\n    \n    cef_json = {}\n    \n    for key, value in dkim_parts.items():\n        cef_json[f\"{key}\"] = f\"{value}\"\n        \n    phantom.debug(cef_json)\n",
                     "warnings": {},
                     "x": 980,
                     "y": 580
@@ -90,7 +90,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T15:00:57.599912+00:00",
+    "create_time": "2023-11-28T15:09:00.562279+00:00",
     "draft_mode": false,
     "labels": [
         "*"
