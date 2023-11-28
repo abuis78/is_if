@@ -132,13 +132,6 @@
                     "targetPort": "9_in"
                 },
                 {
-                    "id": "port_16_to_port_1",
-                    "sourceNode": "16",
-                    "sourcePort": "16_out",
-                    "targetNode": "1",
-                    "targetPort": "1_in"
-                },
-                {
                     "id": "port_15_to_port_20",
                     "sourceNode": "15",
                     "sourcePort": "15_out",
@@ -179,9 +172,28 @@
                     "sourcePort": "22_out",
                     "targetNode": "2",
                     "targetPort": "2_in"
+                },
+                {
+                    "id": "port_16_to_port_23",
+                    "sourceNode": "16",
+                    "sourcePort": "16_out",
+                    "targetNode": "23",
+                    "targetPort": "23_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_23_to_port_24",
+                    "sourceNode": "23",
+                    "sourcePort": "23_out",
+                    "targetNode": "24",
+                    "targetPort": "24_in"
                 }
             ],
-            "hash": "446d1a402680ad0068f05442082fc2970394b726",
+            "hash": "ee6747972895b9794142766a6dfae07a83bdeed5",
             "nodes": {
                 "0": {
                     "data": {
@@ -212,8 +224,8 @@
                     "id": "1",
                     "type": "end",
                     "warnings": {},
-                    "x": 190,
-                    "y": 2840
+                    "x": 360,
+                    "y": 3140
                 },
                 "10": {
                     "data": {
@@ -827,6 +839,134 @@
                     "x": 170,
                     "y": 788
                 },
+                "23": {
+                    "data": {
+                        "advanced": {
+                            "customName": "filter_Vault_Artifact",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "==",
+                                        "param": "artifact:*.name",
+                                        "value": "Vault Artifact"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "Vault Artifact",
+                                "logic": "and"
+                            }
+                        ],
+                        "functionId": 3,
+                        "functionName": "filter_vault_artifact",
+                        "id": "23",
+                        "type": "filter"
+                    },
+                    "errors": {},
+                    "id": "23",
+                    "type": "filter",
+                    "warnings": {},
+                    "x": 80,
+                    "y": 2800
+                },
+                "24": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "unzip_file",
+                            "repoName": "is_if"
+                        },
+                        "functionId": 6,
+                        "functionName": "unzip_file_6",
+                        "id": "24",
+                        "selectMore": false,
+                        "type": "utility",
+                        "utilities": {
+                            "unzip_file": {
+                                "description": "This Python script unpacks ZIP and RAR files that can be protected by an optional password. It handles a list of file paths with corresponding passwords, adds a prefix-based renaming scheme to the unzipped files and calculates their SHA256 and MD5 hash values. The results are saved in a JSON format containing the path, file name, name of the original archive and the calculated hash values. The script also supports unpacking files without a password.",
+                                "fields": [
+                                    {
+                                        "dataTypes": [],
+                                        "description": "A list of Artifat IDs. These artifacts must contain the following information: VaultID. Optionally a password.",
+                                        "inputType": "list",
+                                        "label": "artifact_id",
+                                        "name": "artifact_id",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "",
+                                        "inputType": "item",
+                                        "label": "container_id",
+                                        "name": "container_id",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "",
+                                        "inputType": "item",
+                                        "label": "default_tag",
+                                        "name": "default_tag",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "",
+                                        "inputType": "item",
+                                        "label": "default_severity",
+                                        "name": "default_severity",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "",
+                                        "inputType": "item",
+                                        "label": "default_label",
+                                        "name": "default_label",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "unzip_file",
+                                "name": "unzip_file"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "unzip_file": {
+                                "artifact_id": [
+                                    "filtered-data:filter_vault_artifact:condition_1:artifact:*.id"
+                                ],
+                                "container_id": "container:id",
+                                "default_label": "container:label",
+                                "default_severity": "Low",
+                                "default_tag": "unix"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "24",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 20,
+                    "y": 2980
+                },
                 "3": {
                     "data": {
                         "advanced": {
@@ -1237,7 +1377,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T15:45:07.644974+00:00",
+    "create_time": "2023-11-28T15:49:34.402530+00:00",
     "draft_mode": false,
     "labels": [
         "*"

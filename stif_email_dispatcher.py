@@ -437,19 +437,7 @@ def playbook_send_email_2(action=None, success=None, container=None, results=Non
     ################################################################################
 
     # call playbook "is_if/send_email", returns the playbook_run_id
-    playbook_run_id = phantom.playbook("is_if/send_email", container=container, name="playbook_send_email_2", callback=playbook_send_email_2_callback, inputs=inputs)
-
-    return
-
-
-@phantom.playbook_block()
-def playbook_send_email_2_callback(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
-    phantom.debug("playbook_send_email_2_callback() called")
-
-    
-    # Downstream End block cannot be called directly, since execution will call on_finish automatically.
-    # Using placeholder callback function so child playbook is run synchronously.
-
+    playbook_run_id = phantom.playbook("is_if/send_email", container=container, name="playbook_send_email_2", callback=filter_vault_artifact, inputs=inputs)
 
     return
 
@@ -626,6 +614,61 @@ def add_artifact_2(action=None, success=None, container=None, results=None, hand
     ################################################################################
 
     phantom.act("add artifact", parameters=parameters, name="add_artifact_2", assets=["phantom"], callback=filter_check_if_artifact_name_is_vault_artifact)
+
+    return
+
+
+@phantom.playbook_block()
+def filter_vault_artifact(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("filter_vault_artifact() called")
+
+    # collect filtered artifact ids and results for 'if' condition 1
+    matched_artifacts_1, matched_results_1 = phantom.condition(
+        container=container,
+        conditions=[
+            ["artifact:*.name", "==", "Vault Artifact"]
+        ],
+        name="filter_vault_artifact:condition_1",
+        delimiter=None)
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_1 or matched_results_1:
+        unzip_file_6(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+
+    return
+
+
+@phantom.playbook_block()
+def unzip_file_6(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("unzip_file_6() called")
+
+    id_value = container.get("id", None)
+    label_value = container.get("label", None)
+    filtered_artifact_0_data_filter_vault_artifact = phantom.collect2(container=container, datapath=["filtered-data:filter_vault_artifact:condition_1:artifact:*.id","filtered-data:filter_vault_artifact:condition_1:artifact:*.id"])
+
+    filtered_artifact_0__id = [item[0] for item in filtered_artifact_0_data_filter_vault_artifact]
+
+    parameters = []
+
+    parameters.append({
+        "artifact_id": filtered_artifact_0__id,
+        "container_id": id_value,
+        "default_tag": "unix",
+        "default_severity": "Low",
+        "default_label": label_value,
+    })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.custom_function(custom_function="is_if/unzip_file", parameters=parameters, name="unzip_file_6")
 
     return
 
