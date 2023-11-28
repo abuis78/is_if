@@ -102,16 +102,16 @@ def artifact_update_2(action=None, success=None, container=None, results=None, h
     # build parameters list for 'artifact_update_2' call
     for filtered_artifact_0_item_filter_check_if_artifact_name_is_vault_artifact in filtered_artifact_0_data_filter_check_if_artifact_name_is_vault_artifact:
         parameters.append({
-            "artifact_id": filtered_artifact_0_item_filter_check_if_artifact_name_is_vault_artifact[0],
             "name": None,
+            "tags": "pwd_protected",
             "label": None,
             "severity": None,
             "cef_field": None,
             "cef_value": None,
-            "cef_data_type": None,
-            "tags": "pwd_protected",
-            "overwrite_tags": None,
             "input_json": None,
+            "artifact_id": filtered_artifact_0_item_filter_check_if_artifact_name_is_vault_artifact[0],
+            "cef_data_type": None,
+            "overwrite_tags": None,
         })
 
     ################################################################################
@@ -202,7 +202,7 @@ def exctract_email_fromemail(action=None, success=None, container=None, results=
     ## Custom Code End
     ################################################################################
 
-    phantom.custom_function(custom_function="community/regex_extract_email", parameters=parameters, name="exctract_email_fromemail", callback=extract_email_toemail)
+    phantom.custom_function(custom_function="community/regex_extract_email", parameters=parameters, name="exctract_email_fromemail", callback=add_artifact_1)
 
     return
 
@@ -493,16 +493,16 @@ def create_artifatc_prompt(action=None, success=None, container=None, results=No
     parameters = []
 
     parameters.append({
-        "container": id_value,
         "name": "url prompt",
+        "tags": None,
         "label": None,
         "severity": None,
         "cef_field": None,
         "cef_value": None,
-        "cef_data_type": None,
-        "tags": None,
-        "run_automation": None,
+        "container": id_value,
         "input_json": format_json_artifact_create,
+        "cef_data_type": None,
+        "run_automation": None,
     })
 
     ################################################################################
@@ -532,11 +532,11 @@ def schedule_playbook_1(action=None, success=None, container=None, results=None,
 
     parameters.append({
         "playbook": "is_if/check_for_replay",
+        "container_id": id_value,
+        "delay_purpose": "waiting for the user's response",
         "duration_unit": "Minutes",
         "delay_duration": 5,
         "playbook_scope": "all",
-        "delay_purpose": "waiting for the user's response",
-        "container_id": id_value,
     })
 
     ################################################################################
@@ -550,6 +550,44 @@ def schedule_playbook_1(action=None, success=None, container=None, results=None,
     ################################################################################
 
     phantom.act("schedule playbook", parameters=parameters, name="schedule_playbook_1", assets=["runner-1"])
+
+    return
+
+
+@phantom.playbook_block()
+def add_artifact_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("add_artifact_1() called")
+
+    # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+
+    id_value = container.get("id", None)
+    exctract_email_fromemail_data = phantom.collect2(container=container, datapath=["exctract_email_fromemail:custom_function_result.data.*.email_address"])
+
+    parameters = []
+
+    # build parameters list for 'add_artifact_1' call
+    for exctract_email_fromemail_data_item in exctract_email_fromemail_data:
+        parameters.append({
+            "name": "fromEmail",
+            "label": "event",
+            "container_id": id_value,
+            "cef_name": "fromEmail",
+            "cef_value": exctract_email_fromemail_data_item[0],
+            "run_automation": False,
+            "source_data_identifier": "",
+        })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.act("add artifact", parameters=parameters, name="add_artifact_1", assets=["phantom"], callback=extract_email_toemail)
 
     return
 

@@ -83,13 +83,6 @@
                     "targetPort": "11_in"
                 },
                 {
-                    "id": "port_8_to_port_12",
-                    "sourceNode": "8",
-                    "sourcePort": "8_out",
-                    "targetNode": "12",
-                    "targetPort": "12_in"
-                },
-                {
                     "id": "port_12_to_port_2",
                     "sourceNode": "12",
                     "sourcePort": "12_out",
@@ -165,9 +158,23 @@
                     "sourcePort": "20_out",
                     "targetNode": "1",
                     "targetPort": "1_in"
+                },
+                {
+                    "id": "port_8_to_port_21",
+                    "sourceNode": "8",
+                    "sourcePort": "8_out",
+                    "targetNode": "21",
+                    "targetPort": "21_in"
+                },
+                {
+                    "id": "port_21_to_port_12",
+                    "sourceNode": "21",
+                    "sourcePort": "21_out",
+                    "targetNode": "12",
+                    "targetPort": "12_in"
                 }
             ],
-            "hash": "446d1a402680ad0068f05442082fc2970394b726",
+            "hash": "720af3987d916e2922752ed1c197cf2702007937",
             "nodes": {
                 "0": {
                     "data": {
@@ -183,7 +190,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 190,
-                    "y": 0
+                    "y": -6.394884621840902e-14
                 },
                 "1": {
                     "data": {
@@ -354,7 +361,7 @@
                     "id": "14",
                     "type": "format",
                     "warnings": {},
-                    "x": 0,
+                    "x": -1.4210854715202004e-14,
                     "y": 2084
                 },
                 "15": {
@@ -462,7 +469,7 @@
                     "id": "17",
                     "type": "format",
                     "warnings": {},
-                    "x": 0,
+                    "x": -1.4210854715202004e-14,
                     "y": 1600
                 },
                 "19": {
@@ -712,6 +719,56 @@
                     "warnings": {},
                     "x": 0,
                     "y": 2400
+                },
+                "21": {
+                    "data": {
+                        "action": "add artifact",
+                        "actionType": "generic",
+                        "advanced": {
+                            "join": []
+                        },
+                        "connector": "Phantom",
+                        "connectorConfigs": [
+                            "phantom"
+                        ],
+                        "connectorId": "deb82aa9-22cc-4675-9cf1-534b8d006eb7",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "add_artifact_1",
+                        "id": "21",
+                        "parameters": {
+                            "cef_name": "fromEmail",
+                            "cef_value": "exctract_email_fromemail:custom_function_result.data.*.email_address",
+                            "container_id": "container:id",
+                            "label": "event",
+                            "name": "fromEmail",
+                            "run_automation": false
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "default": "User created artifact",
+                                "field": "name"
+                            },
+                            {
+                                "data_type": "string",
+                                "default": "event",
+                                "field": "label"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "source_data_identifier"
+                            }
+                        ],
+                        "tab": "byAction",
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "21",
+                    "type": "action",
+                    "warnings": {},
+                    "x": 680,
+                    "y": 460
                 },
                 "3": {
                     "data": {
@@ -1085,8 +1142,8 @@
                     "id": "8",
                     "type": "utility",
                     "warnings": {},
-                    "x": 170,
-                    "y": 328
+                    "x": 180,
+                    "y": 320
                 },
                 "9": {
                     "data": {
@@ -1110,7 +1167,7 @@
                     "id": "9",
                     "type": "format",
                     "warnings": {},
-                    "x": 0,
+                    "x": -1.4210854715202004e-14,
                     "y": 1920
                 }
             },
@@ -1123,7 +1180,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-27T15:34:04.496190+00:00",
+    "create_time": "2023-11-28T15:44:12.499675+00:00",
     "draft_mode": false,
     "labels": [
         "*"
