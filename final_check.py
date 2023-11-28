@@ -31,7 +31,7 @@ def code_1(action=None, success=None, container=None, results=None, handle=None,
     # artifact?_filter_container=72293&_filter_name__icontains="Vault%20Artifact:"&_exclude_severity="low"
     c_id = container['id']    
     
-    u_filter = '?_filter_container='+ str(c_id) +'&_filter_name__icontains="Vault Artifact:"&_exclude_severity="low"'
+    u_filter = '?_filter_container="'+ str(c_id) +'"&_filter_name__icontains="Vault Artifact:"&_exclude_severity="low"'
     phantom.debug(u_filter)
     
     url = phantom.build_phantom_rest_url('indicator')
