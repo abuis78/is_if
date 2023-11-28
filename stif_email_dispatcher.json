@@ -191,9 +191,23 @@
                     "sourcePort": "23_out",
                     "targetNode": "24",
                     "targetPort": "24_in"
+                },
+                {
+                    "id": "port_24_to_port_25",
+                    "sourceNode": "24",
+                    "sourcePort": "24_out",
+                    "targetNode": "25",
+                    "targetPort": "25_in"
+                },
+                {
+                    "id": "port_25_to_port_1",
+                    "sourceNode": "25",
+                    "sourcePort": "25_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
                 }
             ],
-            "hash": "bf5e0094478f23895f744868b797d7a3ee2344f5",
+            "hash": "697af55fb5d5afff9a30003b4691efb709d60649",
             "nodes": {
                 "0": {
                     "data": {
@@ -209,7 +223,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 190,
-                    "y": 0
+                    "y": -6.394884621840902e-14
                 },
                 "1": {
                     "data": {
@@ -224,8 +238,8 @@
                     "id": "1",
                     "type": "end",
                     "warnings": {},
-                    "x": 360,
-                    "y": 3140
+                    "x": 340,
+                    "y": 3300
                 },
                 "10": {
                     "data": {
@@ -465,7 +479,7 @@
                     "type": "playbook",
                     "warnings": {},
                     "x": 0,
-                    "y": 2692
+                    "y": 2700
                 },
                 "17": {
                     "data": {
@@ -634,7 +648,7 @@
                                 "label": null,
                                 "name": "url prompt",
                                 "run_automation": null,
-                                "severity": null,
+                                "severity": "Informational",
                                 "tags": null
                             }
                         }
@@ -787,8 +801,8 @@
                     "id": "21",
                     "type": "action",
                     "warnings": {},
-                    "x": 170,
-                    "y": 492
+                    "x": 180,
+                    "y": 500
                 },
                 "22": {
                     "data": {
@@ -872,7 +886,7 @@
                     "id": "23",
                     "type": "filter",
                     "warnings": {},
-                    "x": 80,
+                    "x": 60,
                     "y": 2800
                 },
                 "24": {
@@ -968,6 +982,29 @@
                     "warnings": {},
                     "x": 0,
                     "y": 2980
+                },
+                "25": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "playbook_detonate_file_1",
+                        "id": "25",
+                        "inputs": {},
+                        "playbookName": "detonate_file",
+                        "playbookRepo": 32,
+                        "playbookRepoName": "is_if",
+                        "playbookType": "data",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "25",
+                    "type": "playbook",
+                    "warnings": {},
+                    "x": 0,
+                    "y": 3104.5
                 },
                 "3": {
                     "data": {
@@ -1255,7 +1292,7 @@
                     "id": "6",
                     "type": "format",
                     "warnings": {},
-                    "x": 0,
+                    "x": -1.4210854715202004e-14,
                     "y": 2380
                 },
                 "7": {
@@ -1342,7 +1379,7 @@
                     "type": "utility",
                     "warnings": {},
                     "x": 170,
-                    "y": 328
+                    "y": 327.99999999999994
                 },
                 "9": {
                     "data": {
@@ -1379,7 +1416,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T16:12:50.004806+00:00",
+    "create_time": "2023-11-28T22:07:08.801708+00:00",
     "draft_mode": false,
     "labels": [
         "*"

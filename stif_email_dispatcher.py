@@ -484,7 +484,7 @@ def create_artifatc_prompt(action=None, success=None, container=None, results=No
         "name": "url prompt",
         "tags": None,
         "label": None,
-        "severity": None,
+        "severity": "Informational",
         "cef_field": None,
         "cef_value": None,
         "container": id_value,
@@ -560,9 +560,9 @@ def add_artifact_1(action=None, success=None, container=None, results=None, hand
             parameters.append({
                 "name": "fromEmail",
                 "label": "event",
-                "container_id": id_value,
                 "cef_name": "fromEmail",
                 "cef_value": exctract_email_fromemail_data_item[0],
+                "container_id": id_value,
                 "run_automation": False,
                 "source_data_identifier": source_data_identifier_value,
             })
@@ -600,9 +600,9 @@ def add_artifact_2(action=None, success=None, container=None, results=None, hand
             parameters.append({
                 "name": "toEmail",
                 "label": "event",
-                "container_id": id_value,
                 "cef_name": "toEmail",
                 "cef_value": extract_email_toemail_data_item[0],
+                "container_id": id_value,
                 "run_automation": False,
                 "source_data_identifier": source_data_identifier_value,
             })
@@ -656,10 +656,10 @@ def unzip_file_6(action=None, success=None, container=None, results=None, handle
 
     parameters.append({
         "artifact_id": filtered_artifact_0__id,
-        "container_id": id_value,
         "default_tag": "unpacked",
-        "default_severity": "Low",
+        "container_id": id_value,
         "default_label": label_value,
+        "default_severity": "Low",
     })
 
     ################################################################################
@@ -672,7 +672,41 @@ def unzip_file_6(action=None, success=None, container=None, results=None, handle
     ## Custom Code End
     ################################################################################
 
-    phantom.custom_function(custom_function="is_if/unzip_file", parameters=parameters, name="unzip_file_6")
+    phantom.custom_function(custom_function="is_if/unzip_file", parameters=parameters, name="unzip_file_6", callback=playbook_detonate_file_1)
+
+    return
+
+
+@phantom.playbook_block()
+def playbook_detonate_file_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("playbook_detonate_file_1() called")
+
+    inputs = {}
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    # call playbook "is_if/detonate_file", returns the playbook_run_id
+    playbook_run_id = phantom.playbook("is_if/detonate_file", container=container, name="playbook_detonate_file_1", callback=playbook_detonate_file_1_callback, inputs=inputs)
+
+    return
+
+
+@phantom.playbook_block()
+def playbook_detonate_file_1_callback(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("playbook_detonate_file_1_callback() called")
+
+    
+    # Downstream End block cannot be called directly, since execution will call on_finish automatically.
+    # Using placeholder callback function so child playbook is run synchronously.
+
 
     return
 
