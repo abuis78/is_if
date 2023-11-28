@@ -136,8 +136,10 @@ def filter_status_success(action=None, success=None, container=None, results=Non
     # collect filtered artifact ids and results for 'if' condition 1
     matched_artifacts_1, matched_results_1 = phantom.condition(
         container=container,
+        logical_operator="and",
         conditions=[
-            ["get_scann_report:action_result.status", "==", "success"]
+            ["get_scann_report:action_result.status", "==", "success"],
+            ["filtered-data:filter_status_success:condition_1:get_scann_report:action_result.summary.malicious", ">", 0]
         ],
         name="filter_status_success:condition_1",
         delimiter=None)
@@ -145,6 +147,59 @@ def filter_status_success(action=None, success=None, container=None, results=Non
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
         artifact_update_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+
+    # collect filtered artifact ids and results for 'if' condition 2
+    matched_artifacts_2, matched_results_2 = phantom.condition(
+        container=container,
+        logical_operator="and",
+        conditions=[
+            ["get_scann_report:action_result.status", "==", "success"],
+            ["filtered-data:filter_status_success:condition_1:get_scann_report:action_result.summary.malicious", "==", 0]
+        ],
+        name="filter_status_success:condition_2",
+        delimiter=None)
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_2 or matched_results_2:
+        artifact_update_2(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_2, filtered_results=matched_results_2)
+
+    return
+
+
+@phantom.playbook_block()
+def artifact_update_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("artifact_update_2() called")
+
+    get_scann_report_result_data = phantom.collect2(container=container, datapath=["get_scann_report:action_result.parameter.context.artifact_id","get_scann_report:action_result.parameter.context.artifact_id"], action_results=results)
+
+    parameters = []
+
+    # build parameters list for 'artifact_update_2' call
+    for get_scann_report_result_item in get_scann_report_result_data:
+        parameters.append({
+            "artifact_id": get_scann_report_result_item[0],
+            "name": None,
+            "label": None,
+            "severity": "low",
+            "cef_field": "vt_malicious",
+            "cef_value": 0,
+            "cef_data_type": None,
+            "tags": " unpacked,scan_successful",
+            "overwrite_tags": True,
+            "input_json": None,
+        })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.custom_function(custom_function="community/artifact_update", parameters=parameters, name="artifact_update_2")
 
     return
 
