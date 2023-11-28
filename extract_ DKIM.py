@@ -68,7 +68,7 @@ def extract_dkim_signatur(action=None, success=None, container=None, results=Non
 def format_json_for_create_artifact(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("format_json_for_create_artifact() called")
 
-    template = """{0}"""
+    template = """{{ \"\"cef\": {0} }}"""
 
     # parameter list for template variable replacement
     parameters = [
