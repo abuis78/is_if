@@ -95,7 +95,7 @@ def get_right_artifact(action=None, success=None, container=None, results=None, 
 def format_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("format_2() called")
 
-    template = """{{\n%%\n\"vaultId\": \"{0}\",\n\"scan_id\": \"{1}\"\n%%\n}}"""
+    template = """{{ \"cef\": {{\n%%\n\"vaultId\": \"{0}\",\n\"scan_id\": \"{1}\"\n%%\n}} }}"""
 
     # parameter list for template variable replacement
     parameters = [
