@@ -24,9 +24,35 @@
                     "sourcePort": "2_out",
                     "targetNode": "5",
                     "targetPort": "5_in"
+                },
+                {
+                    "id": "port_5_to_port_10",
+                    "sourceNode": "5",
+                    "sourcePort": "5_out",
+                    "targetNode": "10",
+                    "targetPort": "10_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_10_to_port_11",
+                    "sourceNode": "10",
+                    "sourcePort": "10_out",
+                    "targetNode": "11",
+                    "targetPort": "11_in"
+                },
+                {
+                    "id": "port_11_to_port_12",
+                    "sourceNode": "11",
+                    "sourcePort": "11_out",
+                    "targetNode": "12",
+                    "targetPort": "12_in"
                 }
             ],
-            "hash": "53d05cd0b512452685290f0fc3abd5b9d5999c47",
+            "hash": "9eba5eb877ded8203f5605237802aaeca03bc42d",
             "nodes": {
                 "0": {
                     "data": {
@@ -57,13 +83,13 @@
                     "id": "1",
                     "type": "end",
                     "warnings": {},
-                    "x": 1100,
-                    "y": 1220
+                    "x": 980,
+                    "y": 1420
                 },
-                "2": {
+                "10": {
                     "data": {
                         "advanced": {
-                            "customName": "filter unpacked files",
+                            "customName": "get right artifact",
                             "customNameId": 0,
                             "join": []
                         },
@@ -72,28 +98,51 @@
                                 "comparisons": [
                                     {
                                         "conditionIndex": 0,
-                                        "op": "in",
-                                        "param": "unpacked",
-                                        "value": "artifact:*.tags"
+                                        "op": "==",
+                                        "param": "filtered-data:filter_unpacked_files:condition_1:artifact:*.cef.vaultId",
+                                        "value": "vt_detonate_file:action_result.parameter.vault_id"
                                     }
                                 ],
                                 "conditionIndex": 0,
+                                "customName": "get reight artifact",
                                 "logic": "and"
                             }
                         ],
-                        "functionId": 1,
-                        "functionName": "filter_unpacked_files",
-                        "id": "2",
+                        "functionId": 3,
+                        "functionName": "get_right_artifact",
+                        "id": "10",
                         "type": "filter"
                     },
                     "errors": {},
-                    "id": "2",
+                    "id": "10",
                     "type": "filter",
                     "warnings": {},
                     "x": 1040,
-                    "y": 560
+                    "y": 1000
                 },
-                "3": {
+                "11": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 2,
+                        "functionName": "format_2",
+                        "id": "11",
+                        "parameters": [
+                            "filtered-data:filter_unpacked_files:condition_1:artifact:*.cef.vaultId",
+                            "filtered-data:get_right_artifact:condition_1:vt_detonate_file:action_result.summary.scan_id"
+                        ],
+                        "template": "%%\n{0}\n{1}\n%%",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "11",
+                    "type": "format",
+                    "warnings": {},
+                    "x": 980,
+                    "y": 1160
+                },
+                "12": {
                     "data": {
                         "advanced": {
                             "join": []
@@ -103,9 +152,9 @@
                             "name": "debug",
                             "repoName": "community"
                         },
-                        "functionId": 1,
-                        "functionName": "debug_1",
-                        "id": "3",
+                        "functionId": 2,
+                        "functionName": "debug_2",
+                        "id": "12",
                         "selectMore": false,
                         "type": "utility",
                         "utilities": {
@@ -241,12 +290,10 @@
                         "values": {
                             "debug": {
                                 "input_1": [
-                                    "filtered-data:filter_unpacked_files:condition_1:artifact:*.id"
+                                    "format_2:formatted_data"
                                 ],
                                 "input_10": null,
-                                "input_2": [
-                                    "filtered-data:filter_unpacked_files:condition_1:artifact:*.cef.vaultId"
-                                ],
+                                "input_2": null,
                                 "input_3": null,
                                 "input_4": null,
                                 "input_5": null,
@@ -258,59 +305,52 @@
                         }
                     },
                     "errors": {},
-                    "id": "3",
+                    "id": "12",
                     "type": "utility",
-                    "warnings": {
-                        "config": [
-                            "Reconfigure invalid datapath."
-                        ]
-                    },
-                    "x": 840,
-                    "y": 760
+                    "warnings": {},
+                    "x": 990,
+                    "y": 1324.5
                 },
-                "4": {
+                "2": {
                     "data": {
-                        "action": "file reputation",
-                        "actionType": "investigate",
                         "advanced": {
+                            "customName": "filter unpacked files",
+                            "customNameId": 0,
                             "join": []
                         },
-                        "connector": "VirusTotal v3",
-                        "connectorConfigs": [
-                            "virustotal"
-                        ],
-                        "connectorId": "3fe4875d-a4a7-47d3-9ef1-f9e63a6653a4",
-                        "connectorVersion": "v1",
-                        "functionId": 1,
-                        "functionName": "file_reputation_1",
-                        "id": "4",
-                        "parameters": {
-                            "hash": "artifact:*.cef.fileHashSha256"
-                        },
-                        "requiredParameters": [
+                        "conditions": [
                             {
-                                "data_type": "string",
-                                "field": "hash"
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "in",
+                                        "param": "unpacked",
+                                        "value": "artifact:*.tags"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "logic": "and"
                             }
                         ],
-                        "type": "action"
+                        "functionId": 1,
+                        "functionName": "filter_unpacked_files",
+                        "id": "2",
+                        "type": "filter"
                     },
                     "errors": {},
-                    "id": "4",
-                    "type": "action",
-                    "warnings": {
-                        "context": [
-                            "Connect block to playbook flow."
-                        ]
-                    },
-                    "x": 1580,
-                    "y": 760
+                    "id": "2",
+                    "type": "filter",
+                    "warnings": {},
+                    "x": 1040,
+                    "y": 560
                 },
                 "5": {
                     "data": {
                         "action": "detonate file",
                         "actionType": "investigate",
                         "advanced": {
+                            "customName": "VT detonate file",
+                            "customNameId": 0,
                             "join": []
                         },
                         "connector": "VirusTotal v3",
@@ -320,11 +360,11 @@
                         "connectorId": "3fe4875d-a4a7-47d3-9ef1-f9e63a6653a4",
                         "connectorVersion": "v1",
                         "functionId": 1,
-                        "functionName": "detonate_file_1",
+                        "functionName": "vt_detonate_file",
                         "id": "5",
                         "parameters": {
                             "vault_id": "filtered-data:filter_unpacked_files:condition_1:artifact:*.cef.vaultId",
-                            "wait_time": ""
+                            "wait_time": "5"
                         },
                         "requiredParameters": [
                             {
@@ -338,8 +378,8 @@
                     "id": "5",
                     "type": "action",
                     "warnings": {},
-                    "x": 1220,
-                    "y": 820
+                    "x": 980,
+                    "y": 800
                 }
             },
             "notes": ""
@@ -351,7 +391,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T16:13:59.335556+00:00",
+    "create_time": "2023-11-28T16:30:29.873736+00:00",
     "draft_mode": false,
     "labels": [
         "*"
