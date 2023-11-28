@@ -26,7 +26,7 @@
                     "targetPort": "5_in"
                 }
             ],
-            "hash": "3c391e07650175ec7c36c8e0adae4c9a4daded39",
+            "hash": "483b9fd3aecc258900cf341803b1554163c362fb",
             "nodes": {
                 "0": {
                     "data": {
@@ -261,9 +261,6 @@
                     "warnings": {
                         "config": [
                             "Reconfigure invalid datapath."
-                        ],
-                        "context": [
-                            "Connect block to playbook flow."
                         ]
                     },
                     "x": 540,
@@ -299,11 +296,7 @@
                     "errors": {},
                     "id": "4",
                     "type": "action",
-                    "warnings": {
-                        "context": [
-                            "Connect block to playbook flow."
-                        ]
-                    },
+                    "warnings": {},
                     "x": 1580,
                     "y": 760
                 },
@@ -325,7 +318,7 @@
                         "id": "5",
                         "parameters": {
                             "vault_id": "filtered-data:filter_unpacked_files:condition_1:artifact:*.cef.vaultId",
-                            "wait_time": "10"
+                            "wait_time": ""
                         },
                         "requiredParameters": [
                             {
@@ -340,7 +333,7 @@
                     "type": "action",
                     "warnings": {},
                     "x": 980,
-                    "y": 724.5
+                    "y": 720
                 }
             },
             "notes": ""
@@ -352,7 +345,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T16:06:54.382268+00:00",
+    "create_time": "2023-11-28T16:09:23.932338+00:00",
     "draft_mode": false,
     "labels": [
         "*"

@@ -123,7 +123,7 @@ def detonate_file_1(action=None, success=None, container=None, results=None, han
         if filtered_artifact_0_item_filter_unpacked_files[0] is not None:
             parameters.append({
                 "vault_id": filtered_artifact_0_item_filter_unpacked_files[0],
-                "wait_time": 10,
+                "wait_time": "",
                 "context": {'artifact_id': filtered_artifact_0_item_filter_unpacked_files[1]},
             })
 
