@@ -32,7 +32,7 @@ def filter_unpacked_files(action=None, success=None, container=None, results=Non
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        debug_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+        detonate_file_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 

@@ -19,14 +19,14 @@
                             "index": 0
                         }
                     ],
-                    "id": "port_2_to_port_3",
+                    "id": "port_2_to_port_5",
                     "sourceNode": "2",
                     "sourcePort": "2_out",
-                    "targetNode": "3",
-                    "targetPort": "3_in"
+                    "targetNode": "5",
+                    "targetPort": "5_in"
                 }
             ],
-            "hash": "0156856b17b12406c0f6d5b88b535420a5793cfa",
+            "hash": "53d05cd0b512452685290f0fc3abd5b9d5999c47",
             "nodes": {
                 "0": {
                     "data": {
@@ -260,7 +260,11 @@
                     "errors": {},
                     "id": "3",
                     "type": "utility",
-                    "warnings": {},
+                    "warnings": {
+                        "config": [
+                            "Reconfigure invalid datapath."
+                        ]
+                    },
                     "x": 840,
                     "y": 760
                 },
@@ -294,7 +298,11 @@
                     "errors": {},
                     "id": "4",
                     "type": "action",
-                    "warnings": {},
+                    "warnings": {
+                        "context": [
+                            "Connect block to playbook flow."
+                        ]
+                    },
                     "x": 1580,
                     "y": 760
                 },
@@ -329,11 +337,7 @@
                     "errors": {},
                     "id": "5",
                     "type": "action",
-                    "warnings": {
-                        "config": [
-                            "Reconfigure invalid datapath."
-                        ]
-                    },
+                    "warnings": {},
                     "x": 1220,
                     "y": 820
                 }
@@ -347,7 +351,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T16:10:43.925313+00:00",
+    "create_time": "2023-11-28T16:13:59.335556+00:00",
     "draft_mode": false,
     "labels": [
         "*"
