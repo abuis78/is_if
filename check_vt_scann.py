@@ -154,7 +154,7 @@ def filter_status_success(action=None, success=None, container=None, results=Non
         logical_operator="and",
         conditions=[
             ["get_scann_report:action_result.status", "==", "success"],
-            ["filtered-data:filter_status_success:condition_1:get_scann_report:action_result.summary.malicious", "==", 0]
+            ["filtered-data:filter_status_success:condition_1:get_scann_report:action_result.summary.malicious", "<=", 0]
         ],
         name="filter_status_success:condition_2",
         delimiter=None)

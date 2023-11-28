@@ -69,7 +69,7 @@
                     "targetPort": "7_in"
                 }
             ],
-            "hash": "48949116c7434c19ddf1c1f4f039ea12f86431ca",
+            "hash": "2247b6dd2113bff810d49ead23551fa79cf9556c",
             "nodes": {
                 "0": {
                     "data": {
@@ -412,7 +412,7 @@
                                     },
                                     {
                                         "conditionIndex": 1,
-                                        "op": "==",
+                                        "op": "<=",
                                         "param": "filtered-data:filter_status_success:condition_1:get_scann_report:action_result.summary.malicious",
                                         "value": "0"
                                     }
@@ -601,7 +601,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T21:35:46.152163+00:00",
+    "create_time": "2023-11-28T21:37:15.046349+00:00",
     "draft_mode": false,
     "labels": [
         "*"
