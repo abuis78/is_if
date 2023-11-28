@@ -32,7 +32,7 @@ def filter_unpacked_files(action=None, success=None, container=None, results=Non
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        debug_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+        file_reputation_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
@@ -71,6 +71,39 @@ def debug_1(action=None, success=None, container=None, results=None, handle=None
     ################################################################################
 
     phantom.custom_function(custom_function="community/debug", parameters=parameters, name="debug_1")
+
+    return
+
+
+@phantom.playbook_block()
+def file_reputation_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("file_reputation_1() called")
+
+    # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+
+    container_artifact_data = phantom.collect2(container=container, datapath=["artifact:*.cef.fileHashSha256","artifact:*.id"])
+
+    parameters = []
+
+    # build parameters list for 'file_reputation_1' call
+    for container_artifact_item in container_artifact_data:
+        if container_artifact_item[0] is not None:
+            parameters.append({
+                "hash": container_artifact_item[0],
+                "context": {'artifact_id': container_artifact_item[1]},
+            })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.act("file reputation", parameters=parameters, name="file_reputation_1", assets=["virustotal"])
 
     return
 

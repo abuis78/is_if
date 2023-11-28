@@ -19,14 +19,14 @@
                             "index": 0
                         }
                     ],
-                    "id": "port_2_to_port_3",
+                    "id": "port_2_to_port_4",
                     "sourceNode": "2",
                     "sourcePort": "2_out",
-                    "targetNode": "3",
-                    "targetPort": "3_in"
+                    "targetNode": "4",
+                    "targetPort": "4_in"
                 }
             ],
-            "hash": "fe27be9175abba7c9e2c16009d7b70de56930de8",
+            "hash": "8987c508f5df3014c0bad073f7cec8bf9441780e",
             "nodes": {
                 "0": {
                     "data": {
@@ -57,8 +57,8 @@
                     "id": "1",
                     "type": "end",
                     "warnings": {},
-                    "x": 1000,
-                    "y": 1040
+                    "x": 1100,
+                    "y": 1220
                 },
                 "2": {
                     "data": {
@@ -91,7 +91,7 @@
                     "type": "filter",
                     "warnings": {},
                     "x": 1040,
-                    "y": 564.5
+                    "y": 560
                 },
                 "3": {
                     "data": {
@@ -258,9 +258,50 @@
                     "errors": {},
                     "id": "3",
                     "type": "utility",
+                    "warnings": {
+                        "config": [
+                            "Reconfigure invalid datapath."
+                        ],
+                        "context": [
+                            "Connect block to playbook flow."
+                        ]
+                    },
+                    "x": 540,
+                    "y": 760
+                },
+                "4": {
+                    "data": {
+                        "action": "file reputation",
+                        "actionType": "investigate",
+                        "advanced": {
+                            "join": []
+                        },
+                        "connector": "VirusTotal v3",
+                        "connectorConfigs": [
+                            "virustotal"
+                        ],
+                        "connectorId": "3fe4875d-a4a7-47d3-9ef1-f9e63a6653a4",
+                        "connectorVersion": "v1",
+                        "functionId": 1,
+                        "functionName": "file_reputation_1",
+                        "id": "4",
+                        "parameters": {
+                            "hash": "artifact:*.cef.fileHashSha256"
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "field": "hash"
+                            }
+                        ],
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "4",
+                    "type": "action",
                     "warnings": {},
                     "x": 990,
-                    "y": 724.5
+                    "y": 784.5
                 }
             },
             "notes": ""
@@ -272,7 +313,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T16:04:00.589992+00:00",
+    "create_time": "2023-11-28T16:05:16.474788+00:00",
     "draft_mode": false,
     "labels": [
         "*"
