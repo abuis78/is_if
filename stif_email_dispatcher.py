@@ -617,7 +617,7 @@ def add_artifact_2(action=None, success=None, container=None, results=None, hand
     ## Custom Code End
     ################################################################################
 
-    phantom.act("add artifact", parameters=parameters, name="add_artifact_2", assets=["phantom"], callback=filter_check_if_artifact_name_is_vault_artifact)
+    phantom.act("add artifact", parameters=parameters, name="add_artifact_2", assets=["phantom"], callback=playbook_extract__dkim_1)
 
     return
 
@@ -707,6 +707,34 @@ def playbook_detonate_file_1_callback(action=None, success=None, container=None,
     # Downstream End block cannot be called directly, since execution will call on_finish automatically.
     # Using placeholder callback function so child playbook is run synchronously.
 
+
+    return
+
+
+@phantom.playbook_block()
+def playbook_extract__dkim_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("playbook_extract__dkim_1() called")
+
+    filtered_artifact_0_data_filter_email_artifact = phantom.collect2(container=container, datapath=["filtered-data:filter_email_artifact:condition_1:artifact:*.cef.emailHeaders.DKIM-Signature"])
+
+    filtered_artifact_0__cef_emailheaders_dkim_signature = [item[0] for item in filtered_artifact_0_data_filter_email_artifact]
+
+    inputs = {
+        "dkim_signatur": filtered_artifact_0__cef_emailheaders_dkim_signature,
+    }
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    # call playbook "is_if/extract_ DKIM", returns the playbook_run_id
+    playbook_run_id = phantom.playbook("is_if/extract_ DKIM", container=container, name="playbook_extract__dkim_1", callback=filter_check_if_artifact_name_is_vault_artifact, inputs=inputs)
 
     return
 

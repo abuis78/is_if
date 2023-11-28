@@ -167,13 +167,6 @@
                     "targetPort": "22_in"
                 },
                 {
-                    "id": "port_22_to_port_2",
-                    "sourceNode": "22",
-                    "sourcePort": "22_out",
-                    "targetNode": "2",
-                    "targetPort": "2_in"
-                },
-                {
                     "id": "port_16_to_port_23",
                     "sourceNode": "16",
                     "sourcePort": "16_out",
@@ -205,9 +198,23 @@
                     "sourcePort": "25_out",
                     "targetNode": "1",
                     "targetPort": "1_in"
+                },
+                {
+                    "id": "port_22_to_port_26",
+                    "sourceNode": "22",
+                    "sourcePort": "22_out",
+                    "targetNode": "26",
+                    "targetPort": "26_in"
+                },
+                {
+                    "id": "port_26_to_port_2",
+                    "sourceNode": "26",
+                    "sourcePort": "26_out",
+                    "targetNode": "2",
+                    "targetPort": "2_in"
                 }
             ],
-            "hash": "bf5e0094478f23895f744868b797d7a3ee2344f5",
+            "hash": "fdeca7f5484a71db0625cbb8ce5e5595a0ccdff8",
             "nodes": {
                 "0": {
                     "data": {
@@ -223,7 +230,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 190,
-                    "y": -6.394884621840902e-14
+                    "y": -1.2789769243681803e-13
                 },
                 "1": {
                     "data": {
@@ -1006,6 +1013,36 @@
                     "x": 0,
                     "y": 3104.5
                 },
+                "26": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "playbook_extract__DKIM_1",
+                        "id": "26",
+                        "inputs": {
+                            "DKIM_Signatur": {
+                                "datapaths": [
+                                    "filtered-data:filter_email_artifact:condition_1:artifact:*.cef.emailHeaders.DKIM-Signature"
+                                ],
+                                "deduplicate": false
+                            }
+                        },
+                        "playbookName": "extract_ DKIM",
+                        "playbookRepo": 32,
+                        "playbookRepoName": "is_if",
+                        "playbookType": "data",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "26",
+                    "type": "playbook",
+                    "warnings": {},
+                    "x": 470,
+                    "y": 904.5
+                },
                 "3": {
                     "data": {
                         "advanced": {
@@ -1379,7 +1416,7 @@
                     "type": "utility",
                     "warnings": {},
                     "x": 170,
-                    "y": 327.99999999999994
+                    "y": 327.9999999999999
                 },
                 "9": {
                     "data": {
@@ -1416,7 +1453,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T22:07:08.801708+00:00",
+    "create_time": "2023-11-28T22:55:29.702968+00:00",
     "draft_mode": false,
     "labels": [
         "*"
