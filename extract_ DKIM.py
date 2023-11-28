@@ -48,7 +48,7 @@ def extract_dkim_signatur(action=None, success=None, container=None, results=Non
     cef_json = {}
     
     for key, value in dkim_parts.items():
-        cef_json[f"{key}"] = f"{value}"
+        cef_json[f'"{key}"'] = f'"{value}"'
         #phantom.debug(f"{key}: {value}")
         
     phantom.debug(cef_json)
