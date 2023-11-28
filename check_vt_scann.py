@@ -170,14 +170,14 @@ def filter_status_success(action=None, success=None, container=None, results=Non
 def artifact_update_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("artifact_update_2() called")
 
-    get_scann_report_result_data = phantom.collect2(container=container, datapath=["get_scann_report:action_result.parameter.context.artifact_id","get_scann_report:action_result.parameter.context.artifact_id"], action_results=results)
+    filtered_result_0_data_filter_status_success = phantom.collect2(container=container, datapath=["filtered-data:filter_status_success:condition_2:get_scann_report:action_result.parameter.context.artifact_id"])
 
     parameters = []
 
     # build parameters list for 'artifact_update_2' call
-    for get_scann_report_result_item in get_scann_report_result_data:
+    for filtered_result_0_item_filter_status_success in filtered_result_0_data_filter_status_success:
         parameters.append({
-            "artifact_id": get_scann_report_result_item[0],
+            "artifact_id": filtered_result_0_item_filter_status_success[0],
             "name": None,
             "label": None,
             "severity": "low",

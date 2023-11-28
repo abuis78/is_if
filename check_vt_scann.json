@@ -69,7 +69,7 @@
                     "targetPort": "7_in"
                 }
             ],
-            "hash": "2247b6dd2113bff810d49ead23551fa79cf9556c",
+            "hash": "5c2c4a3a11bce9741579191d8afa4e0e32c6f8d9",
             "nodes": {
                 "0": {
                     "data": {
@@ -171,8 +171,8 @@
                     "id": "3",
                     "type": "action",
                     "warnings": {},
-                    "x": 1190,
-                    "y": 744.5
+                    "x": 1200,
+                    "y": 740
                 },
                 "4": {
                     "data": {
@@ -351,6 +351,7 @@
                             {
                                 "comparisons": [
                                     {
+                                        "conditionIndex": 1,
                                         "op": "==",
                                         "param": "",
                                         "value": ""
@@ -373,7 +374,7 @@
                     "type": "decision",
                     "warnings": {},
                     "x": 1260,
-                    "y": 884.5
+                    "y": 880
                 },
                 "6": {
                     "data": {
@@ -571,7 +572,7 @@
                         "utilityType": "custom_function",
                         "values": {
                             "artifact_update": {
-                                "artifact_id": "get_scann_report:action_result.parameter.context.artifact_id",
+                                "artifact_id": "filtered-data:filter_status_success:condition_2:get_scann_report:action_result.parameter.context.artifact_id",
                                 "cef_data_type": null,
                                 "cef_field": "vt_malicious",
                                 "cef_value": "0",
@@ -588,7 +589,7 @@
                     "id": "7",
                     "type": "utility",
                     "warnings": {},
-                    "x": 1160,
+                    "x": 1220,
                     "y": 1300
                 }
             },
@@ -601,7 +602,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T21:37:15.046349+00:00",
+    "create_time": "2023-11-28T21:39:03.267131+00:00",
     "draft_mode": false,
     "labels": [
         "*"
