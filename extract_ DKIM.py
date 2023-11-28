@@ -41,7 +41,7 @@ def extract_dkim_signatur(action=None, success=None, container=None, results=Non
                 dkim_parts[key.strip()] = value.strip()
         return dkim_parts
 
-    dkim_parts = parse_dkim_signature(playbook_input_dkim_signatur_values)
+    dkim_parts = parse_dkim_signature(playbook_input_dkim_signatur_values[0])
     
     phantom.debug(f"dkim_parts: {dkim_parts}")
     
