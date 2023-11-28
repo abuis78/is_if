@@ -59,7 +59,7 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
     found_match_1 = phantom.decision(
         container=container,
         conditions=[
-            ["count_severity:custom_function:count", ">", 0]
+            ["count_severity:custom_function:count", "!=", 0]
         ],
         delimiter=None)
 
