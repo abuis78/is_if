@@ -64,7 +64,7 @@
                     "targetPort": "14_in"
                 }
             ],
-            "hash": "fb1bde10f1c031a3c6a1b41bcadc12d7727edbfd",
+            "hash": "7c199c0608dd341067a5c90c3dcfec57daff6bf8",
             "nodes": {
                 "0": {
                     "data": {
@@ -300,6 +300,9 @@
                     "warnings": {
                         "config": [
                             "Reconfigure invalid datapath."
+                        ],
+                        "context": [
+                            "Connect block to playbook flow."
                         ]
                     },
                     "x": 1560,
@@ -497,7 +500,7 @@
                                         "conditionIndex": 0,
                                         "op": "==",
                                         "param": "filtered-data:filter_get_right_artifact_vaultid:condition_1:artifact:*.id",
-                                        "value": "artifact:*.id"
+                                        "value": "filtered-data:filter_unpacked_files:condition_1:artifact:*.id"
                                     }
                                 ],
                                 "conditionIndex": 0,
@@ -596,7 +599,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T21:10:06.066315+00:00",
+    "create_time": "2023-11-28T21:14:02.963243+00:00",
     "draft_mode": false,
     "labels": [
         "*"

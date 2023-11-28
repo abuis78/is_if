@@ -204,7 +204,7 @@ def filter_get_artifact_id(action=None, success=None, container=None, results=No
     matched_artifacts_1, matched_results_1 = phantom.condition(
         container=container,
         conditions=[
-            ["filtered-data:filter_get_right_artifact_vaultid:condition_1:artifact:*.id", "==", "artifact:*.id"]
+            ["filtered-data:filter_get_right_artifact_vaultid:condition_1:artifact:*.id", "==", "filtered-data:filter_unpacked_files:condition_1:artifact:*.id"]
         ],
         name="filter_get_artifact_id:condition_1",
         delimiter=None)
