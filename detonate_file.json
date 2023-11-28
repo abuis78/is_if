@@ -64,7 +64,7 @@
                     "targetPort": "14_in"
                 }
             ],
-            "hash": "181e98322f8a4a2b8fc2aa72afd43f55752f973d",
+            "hash": "feb48a3734164e9379f41a72de0cc69ece2caf12",
             "nodes": {
                 "0": {
                     "data": {
@@ -80,7 +80,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 1000,
-                    "y": 419.9999999999999
+                    "y": 419.9999999999998
                 },
                 "1": {
                     "data": {
@@ -474,7 +474,7 @@
                         "functionName": "format_tags",
                         "id": "14",
                         "parameters": [
-                            "filtered-data:filter_get_right_artifact_vaultid:condition_1:artifact:*.tags"
+                            "filtered-data:filter_get_right_artifact_vaultid:condition_1:artifact:*.tags.0"
                         ],
                         "template": "{0}, pending_scan",
                         "type": "format"
@@ -599,7 +599,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T21:02:32.424559+00:00",
+    "create_time": "2023-11-28T21:07:13.716082+00:00",
     "draft_mode": false,
     "labels": [
         "*"

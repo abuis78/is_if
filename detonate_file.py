@@ -131,26 +131,26 @@ def debug_2(action=None, success=None, container=None, results=None, handle=None
 def update_artifact(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("update_artifact() called")
 
-    filtered_artifact_0_data_filter_get_artifact_id = phantom.collect2(container=container, datapath=["filtered-data:filter_get_artifact_id:condition_1:artifact:*.id","filtered-data:filter_get_artifact_id:condition_1:artifact:*.id"])
     filtered_result_0_data_filter_get_right_artifact_vaultid = phantom.collect2(container=container, datapath=["filtered-data:filter_get_right_artifact_vaultid:condition_1:vt_detonate_file:action_result.summary.scan_id"])
+    filtered_artifact_0_data_filter_get_artifact_id = phantom.collect2(container=container, datapath=["filtered-data:filter_get_artifact_id:condition_1:artifact:*.id","filtered-data:filter_get_artifact_id:condition_1:artifact:*.id"])
     format_tags = phantom.get_format_data(name="format_tags")
 
     parameters = []
 
     # build parameters list for 'update_artifact' call
-    for filtered_artifact_0_item_filter_get_artifact_id in filtered_artifact_0_data_filter_get_artifact_id:
-        for filtered_result_0_item_filter_get_right_artifact_vaultid in filtered_result_0_data_filter_get_right_artifact_vaultid:
+    for filtered_result_0_item_filter_get_right_artifact_vaultid in filtered_result_0_data_filter_get_right_artifact_vaultid:
+        for filtered_artifact_0_item_filter_get_artifact_id in filtered_artifact_0_data_filter_get_artifact_id:
             parameters.append({
-                "artifact_id": filtered_artifact_0_item_filter_get_artifact_id[0],
                 "name": None,
+                "tags": format_tags,
                 "label": None,
                 "severity": None,
                 "cef_field": "scan_id",
                 "cef_value": filtered_result_0_item_filter_get_right_artifact_vaultid[0],
-                "cef_data_type": None,
-                "tags": format_tags,
-                "overwrite_tags": True,
                 "input_json": None,
+                "artifact_id": filtered_artifact_0_item_filter_get_artifact_id[0],
+                "cef_data_type": None,
+                "overwrite_tags": True,
             })
 
     ################################################################################
@@ -176,7 +176,7 @@ def format_tags(action=None, success=None, container=None, results=None, handle=
 
     # parameter list for template variable replacement
     parameters = [
-        "filtered-data:filter_get_right_artifact_vaultid:condition_1:artifact:*.tags"
+        "filtered-data:filter_get_right_artifact_vaultid:condition_1:artifact:*.tags.0"
     ]
 
     ################################################################################
