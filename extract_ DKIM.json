@@ -1,0 +1,99 @@
+{
+    "blockly": false,
+    "blockly_xml": "<xml></xml>",
+    "category": "Uncategorized",
+    "coa": {
+        "data": {
+            "description": "",
+            "edges": [
+                {
+                    "id": "port_0_to_port_2",
+                    "sourceNode": "0",
+                    "sourcePort": "0_out",
+                    "targetNode": "2",
+                    "targetPort": "2_in"
+                }
+            ],
+            "hash": "b634b8a7109feff98d8b394522b6b7e3b492e574",
+            "nodes": {
+                "0": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_start",
+                        "id": "0",
+                        "type": "start"
+                    },
+                    "errors": {},
+                    "id": "0",
+                    "type": "start",
+                    "warnings": {},
+                    "x": 1000,
+                    "y": 419.9999999999999
+                },
+                "1": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionName": "on_finish",
+                        "id": "1",
+                        "type": "end"
+                    },
+                    "errors": {},
+                    "id": "1",
+                    "type": "end",
+                    "warnings": {},
+                    "x": 1000,
+                    "y": 1000
+                },
+                "2": {
+                    "data": {
+                        "advanced": {
+                            "customName": "extract DKIM signatur",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "extract_dkim_signatur",
+                        "id": "2",
+                        "inputParameters": [
+                            "playbook_input:dkim_signatur"
+                        ],
+                        "outputVariables": [
+                            "dkim_json"
+                        ],
+                        "type": "code"
+                    },
+                    "errors": {},
+                    "id": "2",
+                    "type": "code",
+                    "userCode": "\n    # Write your custom code here...\n    def parse_dkim_signature(dkim_signature):\n        # Zerlegt die DKIM-Signatur und speichert die Elemente in einem Dictionary\n        dkim_parts = {}\n        for part in dkim_signature.split(\"; \"):\n            if \"=\" in part:\n                key, value = part.split(\"=\", 1)\n                dkim_parts[key.strip()] = value.strip()\n        return dkim_parts\n\n    dkim_parts = parse_dkim_signature(playbook_input_dkim_signatur_values)\n    \n    phantom.debug(f\"dkim_parts: {dkim_parts}\")\n",
+                    "warnings": {},
+                    "x": 980,
+                    "y": 580
+                }
+            },
+            "notes": ""
+        },
+        "input_spec": [
+            {
+                "contains": [],
+                "description": "",
+                "name": "DKIM_Signatur"
+            }
+        ],
+        "output_spec": null,
+        "playbook_type": "data",
+        "python_version": "3",
+        "schema": "5.0.10",
+        "version": "6.1.1.211"
+    },
+    "create_time": "2023-11-28T15:00:57.599912+00:00",
+    "draft_mode": false,
+    "labels": [
+        "*"
+    ],
+    "tags": []
+}
