@@ -177,8 +177,8 @@
                     "type": "code",
                     "userCode": "\n    # Write your custom code here...\n    phantom.debug(filtered_result_0_summary_malicious[0])\n    x = filtered_result_0_summary_malicious[0]\n    # \u00dcberpr\u00fcfen, ob x > 1 und <= 20\n    if 1 < x <= 20:\n        phantom.debug(\"x ist gr\u00f6\u00dfer als 1 und kleiner oder gleich 20.\")\n        calculate_the_severity__new_severity = 'medium'\n    # \u00dcberpr\u00fcfen, ob x > 20 und < 50\n    elif 20 < x < 50:\n        phantom.debug(\"x ist \u00fcber 20 und unter 50.\")\n        calculate_the_severity__new_severity = 'high'\n    # \u00dcberpr\u00fcfen, ob x >= 50\n    elif x >= 50:\n        phantom.debug(\"x ist 50 oder mehr.\")\n        calculate_the_severity__new_severity = 'critical'\n    else:\n        phantom.debug(\"x erf\u00fcllt keine der Bedingungen.\")\n",
                     "warnings": {},
-                    "x": 500,
-                    "y": 1180
+                    "x": 0,
+                    "y": 852
                 },
                 "2": {
                     "data": {
@@ -662,8 +662,8 @@
                     "id": "7",
                     "type": "utility",
                     "warnings": {},
-                    "x": 1220,
-                    "y": 1300
+                    "x": 340,
+                    "y": 1016
                 },
                 "8": {
                     "data": {
@@ -696,8 +696,8 @@
                     "id": "8",
                     "type": "filter",
                     "warnings": {},
-                    "x": 1640,
-                    "y": 1040
+                    "x": 740,
+                    "y": 836
                 },
                 "9": {
                     "data": {
@@ -849,8 +849,8 @@
                     "id": "9",
                     "type": "utility",
                     "warnings": {},
-                    "x": 1590,
-                    "y": 1244.5
+                    "x": 680,
+                    "y": 1016
                 }
             },
             "notes": ""
