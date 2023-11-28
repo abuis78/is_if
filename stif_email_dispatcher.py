@@ -317,7 +317,7 @@ def extract_email_toemail(action=None, success=None, container=None, results=Non
     ## Custom Code End
     ################################################################################
 
-    phantom.custom_function(custom_function="community/regex_extract_email", parameters=parameters, name="extract_email_toemail", callback=filter_check_if_artifact_name_is_vault_artifact)
+    phantom.custom_function(custom_function="community/regex_extract_email", parameters=parameters, name="extract_email_toemail", callback=add_artifact_2)
 
     return
 
@@ -588,6 +588,44 @@ def add_artifact_1(action=None, success=None, container=None, results=None, hand
     ################################################################################
 
     phantom.act("add artifact", parameters=parameters, name="add_artifact_1", assets=["phantom"], callback=extract_email_toemail)
+
+    return
+
+
+@phantom.playbook_block()
+def add_artifact_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("add_artifact_2() called")
+
+    # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
+
+    id_value = container.get("id", None)
+    extract_email_toemail_data = phantom.collect2(container=container, datapath=["extract_email_toemail:custom_function_result.data.*.email_address"])
+
+    parameters = []
+
+    # build parameters list for 'add_artifact_2' call
+    for extract_email_toemail_data_item in extract_email_toemail_data:
+        parameters.append({
+            "name": "toEmail",
+            "label": "event",
+            "container_id": id_value,
+            "cef_name": "toEmail",
+            "cef_value": extract_email_toemail_data_item[0],
+            "run_automation": False,
+            "source_data_identifier": "",
+        })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.act("add artifact", parameters=parameters, name="add_artifact_2", assets=["phantom"], callback=filter_check_if_artifact_name_is_vault_artifact)
 
     return
 

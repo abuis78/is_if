@@ -83,13 +83,6 @@
                     "targetPort": "11_in"
                 },
                 {
-                    "id": "port_12_to_port_2",
-                    "sourceNode": "12",
-                    "sourcePort": "12_out",
-                    "targetNode": "2",
-                    "targetPort": "2_in"
-                },
-                {
                     "id": "port_6_to_port_13",
                     "sourceNode": "6",
                     "sourcePort": "6_out",
@@ -172,9 +165,23 @@
                     "sourcePort": "21_out",
                     "targetNode": "12",
                     "targetPort": "12_in"
+                },
+                {
+                    "id": "port_12_to_port_22",
+                    "sourceNode": "12",
+                    "sourcePort": "12_out",
+                    "targetNode": "22",
+                    "targetPort": "22_in"
+                },
+                {
+                    "id": "port_22_to_port_2",
+                    "sourceNode": "22",
+                    "sourcePort": "22_out",
+                    "targetNode": "2",
+                    "targetPort": "2_in"
                 }
             ],
-            "hash": "720af3987d916e2922752ed1c197cf2702007937",
+            "hash": "16b47b81a699c0dcd0409889dd4032e3b53551c8",
             "nodes": {
                 "0": {
                     "data": {
@@ -770,6 +777,56 @@
                     "x": 680,
                     "y": 460
                 },
+                "22": {
+                    "data": {
+                        "action": "add artifact",
+                        "actionType": "generic",
+                        "advanced": {
+                            "join": []
+                        },
+                        "connector": "Phantom",
+                        "connectorConfigs": [
+                            "phantom"
+                        ],
+                        "connectorId": "deb82aa9-22cc-4675-9cf1-534b8d006eb7",
+                        "connectorVersion": "v1",
+                        "functionId": 2,
+                        "functionName": "add_artifact_2",
+                        "id": "22",
+                        "parameters": {
+                            "cef_name": "toEmail",
+                            "cef_value": "extract_email_toemail:custom_function_result.data.*.email_address",
+                            "container_id": "container:id",
+                            "label": "event",
+                            "name": "toEmail",
+                            "run_automation": false
+                        },
+                        "requiredParameters": [
+                            {
+                                "data_type": "string",
+                                "default": "User created artifact",
+                                "field": "name"
+                            },
+                            {
+                                "data_type": "string",
+                                "default": "event",
+                                "field": "label"
+                            },
+                            {
+                                "data_type": "string",
+                                "field": "source_data_identifier"
+                            }
+                        ],
+                        "tab": "byAction",
+                        "type": "action"
+                    },
+                    "errors": {},
+                    "id": "22",
+                    "type": "action",
+                    "warnings": {},
+                    "x": 560,
+                    "y": 620
+                },
                 "3": {
                     "data": {
                         "advanced": {
@@ -1180,7 +1237,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T15:44:12.499675+00:00",
+    "create_time": "2023-11-28T15:45:07.644974+00:00",
     "draft_mode": false,
     "labels": [
         "*"
