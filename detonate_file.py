@@ -52,7 +52,7 @@ def vt_detonate_file(action=None, success=None, container=None, results=None, ha
         if filtered_artifact_0_item_filter_unpacked_files[0] is not None:
             parameters.append({
                 "vault_id": filtered_artifact_0_item_filter_unpacked_files[0],
-                "wait_time": 1,
+                "wait_time": 0,
                 "context": {'artifact_id': filtered_artifact_0_item_filter_unpacked_files[1]},
             })
 
@@ -180,16 +180,16 @@ def artifact_update_1(action=None, success=None, container=None, results=None, h
     # build parameters list for 'artifact_update_1' call
     for schedule_playbook_1_result_item in schedule_playbook_1_result_data:
         parameters.append({
-            "artifact_id": schedule_playbook_1_result_item[0],
             "name": None,
+            "tags": None,
             "label": None,
             "severity": "Informational",
             "cef_field": None,
             "cef_value": None,
-            "cef_data_type": None,
-            "tags": None,
-            "overwrite_tags": None,
             "input_json": None,
+            "artifact_id": schedule_playbook_1_result_item[0],
+            "cef_data_type": None,
+            "overwrite_tags": None,
         })
 
     ################################################################################
