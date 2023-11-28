@@ -67,9 +67,35 @@
                     "sourcePort": "6_out",
                     "targetNode": "7",
                     "targetPort": "7_in"
+                },
+                {
+                    "id": "port_4_to_port_1",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_7_to_port_1",
+                    "sourceNode": "7",
+                    "sourcePort": "7_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "id": "port_5_to_port_8",
+                    "sourceNode": "5",
+                    "sourcePort": "5_out",
+                    "targetNode": "8",
+                    "targetPort": "8_in"
                 }
             ],
-            "hash": "d4219fdad6dd45ddfbb2236f16de7254b6456b26",
+            "hash": "ca6dfb9b59271de82208560731d042c0cb57fb13",
             "nodes": {
                 "0": {
                     "data": {
@@ -100,8 +126,8 @@
                     "id": "1",
                     "type": "end",
                     "warnings": {},
-                    "x": 1780,
-                    "y": 1340
+                    "x": 1480,
+                    "y": 1520
                 },
                 "2": {
                     "data": {
@@ -587,6 +613,38 @@
                     "warnings": {},
                     "x": 1220,
                     "y": 1300
+                },
+                "8": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "==",
+                                        "param": "get_scann_report:action_result.status",
+                                        "value": "failed"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "customName": "status failed",
+                                "logic": "and"
+                            }
+                        ],
+                        "functionId": 3,
+                        "functionName": "filter_3",
+                        "id": "8",
+                        "type": "filter"
+                    },
+                    "errors": {},
+                    "id": "8",
+                    "type": "filter",
+                    "warnings": {},
+                    "x": 1630,
+                    "y": 1044.5
                 }
             },
             "notes": ""
@@ -598,7 +656,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T21:42:33.756847+00:00",
+    "create_time": "2023-11-28T21:44:28.823475+00:00",
     "draft_mode": false,
     "labels": [
         "*"

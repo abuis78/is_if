@@ -126,6 +126,9 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
         filter_status_success(action=action, success=success, container=container, results=results, handle=handle)
         return
 
+    # check for 'else' condition 2
+    filter_3(action=action, success=success, container=container, results=results, handle=handle)
+
     return
 
 
@@ -200,6 +203,26 @@ def artifact_update_2(action=None, success=None, container=None, results=None, h
     ################################################################################
 
     phantom.custom_function(custom_function="community/artifact_update", parameters=parameters, name="artifact_update_2")
+
+    return
+
+
+@phantom.playbook_block()
+def filter_3(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("filter_3() called")
+
+    # collect filtered artifact ids and results for 'if' condition 1
+    matched_artifacts_1, matched_results_1 = phantom.condition(
+        container=container,
+        conditions=[
+            ["get_scann_report:action_result.status", "==", "failed"]
+        ],
+        name="filter_3:condition_1",
+        delimiter=None)
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_1 or matched_results_1:
+        pass
 
     return
 
