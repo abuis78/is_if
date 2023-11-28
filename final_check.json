@@ -97,7 +97,6 @@
                     "targetPort": "6_in"
                 }
             ],
-            "hash": "a3f805bbf45c09397b25a9d7c8881d60160207ac",
             "nodes": {
                 "0": {
                     "data": {
@@ -112,8 +111,8 @@
                     "id": "0",
                     "type": "start",
                     "warnings": {},
-                    "x": 1020,
-                    "y": 420
+                    "x": 190,
+                    "y": 0
                 },
                 "1": {
                     "data": {
@@ -128,8 +127,8 @@
                     "id": "1",
                     "type": "end",
                     "warnings": {},
-                    "x": 1040,
-                    "y": 1540
+                    "x": 190,
+                    "y": 1280
                 },
                 "2": {
                     "data": {
@@ -152,8 +151,8 @@
                     "type": "code",
                     "userCode": "\n    # Write your custom code here...\n    # artifact?_filter_container=72293&_filter_name__icontains=\"Vault%20Artifact:\"&_exclude_severity=\"low\"\n    c_id = container['id']    \n    \n    u_filter = '?_filter_container=\"'+ str(c_id) +'\"&_filter_name__icontains=\"Vault Artifact:\"&_exclude_severity=\"low\"'\n    phantom.debug(u_filter)\n    \n    url = phantom.build_phantom_rest_url('artifact')\n    url_filter = url + u_filter\n    r = phantom.requests.get(url_filter,verify=False)\n    data = r.json()\n    phantom.debug(data[\"count\"])\n    code_1__count = data[\"count\"]\n",
                     "warnings": {},
-                    "x": 1000,
-                    "y": 560
+                    "x": 170,
+                    "y": 148
                 },
                 "3": {
                     "data": {
@@ -201,8 +200,8 @@
                     "id": "3",
                     "type": "decision",
                     "warnings": {},
-                    "x": 1080,
-                    "y": 700
+                    "x": 250,
+                    "y": 296
                 },
                 "4": {
                     "data": {
@@ -255,8 +254,8 @@
                     "id": "4",
                     "type": "utility",
                     "warnings": {},
-                    "x": 720,
-                    "y": 900
+                    "x": 0,
+                    "y": 1132
                 },
                 "5": {
                     "data": {
@@ -278,8 +277,8 @@
                     "id": "5",
                     "type": "format",
                     "warnings": {},
-                    "x": 1505,
-                    "y": 820
+                    "x": 340,
+                    "y": 476
                 },
                 "6": {
                     "data": {
@@ -301,8 +300,8 @@
                     "id": "6",
                     "type": "format",
                     "warnings": {},
-                    "x": 1320,
-                    "y": 1040
+                    "x": 340,
+                    "y": 804
                 },
                 "7": {
                     "data": {
@@ -335,8 +334,8 @@
                     "id": "7",
                     "type": "filter",
                     "warnings": {},
-                    "x": 1390,
-                    "y": 1204.5
+                    "x": 400,
+                    "y": 952
                 },
                 "8": {
                     "data": {
@@ -377,8 +376,8 @@
                     "id": "8",
                     "type": "playbook",
                     "warnings": {},
-                    "x": 1340,
-                    "y": 1380
+                    "x": 340,
+                    "y": 1132
                 },
                 "9": {
                     "data": {
@@ -411,8 +410,8 @@
                     "id": "9",
                     "type": "filter",
                     "warnings": {},
-                    "x": 1720,
-                    "y": 960
+                    "x": 400,
+                    "y": 624
                 }
             },
             "notes": ""
