@@ -193,7 +193,7 @@
                     "targetPort": "24_in"
                 }
             ],
-            "hash": "ee6747972895b9794142766a6dfae07a83bdeed5",
+            "hash": "88f2953e05848ca09dd58b86c75f66cd623fb8de",
             "nodes": {
                 "0": {
                     "data": {
@@ -956,7 +956,7 @@
                                 "container_id": "container:id",
                                 "default_label": "container:label",
                                 "default_severity": "Low",
-                                "default_tag": "unix"
+                                "default_tag": "unpacked"
                             }
                         }
                     },
@@ -964,7 +964,7 @@
                     "id": "24",
                     "type": "utility",
                     "warnings": {},
-                    "x": 20,
+                    "x": 0,
                     "y": 2980
                 },
                 "3": {
@@ -1377,7 +1377,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T15:49:34.402530+00:00",
+    "create_time": "2023-11-28T15:59:45.228275+00:00",
     "draft_mode": false,
     "labels": [
         "*"

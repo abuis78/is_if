@@ -653,7 +653,7 @@ def unzip_file_6(action=None, success=None, container=None, results=None, handle
     parameters.append({
         "artifact_id": filtered_artifact_0__id,
         "container_id": id_value,
-        "default_tag": "unix",
+        "default_tag": "unpacked",
         "default_severity": "Low",
         "default_label": label_value,
     })
