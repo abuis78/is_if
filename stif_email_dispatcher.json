@@ -193,7 +193,7 @@
                     "targetPort": "24_in"
                 }
             ],
-            "hash": "88f2953e05848ca09dd58b86c75f66cd623fb8de",
+            "hash": "bf5e0094478f23895f744868b797d7a3ee2344f5",
             "nodes": {
                 "0": {
                     "data": {
@@ -761,7 +761,8 @@
                             "container_id": "container:id",
                             "label": "event",
                             "name": "fromEmail",
-                            "run_automation": false
+                            "run_automation": false,
+                            "source_data_identifier": "container:source_data_identifier"
                         },
                         "requiredParameters": [
                             {
@@ -811,7 +812,8 @@
                             "container_id": "container:id",
                             "label": "event",
                             "name": "toEmail",
-                            "run_automation": false
+                            "run_automation": false,
+                            "source_data_identifier": "container:source_data_identifier"
                         },
                         "requiredParameters": [
                             {
@@ -1377,7 +1379,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T15:59:45.228275+00:00",
+    "create_time": "2023-11-28T16:12:50.004806+00:00",
     "draft_mode": false,
     "labels": [
         "*"

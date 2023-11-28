@@ -549,21 +549,23 @@ def add_artifact_1(action=None, success=None, container=None, results=None, hand
     # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
 
     id_value = container.get("id", None)
+    source_data_identifier_value = container.get("source_data_identifier", None)
     exctract_email_fromemail_data = phantom.collect2(container=container, datapath=["exctract_email_fromemail:custom_function_result.data.*.email_address"])
 
     parameters = []
 
     # build parameters list for 'add_artifact_1' call
     for exctract_email_fromemail_data_item in exctract_email_fromemail_data:
-        parameters.append({
-            "name": "fromEmail",
-            "label": "event",
-            "container_id": id_value,
-            "cef_name": "fromEmail",
-            "cef_value": exctract_email_fromemail_data_item[0],
-            "run_automation": False,
-            "source_data_identifier": "",
-        })
+        if source_data_identifier_value is not None:
+            parameters.append({
+                "name": "fromEmail",
+                "label": "event",
+                "container_id": id_value,
+                "cef_name": "fromEmail",
+                "cef_value": exctract_email_fromemail_data_item[0],
+                "run_automation": False,
+                "source_data_identifier": source_data_identifier_value,
+            })
 
     ################################################################################
     ## Custom Code Start
@@ -587,21 +589,23 @@ def add_artifact_2(action=None, success=None, container=None, results=None, hand
     # phantom.debug('Action: {0} {1}'.format(action['name'], ('SUCCEEDED' if success else 'FAILED')))
 
     id_value = container.get("id", None)
+    source_data_identifier_value = container.get("source_data_identifier", None)
     extract_email_toemail_data = phantom.collect2(container=container, datapath=["extract_email_toemail:custom_function_result.data.*.email_address"])
 
     parameters = []
 
     # build parameters list for 'add_artifact_2' call
     for extract_email_toemail_data_item in extract_email_toemail_data:
-        parameters.append({
-            "name": "toEmail",
-            "label": "event",
-            "container_id": id_value,
-            "cef_name": "toEmail",
-            "cef_value": extract_email_toemail_data_item[0],
-            "run_automation": False,
-            "source_data_identifier": "",
-        })
+        if source_data_identifier_value is not None:
+            parameters.append({
+                "name": "toEmail",
+                "label": "event",
+                "container_id": id_value,
+                "cef_name": "toEmail",
+                "cef_value": extract_email_toemail_data_item[0],
+                "run_automation": False,
+                "source_data_identifier": source_data_identifier_value,
+            })
 
     ################################################################################
     ## Custom Code Start
