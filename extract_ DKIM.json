@@ -35,7 +35,7 @@
                     "targetPort": "6_in"
                 }
             ],
-            "hash": "969f6fe6552b0748fb08329efea5a650a902a39f",
+            "hash": "de3dc6a6def3be8c439e58cf124e25f3ad85e40b",
             "nodes": {
                 "0": {
                     "data": {
@@ -108,7 +108,7 @@
                         "parameters": [
                             "extract_dkim_signatur:custom_function:dkim_json"
                         ],
-                        "template": "{{ {0} }}",
+                        "template": "{0}",
                         "type": "format"
                     },
                     "errors": {},
@@ -456,7 +456,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T15:19:43.414464+00:00",
+    "create_time": "2023-11-28T15:20:15.180799+00:00",
     "draft_mode": false,
     "labels": [
         "*"
