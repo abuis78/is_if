@@ -52,7 +52,7 @@
                     "targetPort": "12_in"
                 }
             ],
-            "hash": "9eba5eb877ded8203f5605237802aaeca03bc42d",
+            "hash": "782b41e129c179cd4544b3d2f9591782a3c5c60e",
             "nodes": {
                 "0": {
                     "data": {
@@ -83,8 +83,8 @@
                     "id": "1",
                     "type": "end",
                     "warnings": {},
-                    "x": 980,
-                    "y": 1420
+                    "x": 1120,
+                    "y": 1680
                 },
                 "10": {
                     "data": {
@@ -132,7 +132,7 @@
                             "filtered-data:filter_unpacked_files:condition_1:artifact:*.cef.vaultId",
                             "filtered-data:get_right_artifact:condition_1:vt_detonate_file:action_result.summary.scan_id"
                         ],
-                        "template": "%%\n{0}\n{1}\n%%",
+                        "template": "{{\n%%\n\"vaultId\": \"{0}\",\n\"scan_id\": \"{1}\"\n%%\n}}",
                         "type": "format"
                     },
                     "errors": {},
@@ -308,8 +308,8 @@
                     "id": "12",
                     "type": "utility",
                     "warnings": {},
-                    "x": 990,
-                    "y": 1324.5
+                    "x": 980,
+                    "y": 1400
                 },
                 "2": {
                     "data": {
@@ -391,7 +391,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T16:30:29.873736+00:00",
+    "create_time": "2023-11-28T20:50:34.981279+00:00",
     "draft_mode": false,
     "labels": [
         "*"
