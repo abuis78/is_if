@@ -149,7 +149,7 @@ def update_artifact(action=None, success=None, container=None, results=None, han
                 "cef_value": filtered_result_0_item_filter_get_right_artifact[0],
                 "cef_data_type": None,
                 "tags": format_tags,
-                "overwrite_tags": None,
+                "overwrite_tags": True,
                 "input_json": None,
             })
 

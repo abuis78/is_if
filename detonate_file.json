@@ -52,7 +52,7 @@
                     "targetPort": "13_in"
                 }
             ],
-            "hash": "bb3827f56c4a3763e0fb95fd76d1e34422c6dd95",
+            "hash": "e1507f814ee1df991deed5ad43e535e7602d4018",
             "nodes": {
                 "0": {
                     "data": {
@@ -288,9 +288,6 @@
                     "warnings": {
                         "config": [
                             "Reconfigure invalid datapath."
-                        ],
-                        "context": [
-                            "Connect block to playbook flow."
                         ]
                     },
                     "x": 1560,
@@ -438,7 +435,7 @@
                                 "input_json": null,
                                 "label": null,
                                 "name": null,
-                                "overwrite_tags": null,
+                                "overwrite_tags": "True",
                                 "severity": null,
                                 "tags": "format_tags:formatted_data"
                             }
@@ -554,7 +551,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T20:57:36.237325+00:00",
+    "create_time": "2023-11-28T20:59:23.212052+00:00",
     "draft_mode": false,
     "labels": [
         "*"
