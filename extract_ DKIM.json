@@ -35,7 +35,7 @@
                     "targetPort": "6_in"
                 }
             ],
-            "hash": "f3a11f4e3d7f2d2e9829aa7a6bcd8f7513b47287",
+            "hash": "d90c2e4b2672e2b71c988257dec9c3eb741f461d",
             "nodes": {
                 "0": {
                     "data": {
@@ -90,7 +90,7 @@
                     "errors": {},
                     "id": "2",
                     "type": "code",
-                    "userCode": "\n    # Write your custom code here...\n    def parse_dkim_signature(dkim_signature):\n        # Zerlegt die DKIM-Signatur und speichert die Elemente in einem Dictionary\n        dkim_parts = {}\n        for part in dkim_signature.split(\"; \"):\n            if \"=\" in part:\n                key, value = part.split(\"=\", 1)\n                dkim_parts[key.strip()] = value.strip()\n        return dkim_parts\n\n    dkim_parts = parse_dkim_signature(playbook_input_dkim_signatur_values[0])\n    \n    phantom.debug(f\"dkim_parts: {dkim_parts}\")\n    \n    cef_json = {}\n    \n    for key, value in dkim_parts.items():\n        cef_json[f'\"{key}\"'] = f'\"{value}\"'\n        #phantom.debug(f\"{key}: {value}\")\n        \n    phantom.debug(cef_json)\n    extract_dkim_signatur__dkim_json = cef_json\n",
+                    "userCode": "\n    # Write your custom code here...\n    def parse_dkim_to_json(dkim_signature):\n        dkim_parts = {}\n        for part in dkim_signature.split(\"; \"):\n            if \"=\" in part:\n                key, value = part.split(\"=\", 1)\n                dkim_parts[key.strip()] = value.strip()\n        return json.dumps(dkim_parts, indent=4)\n\n    dkim_json = parse_dkim_to_json(playbook_input_dkim_signatur_values[0])\n    \n    phantom.debug(f\"dkim_json: {dkim_json}\")\n    \n    extract_dkim_signatur__dkim_json = dkim_json\n",
                     "warnings": {},
                     "x": 980,
                     "y": 580
@@ -456,7 +456,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T15:30:14.158363+00:00",
+    "create_time": "2023-11-28T15:38:31.966079+00:00",
     "draft_mode": false,
     "labels": [
         "*"

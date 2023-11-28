@@ -32,27 +32,19 @@ def extract_dkim_signatur(action=None, success=None, container=None, results=Non
     ################################################################################
 
     # Write your custom code here...
-    def parse_dkim_signature(dkim_signature):
-        # Zerlegt die DKIM-Signatur und speichert die Elemente in einem Dictionary
+    def parse_dkim_to_json(dkim_signature):
         dkim_parts = {}
         for part in dkim_signature.split("; "):
             if "=" in part:
                 key, value = part.split("=", 1)
                 dkim_parts[key.strip()] = value.strip()
-        return dkim_parts
+        return json.dumps(dkim_parts, indent=4)
 
-    dkim_parts = parse_dkim_signature(playbook_input_dkim_signatur_values[0])
+    dkim_json = parse_dkim_to_json(playbook_input_dkim_signatur_values[0])
     
-    phantom.debug(f"dkim_parts: {dkim_parts}")
+    phantom.debug(f"dkim_json: {dkim_json}")
     
-    cef_json = {}
-    
-    for key, value in dkim_parts.items():
-        cef_json[f'"{key}"'] = f'"{value}"'
-        #phantom.debug(f"{key}: {value}")
-        
-    phantom.debug(cef_json)
-    extract_dkim_signatur__dkim_json = cef_json
+    extract_dkim_signatur__dkim_json = dkim_json
     ################################################################################
     ## Custom Code End
     ################################################################################
