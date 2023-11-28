@@ -79,7 +79,7 @@ def filter_get_right_artifact_vaultid(action=None, success=None, container=None,
     matched_artifacts_1, matched_results_1 = phantom.condition(
         container=container,
         conditions=[
-            ["filtered-data:filter_unpacked_files:condition_1:artifact:*.cef.vaultId", "==", "vt_detonate_file:action_result.parameter.vault_id"]
+            ["vt_detonate_file:action_result.parameter.vault_id", "==", "filtered-data:filter_unpacked_files:condition_1:artifact:*.cef.vaultId"]
         ],
         name="filter_get_right_artifact_vaultid:condition_1",
         delimiter=None)

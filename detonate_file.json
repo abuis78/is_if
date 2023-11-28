@@ -64,7 +64,7 @@
                     "targetPort": "14_in"
                 }
             ],
-            "hash": "feb48a3734164e9379f41a72de0cc69ece2caf12",
+            "hash": "fb1bde10f1c031a3c6a1b41bcadc12d7727edbfd",
             "nodes": {
                 "0": {
                     "data": {
@@ -111,8 +111,8 @@
                                     {
                                         "conditionIndex": 0,
                                         "op": "==",
-                                        "param": "filtered-data:filter_unpacked_files:condition_1:artifact:*.cef.vaultId",
-                                        "value": "vt_detonate_file:action_result.parameter.vault_id"
+                                        "param": "vt_detonate_file:action_result.parameter.vault_id",
+                                        "value": "filtered-data:filter_unpacked_files:condition_1:artifact:*.cef.vaultId"
                                     }
                                 ],
                                 "conditionIndex": 0,
@@ -300,9 +300,6 @@
                     "warnings": {
                         "config": [
                             "Reconfigure invalid datapath."
-                        ],
-                        "context": [
-                            "Connect block to playbook flow."
                         ]
                     },
                     "x": 1560,
@@ -599,7 +596,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T21:07:13.716082+00:00",
+    "create_time": "2023-11-28T21:10:06.066315+00:00",
     "draft_mode": false,
     "labels": [
         "*"
