@@ -57,20 +57,6 @@
                     "targetPort": "7_in"
                 },
                 {
-                    "id": "port_4_to_port_1",
-                    "sourceNode": "4",
-                    "sourcePort": "4_out",
-                    "targetNode": "1",
-                    "targetPort": "1_in"
-                },
-                {
-                    "id": "port_7_to_port_1",
-                    "sourceNode": "7",
-                    "sourcePort": "7_out",
-                    "targetNode": "1",
-                    "targetPort": "1_in"
-                },
-                {
                     "conditions": [
                         {
                             "index": 1
@@ -95,13 +81,6 @@
                     "targetPort": "9_in"
                 },
                 {
-                    "id": "port_9_to_port_1",
-                    "sourceNode": "9",
-                    "sourcePort": "9_out",
-                    "targetNode": "1",
-                    "targetPort": "1_in"
-                },
-                {
                     "conditions": [
                         {
                             "index": 0
@@ -119,8 +98,44 @@
                     "sourcePort": "10_out",
                     "targetNode": "4",
                     "targetPort": "4_in"
+                },
+                {
+                    "id": "port_9_to_port_1",
+                    "sourceNode": "9",
+                    "sourcePort": "9_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "id": "port_7_to_port_11",
+                    "sourceNode": "7",
+                    "sourcePort": "7_out",
+                    "targetNode": "11",
+                    "targetPort": "11_in"
+                },
+                {
+                    "id": "port_4_to_port_11",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "11",
+                    "targetPort": "11_in"
+                },
+                {
+                    "id": "port_11_to_port_12",
+                    "sourceNode": "11",
+                    "sourcePort": "11_out",
+                    "targetNode": "12",
+                    "targetPort": "12_in"
+                },
+                {
+                    "id": "port_12_to_port_1",
+                    "sourceNode": "12",
+                    "sourcePort": "12_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
                 }
             ],
+            "hash": "decfe2a1cab05c113cc0b19c1fb7350253166466",
             "nodes": {
                 "0": {
                     "data": {
@@ -136,7 +151,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 360,
-                    "y": 0
+                    "y": -6.394884621840902e-14
                 },
                 "1": {
                     "data": {
@@ -151,8 +166,8 @@
                     "id": "1",
                     "type": "end",
                     "warnings": {},
-                    "x": 360,
-                    "y": 1164
+                    "x": 380,
+                    "y": 1440
                 },
                 "10": {
                     "data": {
@@ -179,6 +194,68 @@
                     "warnings": {},
                     "x": 0,
                     "y": 852
+                },
+                "11": {
+                    "data": {
+                        "advanced": {
+                            "join": [],
+                            "notRequiredJoins": [
+                                "artifact_update_1",
+                                "artifact_update_2"
+                            ]
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "noop",
+                            "repoName": "DB_POC_final"
+                        },
+                        "functionId": 4,
+                        "functionName": "noop_4",
+                        "id": "11",
+                        "selectMore": false,
+                        "type": "utility",
+                        "utilities": {
+                            "noop": {
+                                "description": "Do nothing and return nothing. Use this if you want to do something in a custom function setup section or leave a placeholder block in a playbook. This does not sleep or wait and will return as soon as possible.",
+                                "fields": [],
+                                "label": "noop",
+                                "name": "noop"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "noop": {}
+                        }
+                    },
+                    "errors": {},
+                    "id": "11",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 140,
+                    "y": 1160
+                },
+                "12": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "playbook_final_check_1",
+                        "id": "12",
+                        "inputs": {},
+                        "playbookName": "final_check",
+                        "playbookRepo": 32,
+                        "playbookRepoName": "is_if",
+                        "playbookType": "automation",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "12",
+                    "type": "playbook",
+                    "warnings": {},
+                    "x": 150,
+                    "y": 1284.5
                 },
                 "2": {
                     "data": {
@@ -862,7 +939,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T22:00:01.351439+00:00",
+    "create_time": "2023-11-28T22:47:59.303276+00:00",
     "draft_mode": false,
     "labels": [
         "*"

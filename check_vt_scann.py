@@ -105,7 +105,7 @@ def artifact_update_1(action=None, success=None, container=None, results=None, h
     ## Custom Code End
     ################################################################################
 
-    phantom.custom_function(custom_function="community/artifact_update", parameters=parameters, name="artifact_update_1")
+    phantom.custom_function(custom_function="community/artifact_update", parameters=parameters, name="artifact_update_1", callback=join_noop_4)
 
     return
 
@@ -203,7 +203,7 @@ def artifact_update_2(action=None, success=None, container=None, results=None, h
     ## Custom Code End
     ################################################################################
 
-    phantom.custom_function(custom_function="community/artifact_update", parameters=parameters, name="artifact_update_2")
+    phantom.custom_function(custom_function="community/artifact_update", parameters=parameters, name="artifact_update_2", callback=join_noop_4)
 
     return
 
@@ -304,6 +304,76 @@ def calculate_the_severity(action=None, success=None, container=None, results=No
     phantom.save_run_data(key="calculate_the_severity:new_severity", value=json.dumps(calculate_the_severity__new_severity))
 
     artifact_update_1(container=container)
+
+    return
+
+
+@phantom.playbook_block()
+def join_noop_4(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("join_noop_4() called")
+
+    # if the joined function has already been called, do nothing
+    if phantom.get_run_data(key="join_noop_4_called"):
+        return
+
+    # save the state that the joined function has now been called
+    phantom.save_run_data(key="join_noop_4_called", value="noop_4")
+
+    # call connected block "noop_4"
+    noop_4(container=container, handle=handle)
+
+    return
+
+
+@phantom.playbook_block()
+def noop_4(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("noop_4() called")
+
+    parameters = [{}]
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.custom_function(custom_function="DB_POC_final/noop", parameters=parameters, name="noop_4", callback=playbook_final_check_1)
+
+    return
+
+
+@phantom.playbook_block()
+def playbook_final_check_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("playbook_final_check_1() called")
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    # call playbook "is_if/final_check", returns the playbook_run_id
+    playbook_run_id = phantom.playbook("is_if/final_check", container=container, name="playbook_final_check_1", callback=playbook_final_check_1_callback)
+
+    return
+
+
+@phantom.playbook_block()
+def playbook_final_check_1_callback(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("playbook_final_check_1_callback() called")
+
+    
+    # Downstream End block cannot be called directly, since execution will call on_finish automatically.
+    # Using placeholder callback function so child playbook is run synchronously.
+
 
     return
 
