@@ -123,7 +123,7 @@ def unzip_file(artifact_id=None, container_id=None, default_tag=None, default_se
                         "parent_archive_name": parent_archive_name,
                         "sha256": sha256,
                         "md5": md5,
-                        "vault_id": vault_id
+                        "vaultId": vault_id
                         },
                         "container_id": container_id,
                         "severity": default_severity,
