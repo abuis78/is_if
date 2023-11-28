@@ -32,7 +32,7 @@ def filter_unpacked_files(action=None, success=None, container=None, results=Non
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        detonate_file_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+        debug_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
@@ -41,15 +41,16 @@ def filter_unpacked_files(action=None, success=None, container=None, results=Non
 def debug_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("debug_1() called")
 
-    filtered_artifact_0_data_filter_unpacked_files = phantom.collect2(container=container, datapath=["filtered-data:filter_unpacked_files:condition_1:artifact:*.id","filtered-data:filter_unpacked_files:condition_1:artifact:*.id"])
+    filtered_artifact_0_data_filter_unpacked_files = phantom.collect2(container=container, datapath=["filtered-data:filter_unpacked_files:condition_1:artifact:*.id","filtered-data:filter_unpacked_files:condition_1:artifact:*.cef.vaultId","filtered-data:filter_unpacked_files:condition_1:artifact:*.id"])
 
     filtered_artifact_0__id = [item[0] for item in filtered_artifact_0_data_filter_unpacked_files]
+    filtered_artifact_0__cef_vaultid = [item[1] for item in filtered_artifact_0_data_filter_unpacked_files]
 
     parameters = []
 
     parameters.append({
         "input_1": filtered_artifact_0__id,
-        "input_2": None,
+        "input_2": filtered_artifact_0__cef_vaultid,
         "input_3": None,
         "input_4": None,
         "input_5": None,
