@@ -34,7 +34,7 @@ def code_1(action=None, success=None, container=None, results=None, handle=None,
     u_filter = '?_filter_container="'+ str(c_id) +'"&_filter_name__icontains="Vault Artifact:"&_exclude_severity="low"'
     phantom.debug(u_filter)
     
-    url = phantom.build_phantom_rest_url('indicator')
+    url = phantom.build_phantom_rest_url('artifact')
     url_filter = url + u_filter
     r = phantom.requests.get(url_filter,verify=False)
     data = r.json()
