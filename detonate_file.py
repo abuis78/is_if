@@ -66,14 +66,14 @@ def vt_detonate_file(action=None, success=None, container=None, results=None, ha
     ## Custom Code End
     ################################################################################
 
-    phantom.act("detonate file", parameters=parameters, name="vt_detonate_file", assets=["virustotal"], callback=filter_get_right_artifact)
+    phantom.act("detonate file", parameters=parameters, name="vt_detonate_file", assets=["virustotal"], callback=filter_get_right_artifact_vaultid)
 
     return
 
 
 @phantom.playbook_block()
-def filter_get_right_artifact(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
-    phantom.debug("filter_get_right_artifact() called")
+def filter_get_right_artifact_vaultid(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("filter_get_right_artifact_vaultid() called")
 
     # collect filtered artifact ids and results for 'if' condition 1
     matched_artifacts_1, matched_results_1 = phantom.condition(
@@ -81,12 +81,12 @@ def filter_get_right_artifact(action=None, success=None, container=None, results
         conditions=[
             ["filtered-data:filter_unpacked_files:condition_1:artifact:*.cef.vaultId", "==", "vt_detonate_file:action_result.parameter.vault_id"]
         ],
-        name="filter_get_right_artifact:condition_1",
+        name="filter_get_right_artifact_vaultid:condition_1",
         delimiter=None)
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        format_tags(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+        filter_get_artifact_id(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
@@ -131,22 +131,22 @@ def debug_2(action=None, success=None, container=None, results=None, handle=None
 def update_artifact(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("update_artifact() called")
 
-    filtered_artifact_0_data_filter_get_right_artifact = phantom.collect2(container=container, datapath=["filtered-data:filter_get_right_artifact:condition_1:artifact:*.id","filtered-data:filter_get_right_artifact:condition_1:artifact:*.id"])
-    filtered_result_0_data_filter_get_right_artifact = phantom.collect2(container=container, datapath=["filtered-data:filter_get_right_artifact:condition_1:vt_detonate_file:action_result.summary.scan_id"])
+    filtered_artifact_0_data_filter_get_artifact_id = phantom.collect2(container=container, datapath=["filtered-data:filter_get_artifact_id:condition_1:artifact:*.id","filtered-data:filter_get_artifact_id:condition_1:artifact:*.id"])
+    filtered_result_0_data_filter_get_right_artifact_vaultid = phantom.collect2(container=container, datapath=["filtered-data:filter_get_right_artifact_vaultid:condition_1:vt_detonate_file:action_result.summary.scan_id"])
     format_tags = phantom.get_format_data(name="format_tags")
 
     parameters = []
 
     # build parameters list for 'update_artifact' call
-    for filtered_artifact_0_item_filter_get_right_artifact in filtered_artifact_0_data_filter_get_right_artifact:
-        for filtered_result_0_item_filter_get_right_artifact in filtered_result_0_data_filter_get_right_artifact:
+    for filtered_artifact_0_item_filter_get_artifact_id in filtered_artifact_0_data_filter_get_artifact_id:
+        for filtered_result_0_item_filter_get_right_artifact_vaultid in filtered_result_0_data_filter_get_right_artifact_vaultid:
             parameters.append({
-                "artifact_id": filtered_artifact_0_item_filter_get_right_artifact[0],
+                "artifact_id": filtered_artifact_0_item_filter_get_artifact_id[0],
                 "name": None,
                 "label": None,
                 "severity": None,
                 "cef_field": "scan_id",
-                "cef_value": filtered_result_0_item_filter_get_right_artifact[0],
+                "cef_value": filtered_result_0_item_filter_get_right_artifact_vaultid[0],
                 "cef_data_type": None,
                 "tags": format_tags,
                 "overwrite_tags": True,
@@ -176,7 +176,7 @@ def format_tags(action=None, success=None, container=None, results=None, handle=
 
     # parameter list for template variable replacement
     parameters = [
-        "filtered-data:filter_get_right_artifact:condition_1:artifact:*.tags"
+        "filtered-data:filter_get_right_artifact_vaultid:condition_1:artifact:*.tags"
     ]
 
     ################################################################################
@@ -192,6 +192,26 @@ def format_tags(action=None, success=None, container=None, results=None, handle=
     phantom.format(container=container, template=template, parameters=parameters, name="format_tags")
 
     update_artifact(container=container)
+
+    return
+
+
+@phantom.playbook_block()
+def filter_get_artifact_id(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("filter_get_artifact_id() called")
+
+    # collect filtered artifact ids and results for 'if' condition 1
+    matched_artifacts_1, matched_results_1 = phantom.condition(
+        container=container,
+        conditions=[
+            ["filtered-data:filter_get_right_artifact_vaultid:condition_1:artifact:*.id", "==", "artifact:*.id"]
+        ],
+        name="filter_get_artifact_id:condition_1",
+        delimiter=None)
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_1 or matched_results_1:
+        format_tags(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
