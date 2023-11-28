@@ -69,7 +69,7 @@
                     "targetPort": "7_in"
                 }
             ],
-            "hash": "d2ba1a1f591bfc428ba041e3bba08d15204e1efb",
+            "hash": "d4219fdad6dd45ddfbb2236f16de7254b6456b26",
             "nodes": {
                 "0": {
                     "data": {
@@ -571,7 +571,7 @@
                                 "artifact_id": "filtered-data:filter_status_success:condition_2:get_scann_report:action_result.parameter.context.artifact_id",
                                 "cef_data_type": null,
                                 "cef_field": "vt_malicious",
-                                "cef_value": "0",
+                                "cef_value": "no hit",
                                 "input_json": null,
                                 "label": null,
                                 "name": null,
@@ -598,7 +598,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T21:41:42.590245+00:00",
+    "create_time": "2023-11-28T21:42:33.756847+00:00",
     "draft_mode": false,
     "labels": [
         "*"

@@ -182,7 +182,7 @@ def artifact_update_2(action=None, success=None, container=None, results=None, h
             "label": None,
             "severity": "low",
             "cef_field": "vt_malicious",
-            "cef_value": 0,
+            "cef_value": "no hit",
             "cef_data_type": None,
             "tags": " unpacked,scan_successful",
             "overwrite_tags": True,
