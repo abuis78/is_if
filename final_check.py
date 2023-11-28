@@ -21,8 +21,6 @@ def on_start(container):
 def code_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("code_1() called")
 
-    id_value = container.get("id", None)
-
     code_1__count = None
 
     ################################################################################
@@ -31,9 +29,10 @@ def code_1(action=None, success=None, container=None, results=None, handle=None,
 
     # Write your custom code here...
     # artifact?_filter_container=72293&_filter_name__icontains="Vault%20Artifact:"&_exclude_severity="low"
-
+    c_id = container['id']    
     
-    u_filter = '?_filter_container='+ str(id_value) +'&_filter_name__icontains="Vault Artifact:"&_exclude_severity="low"'
+    u_filter = '?_filter_container='+ str(c_id) +'&_filter_name__icontains="Vault Artifact:"&_exclude_severity="low"'
+    phantom.debug(u_filter)
     
     url = phantom.build_phantom_rest_url('indicator')
     url_filter = url + u_filter

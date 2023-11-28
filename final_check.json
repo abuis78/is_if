@@ -14,7 +14,7 @@
                     "targetPort": "2_in"
                 }
             ],
-            "hash": "b8e76f3fe489366060956ee6646e50065bbcc5d7",
+            "hash": "ed793baef5f7e2dc79688840e26baea673bfa71d",
             "nodes": {
                 "0": {
                     "data": {
@@ -56,9 +56,7 @@
                         "functionId": 1,
                         "functionName": "code_1",
                         "id": "2",
-                        "inputParameters": [
-                            "container:id"
-                        ],
+                        "inputParameters": [],
                         "outputVariables": [
                             "count"
                         ],
@@ -67,7 +65,7 @@
                     "errors": {},
                     "id": "2",
                     "type": "code",
-                    "userCode": "\n    # Write your custom code here...\n    # artifact?_filter_container=72293&_filter_name__icontains=\"Vault%20Artifact:\"&_exclude_severity=\"low\"\n\n    \n    u_filter = '?_filter_container='+ str(id_value) +'&_filter_name__icontains=\"Vault Artifact:\"&_exclude_severity=\"low\"'\n    \n    url = phantom.build_phantom_rest_url('indicator')\n    url_filter = url + u_filter\n    r = phantom.requests.get(url,verify=False)\n    data = r.json()\n    phantom.debug(data)\n",
+                    "userCode": "\n    # Write your custom code here...\n    # artifact?_filter_container=72293&_filter_name__icontains=\"Vault%20Artifact:\"&_exclude_severity=\"low\"\n    c_id = container['id']    \n    \n    u_filter = '?_filter_container='+ str(c_id) +'&_filter_name__icontains=\"Vault Artifact:\"&_exclude_severity=\"low\"'\n    phantom.debug(u_filter)\n    \n    url = phantom.build_phantom_rest_url('indicator')\n    url_filter = url + u_filter\n    r = phantom.requests.get(url,verify=False)\n    data = r.json()\n    phantom.debug(data)\n",
                     "warnings": {},
                     "x": 1000,
                     "y": 560
@@ -82,7 +80,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T22:23:07.899661+00:00",
+    "create_time": "2023-11-28T22:25:05.467972+00:00",
     "draft_mode": false,
     "labels": [
         "*"
