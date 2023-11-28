@@ -127,7 +127,7 @@ def decision_1(action=None, success=None, container=None, results=None, handle=N
         return
 
     # check for 'else' condition 2
-    filter_3(action=action, success=success, container=container, results=results, handle=handle)
+    filter_failed_scann(action=action, success=success, container=container, results=results, handle=handle)
 
     return
 
@@ -208,21 +208,59 @@ def artifact_update_2(action=None, success=None, container=None, results=None, h
 
 
 @phantom.playbook_block()
-def filter_3(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
-    phantom.debug("filter_3() called")
+def filter_failed_scann(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("filter_failed_scann() called")
 
     # collect filtered artifact ids and results for 'if' condition 1
     matched_artifacts_1, matched_results_1 = phantom.condition(
         container=container,
         conditions=[
-            ["get_scann_report:action_result.status", "==", "failed"]
+            ["artifact:*.name", "==", "scheduled playbook"]
         ],
-        name="filter_3:condition_1",
+        name="filter_failed_scann:condition_1",
         delimiter=None)
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        pass
+        artifact_update_3(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+
+    return
+
+
+@phantom.playbook_block()
+def artifact_update_3(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("artifact_update_3() called")
+
+    filtered_artifact_0_data_filter_artifacts_pending_scan = phantom.collect2(container=container, datapath=["filtered-data:filter_artifacts_pending_scan:condition_1:artifact:*.id","filtered-data:filter_artifacts_pending_scan:condition_1:artifact:*.id"])
+
+    parameters = []
+
+    # build parameters list for 'artifact_update_3' call
+    for filtered_artifact_0_item_filter_artifacts_pending_scan in filtered_artifact_0_data_filter_artifacts_pending_scan:
+        parameters.append({
+            "artifact_id": filtered_artifact_0_item_filter_artifacts_pending_scan[0],
+            "name": None,
+            "label": "pending",
+            "severity": None,
+            "cef_field": None,
+            "cef_value": None,
+            "cef_data_type": None,
+            "tags": None,
+            "overwrite_tags": None,
+            "input_json": None,
+        })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.custom_function(custom_function="community/artifact_update", parameters=parameters, name="artifact_update_3")
 
     return
 
