@@ -26,32 +26,6 @@
                     "targetPort": "5_in"
                 },
                 {
-                    "id": "port_5_to_port_10",
-                    "sourceNode": "5",
-                    "sourcePort": "5_out",
-                    "targetNode": "10",
-                    "targetPort": "10_in"
-                },
-                {
-                    "id": "port_14_to_port_13",
-                    "sourceNode": "14",
-                    "sourcePort": "14_out",
-                    "targetNode": "13",
-                    "targetPort": "13_in"
-                },
-                {
-                    "conditions": [
-                        {
-                            "index": 0
-                        }
-                    ],
-                    "id": "port_10_to_port_15",
-                    "sourceNode": "10",
-                    "sourcePort": "10_out",
-                    "targetNode": "15",
-                    "targetPort": "15_in"
-                },
-                {
                     "conditions": [
                         {
                             "index": 0
@@ -62,9 +36,16 @@
                     "sourcePort": "15_out",
                     "targetNode": "14",
                     "targetPort": "14_in"
+                },
+                {
+                    "id": "port_5_to_port_13",
+                    "sourceNode": "5",
+                    "sourcePort": "5_out",
+                    "targetNode": "13",
+                    "targetPort": "13_in"
                 }
             ],
-            "hash": "7c199c0608dd341067a5c90c3dcfec57daff6bf8",
+            "hash": "69b63a02ef54e700ed8e3b7af984a2b7230c91bd",
             "nodes": {
                 "0": {
                     "data": {
@@ -128,9 +109,16 @@
                     "errors": {},
                     "id": "10",
                     "type": "filter",
-                    "warnings": {},
-                    "x": 1040,
-                    "y": 1000
+                    "warnings": {
+                        "config": [
+                            "Reconfigure invalid datapath."
+                        ],
+                        "context": [
+                            "Connect block to playbook flow."
+                        ]
+                    },
+                    "x": 540,
+                    "y": 940
                 },
                 "12": {
                     "data": {
@@ -300,9 +288,6 @@
                     "warnings": {
                         "config": [
                             "Reconfigure invalid datapath."
-                        ],
-                        "context": [
-                            "Connect block to playbook flow."
                         ]
                     },
                     "x": 1560,
@@ -443,10 +428,10 @@
                         "utilityType": "custom_function",
                         "values": {
                             "artifact_update": {
-                                "artifact_id": "filtered-data:filter_get_artifact_id:condition_1:artifact:*.id",
+                                "artifact_id": "vt_detonate_file:action_result.parameter.context.artifact_id",
                                 "cef_data_type": null,
                                 "cef_field": "scan_id",
-                                "cef_value": "filtered-data:filter_get_right_artifact_vaultid:condition_1:vt_detonate_file:action_result.summary.scan_id",
+                                "cef_value": "vt_detonate_file:action_result.summary.scan_id",
                                 "input_json": null,
                                 "label": null,
                                 "name": null,
@@ -459,9 +444,13 @@
                     "errors": {},
                     "id": "13",
                     "type": "utility",
-                    "warnings": {},
+                    "warnings": {
+                        "config": [
+                            "Reconfigure invalid datapath."
+                        ]
+                    },
                     "x": 980,
-                    "y": 1420
+                    "y": 980
                 },
                 "14": {
                     "data": {
@@ -482,9 +471,13 @@
                     "errors": {},
                     "id": "14",
                     "type": "format",
-                    "warnings": {},
-                    "x": 980,
-                    "y": 1320
+                    "warnings": {
+                        "config": [
+                            "Reconfigure invalid datapath."
+                        ]
+                    },
+                    "x": 520,
+                    "y": 1340
                 },
                 "15": {
                     "data": {
@@ -515,8 +508,12 @@
                     "errors": {},
                     "id": "15",
                     "type": "filter",
-                    "warnings": {},
-                    "x": 1040,
+                    "warnings": {
+                        "config": [
+                            "Reconfigure invalid datapath."
+                        ]
+                    },
+                    "x": 620,
                     "y": 1160
                 },
                 "2": {
@@ -599,7 +596,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T21:14:02.963243+00:00",
+    "create_time": "2023-11-28T21:17:31.329283+00:00",
     "draft_mode": false,
     "labels": [
         "*"
