@@ -148,10 +148,10 @@ def schedule_playbook_1(action=None, success=None, container=None, results=None,
 
     parameters.append({
         "playbook": "is_if/check_vt_scann",
+        "delay_purpose": "Wait for VT scann report",
         "duration_unit": "Minutes",
         "delay_duration": 5,
         "playbook_scope": "all",
-        "delay_purpose": "Wait for VT scann report",
     })
 
     ################################################################################
@@ -164,7 +164,45 @@ def schedule_playbook_1(action=None, success=None, container=None, results=None,
     ## Custom Code End
     ################################################################################
 
-    phantom.act("schedule playbook", parameters=parameters, name="schedule_playbook_1", assets=["runner-1"])
+    phantom.act("schedule playbook", parameters=parameters, name="schedule_playbook_1", assets=["runner-1"], callback=artifact_update_1)
+
+    return
+
+
+@phantom.playbook_block()
+def artifact_update_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("artifact_update_1() called")
+
+    schedule_playbook_1_result_data = phantom.collect2(container=container, datapath=["schedule_playbook_1:action_result.parameter.context.artifact_id","schedule_playbook_1:action_result.parameter.context.artifact_id"], action_results=results)
+
+    parameters = []
+
+    # build parameters list for 'artifact_update_1' call
+    for schedule_playbook_1_result_item in schedule_playbook_1_result_data:
+        parameters.append({
+            "artifact_id": schedule_playbook_1_result_item[0],
+            "name": None,
+            "label": None,
+            "severity": "Informational",
+            "cef_field": None,
+            "cef_value": None,
+            "cef_data_type": None,
+            "tags": None,
+            "overwrite_tags": None,
+            "input_json": None,
+        })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.custom_function(custom_function="community/artifact_update", parameters=parameters, name="artifact_update_1")
 
     return
 
