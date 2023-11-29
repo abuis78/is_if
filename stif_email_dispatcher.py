@@ -637,7 +637,7 @@ def filter_vault_artifact(action=None, success=None, container=None, results=Non
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        unzip_file_7(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+        unzip_file_8(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
@@ -740,8 +740,8 @@ def playbook_extract__dkim_1(action=None, success=None, container=None, results=
 
 
 @phantom.playbook_block()
-def unzip_file_7(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
-    phantom.debug("unzip_file_7() called")
+def unzip_file_8(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("unzip_file_8() called")
 
     id_value = container.get("id", None)
     label_value = container.get("label", None)
@@ -757,7 +757,6 @@ def unzip_file_7(action=None, success=None, container=None, results=None, handle
         "default_tag": "unpacked",
         "default_severity": "Low",
         "default_label": label_value,
-        "pwd": None,
     })
 
     ################################################################################
@@ -770,7 +769,7 @@ def unzip_file_7(action=None, success=None, container=None, results=None, handle
     ## Custom Code End
     ################################################################################
 
-    phantom.custom_function(custom_function="is_if/unzip_file", parameters=parameters, name="unzip_file_7", callback=playbook_detonate_file_1)
+    phantom.custom_function(custom_function="is_if/unzip_file", parameters=parameters, name="unzip_file_8", callback=playbook_detonate_file_1)
 
     return
 

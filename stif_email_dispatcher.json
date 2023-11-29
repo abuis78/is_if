@@ -200,21 +200,21 @@
                             "index": 0
                         }
                     ],
-                    "id": "port_23_to_port_27",
+                    "id": "port_23_to_port_28",
                     "sourceNode": "23",
                     "sourcePort": "23_out",
-                    "targetNode": "27",
-                    "targetPort": "27_in"
+                    "targetNode": "28",
+                    "targetPort": "28_in"
                 },
                 {
-                    "id": "port_27_to_port_25",
-                    "sourceNode": "27",
-                    "sourcePort": "27_out",
+                    "id": "port_28_to_port_25",
+                    "sourceNode": "28",
+                    "sourcePort": "28_out",
                     "targetNode": "25",
                     "targetPort": "25_in"
                 }
             ],
-            "hash": "c8dc2cd8f23fdc3a408aacc67f9c232155530c82",
+            "hash": "6009c5a8279ec5da8745fc48edcef6a15e6971b7",
             "nodes": {
                 "0": {
                     "data": {
@@ -893,8 +893,8 @@
                     "id": "23",
                     "type": "filter",
                     "warnings": {},
-                    "x": 380,
-                    "y": 2540
+                    "x": 400,
+                    "y": 2580
                 },
                 "24": {
                     "data": {
@@ -988,11 +988,7 @@
                     "type": "utility",
                     "warnings": {
                         "config": [
-                            "Reconfigure invalid datapath.",
-                            "The referenced custom function has changed. Reconfigure this block to use the updated parameters."
-                        ],
-                        "context": [
-                            "Connect block to playbook flow."
+                            "Reconfigure invalid datapath."
                         ]
                     },
                     "x": 640,
@@ -1051,7 +1047,7 @@
                     "x": 170,
                     "y": 936
                 },
-                "27": {
+                "28": {
                     "data": {
                         "advanced": {
                             "join": []
@@ -1061,9 +1057,9 @@
                             "name": "unzip_file",
                             "repoName": "is_if"
                         },
-                        "functionId": 7,
-                        "functionName": "unzip_file_7",
-                        "id": "27",
+                        "functionId": 8,
+                        "functionName": "unzip_file_8",
+                        "id": "28",
                         "selectMore": false,
                         "type": "utility",
                         "utilities": {
@@ -1119,16 +1115,6 @@
                                         "placeholder": "",
                                         "renderType": "datapath",
                                         "required": false
-                                    },
-                                    {
-                                        "dataTypes": [],
-                                        "description": "",
-                                        "inputType": "item",
-                                        "label": "pwd",
-                                        "name": "pwd",
-                                        "placeholder": "",
-                                        "renderType": "datapath",
-                                        "required": false
                                     }
                                 ],
                                 "label": "unzip_file",
@@ -1144,17 +1130,16 @@
                                 "container_id": "container:id",
                                 "default_label": "container:label",
                                 "default_severity": "Low",
-                                "default_tag": "unpacked",
-                                "pwd": null
+                                "default_tag": "unpacked"
                             }
                         }
                     },
                     "errors": {},
-                    "id": "27",
+                    "id": "28",
                     "type": "utility",
                     "warnings": {},
-                    "x": 320,
-                    "y": 2700
+                    "x": 350,
+                    "y": 2724.5
                 },
                 "3": {
                     "data": {
@@ -1566,7 +1551,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-29T13:28:41.598229+00:00",
+    "create_time": "2023-11-29T13:36:21.970239+00:00",
     "draft_mode": false,
     "labels": [
         "*"
