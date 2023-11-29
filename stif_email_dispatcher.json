@@ -214,7 +214,7 @@
                     "targetPort": "25_in"
                 }
             ],
-            "hash": "6009c5a8279ec5da8745fc48edcef6a15e6971b7",
+            "hash": "b430e6baca47c41549996001083f24d922da8f40",
             "nodes": {
                 "0": {
                     "data": {
@@ -896,104 +896,6 @@
                     "x": 400,
                     "y": 2580
                 },
-                "24": {
-                    "data": {
-                        "advanced": {
-                            "join": []
-                        },
-                        "customFunction": {
-                            "draftMode": false,
-                            "name": "unzip_file",
-                            "repoName": "is_if"
-                        },
-                        "functionId": 6,
-                        "functionName": "unzip_file_6",
-                        "id": "24",
-                        "selectMore": false,
-                        "type": "utility",
-                        "utilities": {
-                            "unzip_file": {
-                                "description": "This Python script unpacks ZIP and RAR files that can be protected by an optional password. It handles a list of file paths with corresponding passwords, adds a prefix-based renaming scheme to the unzipped files and calculates their SHA256 and MD5 hash values. The results are saved in a JSON format containing the path, file name, name of the original archive and the calculated hash values. The script also supports unpacking files without a password.",
-                                "fields": [
-                                    {
-                                        "dataTypes": [],
-                                        "description": "A list of Artifat IDs. These artifacts must contain the following information: VaultID. Optionally a password.",
-                                        "inputType": "list",
-                                        "label": "artifact_id",
-                                        "name": "artifact_id",
-                                        "placeholder": "",
-                                        "renderType": "datapath",
-                                        "required": false
-                                    },
-                                    {
-                                        "dataTypes": [],
-                                        "description": "",
-                                        "inputType": "item",
-                                        "label": "container_id",
-                                        "name": "container_id",
-                                        "placeholder": "",
-                                        "renderType": "datapath",
-                                        "required": false
-                                    },
-                                    {
-                                        "dataTypes": [],
-                                        "description": "",
-                                        "inputType": "item",
-                                        "label": "default_tag",
-                                        "name": "default_tag",
-                                        "placeholder": "",
-                                        "renderType": "datapath",
-                                        "required": false
-                                    },
-                                    {
-                                        "dataTypes": [],
-                                        "description": "",
-                                        "inputType": "item",
-                                        "label": "default_severity",
-                                        "name": "default_severity",
-                                        "placeholder": "",
-                                        "renderType": "datapath",
-                                        "required": false
-                                    },
-                                    {
-                                        "dataTypes": [],
-                                        "description": "",
-                                        "inputType": "item",
-                                        "label": "default_label",
-                                        "name": "default_label",
-                                        "placeholder": "",
-                                        "renderType": "datapath",
-                                        "required": false
-                                    }
-                                ],
-                                "label": "unzip_file",
-                                "name": "unzip_file"
-                            }
-                        },
-                        "utilityType": "custom_function",
-                        "values": {
-                            "unzip_file": {
-                                "artifact_id": [
-                                    "filtered-data:filter_vault_artifact:condition_1:artifact:*.id"
-                                ],
-                                "container_id": "container:id",
-                                "default_label": "container:label",
-                                "default_severity": "Low",
-                                "default_tag": "unpacked"
-                            }
-                        }
-                    },
-                    "errors": {},
-                    "id": "24",
-                    "type": "utility",
-                    "warnings": {
-                        "config": [
-                            "Reconfigure invalid datapath."
-                        ]
-                    },
-                    "x": 640,
-                    "y": 2700
-                },
                 "25": {
                     "data": {
                         "advanced": {
@@ -1551,7 +1453,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-29T13:36:21.970239+00:00",
+    "create_time": "2023-11-29T13:39:03.414476+00:00",
     "draft_mode": false,
     "labels": [
         "*"

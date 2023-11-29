@@ -643,41 +643,6 @@ def filter_vault_artifact(action=None, success=None, container=None, results=Non
 
 
 @phantom.playbook_block()
-def unzip_file_6(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
-    phantom.debug("unzip_file_6() called")
-
-    id_value = container.get("id", None)
-    label_value = container.get("label", None)
-    filtered_artifact_0_data_filter_vault_artifact = phantom.collect2(container=container, datapath=["filtered-data:filter_vault_artifact:condition_1:artifact:*.id","filtered-data:filter_vault_artifact:condition_1:artifact:*.id"])
-
-    filtered_artifact_0__id = [item[0] for item in filtered_artifact_0_data_filter_vault_artifact]
-
-    parameters = []
-
-    parameters.append({
-        "artifact_id": filtered_artifact_0__id,
-        "default_tag": "unpacked",
-        "container_id": id_value,
-        "default_label": label_value,
-        "default_severity": "Low",
-    })
-
-    ################################################################################
-    ## Custom Code Start
-    ################################################################################
-
-    # Write your custom code here...
-
-    ################################################################################
-    ## Custom Code End
-    ################################################################################
-
-    phantom.custom_function(custom_function="is_if/unzip_file", parameters=parameters, name="unzip_file_6")
-
-    return
-
-
-@phantom.playbook_block()
 def playbook_detonate_file_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("playbook_detonate_file_1() called")
 
