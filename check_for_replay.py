@@ -155,7 +155,7 @@ def unzip_file_2(action=None, success=None, container=None, results=None, handle
 def debug_3(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
     phantom.debug("debug_3() called")
 
-    check_prompt_status_result_data = phantom.collect2(container=container, datapath=["check_prompt_status:action_result.data.response.password","check_prompt_status:action_result.parameter.context.artifact_id"], action_results=results)
+    check_prompt_status_result_data = phantom.collect2(container=container, datapath=["check_prompt_status:action_result.data.0.response.password","check_prompt_status:action_result.parameter.context.artifact_id"], action_results=results)
 
     check_prompt_status_result_item_0 = [item[0] for item in check_prompt_status_result_data]
 
