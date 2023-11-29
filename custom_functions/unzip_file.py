@@ -1,4 +1,4 @@
-def unzip_file(artifact_id=None, container_id=None, default_tag=None, default_severity=None, default_label=None, **kwargs):
+def unzip_file(artifact_id=None, container_id=None, default_tag=None, default_severity=None, default_label=None, pwd=None, **kwargs):
     """
     This Python script unpacks ZIP and RAR files that can be protected by an optional password. It handles a list of file paths with corresponding passwords, adds a prefix-based renaming scheme to the unzipped files and calculates their SHA256 and MD5 hash values. The results are saved in a JSON format containing the path, file name, name of the original archive and the calculated hash values. The script also supports unpacking files without a password.
     
@@ -8,6 +8,7 @@ def unzip_file(artifact_id=None, container_id=None, default_tag=None, default_se
         default_tag
         default_severity
         default_label
+        pwd
     
     Returns a JSON-serializable object that implements the configured data paths:
         
