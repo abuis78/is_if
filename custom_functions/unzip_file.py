@@ -167,7 +167,7 @@ def unzip_file(artifact_id=None, container_id=None, default_tag=None, default_se
         file_extension = parent_archive_name.split('.')[-1].lower()  # Extracting file extension
         try:
             prefix = parent_archive_name.split('.')[0]  # Prefix based on file name
-            pwd = "Sonne1234".encode()  # Example password
+            #pwd = "Sonne1234".encode()  # Example password
             
 
             # Process ZIP files
