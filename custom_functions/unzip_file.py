@@ -88,6 +88,7 @@ def unzip_file(artifact_id=None, container_id=None, default_tag=None, default_se
 
     def add_prefix_and_extract(zip_ref, extract_to, prefix, parent_archive_name,default_tag,default_severity,default_label,container_id, password=None):
         """Extract files from zip, add a prefix, calculate hashes, and add to results."""
+        phantom.debug(f"password: {password}")
         # Create a unique subfolder for extracted files
         unique_subfolder = f"{extract_to}{prefix}_{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}/"
         os.makedirs(unique_subfolder, exist_ok=True)

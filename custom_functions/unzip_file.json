@@ -1,5 +1,5 @@
 {
-    "create_time": "2023-11-29T13:04:44.874739+00:00",
+    "create_time": "2023-11-29T13:07:39.756904+00:00",
     "custom_function_id": "8b3b9be01d9fc8de55c210bcaade06774e9fa757",
     "description": "This Python script unpacks ZIP and RAR files that can be protected by an optional password. It handles a list of file paths with corresponding passwords, adds a prefix-based renaming scheme to the unzipped files and calculates their SHA256 and MD5 hash values. The results are saved in a JSON format containing the path, file name, name of the original archive and the calculated hash values. The script also supports unpacking files without a password.",
     "draft_mode": false,
