@@ -176,7 +176,7 @@ def unzip_file(artifact_id=None, container_id=None, default_tag=None, default_se
                         zip_ref.extractall(pwd=pwd)
                     else:
                         zip_ref.extractall()
-                    add_prefix_and_extract(zip_ref, extract_to, prefix, parent_archive_name,default_tag,default_severity,default_label,container_id,"Sonne1234")
+                    add_prefix_and_extract(zip_ref, extract_to, prefix, parent_archive_name,default_tag,default_severity,default_label,container_id,pwd)
             else:
                 phantom.debug(f"File format of {parent_archive_name} is not supported.")
 
