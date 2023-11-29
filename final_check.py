@@ -97,7 +97,7 @@ def set_severity_1(action=None, success=None, container=None, results=None, hand
 
     container = phantom.get_container(container.get('id', None))
 
-    promote_to_case_2(container=container)
+    promote_to_case_3(container=container)
 
     return
 
@@ -243,8 +243,8 @@ def filter_scan_successful(action=None, success=None, container=None, results=No
 
 
 @phantom.playbook_block()
-def promote_to_case_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
-    phantom.debug("promote_to_case_2() called")
+def promote_to_case_3(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("promote_to_case_3() called")
 
     ################################################################################
     ## Custom Code Start
@@ -256,9 +256,129 @@ def promote_to_case_2(action=None, success=None, container=None, results=None, h
     ## Custom Code End
     ################################################################################
 
-    phantom.promote()
+    phantom.promote(container=container, template="E-Mail mit Anhang")
 
     container = phantom.get_container(container.get('id', None))
+
+    format_email_subjekt(container=container)
+
+    return
+
+
+@phantom.playbook_block()
+def format_email_subjekt(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("format_email_subjekt() called")
+
+    template = """[{0}] - Faszinierende Entdeckung: Unsere tiefgehende Untersuchung des verdächtigen Inhalts nimmt Fahrt auf!\n"""
+
+    # parameter list for template variable replacement
+    parameters = [
+        "container:id"
+    ]
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.format(container=container, template=template, parameters=parameters, name="format_email_subjekt")
+
+    format_email_body_1(container=container)
+
+    return
+
+
+@phantom.playbook_block()
+def format_email_body_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("format_email_body_1() called")
+
+    template = """Sehr geehrte Damen und Herren,\n\nich möchte Sie über spannende Fortschritte in unserer Analyse des verdächtigen Inhalts informieren. Wir sind nun in der Lage, tiefere Einblicke zu gewinnen, die bedeutende Implikationen für unser Projekt haben könnten.\n\nIn Kürze teilen wir detailliertere Ergebnisse mit Ihnen. Bitte behandeln Sie diese Informationen bis dahin vertraulich. Wir schätzen Ihre Unterstützung und freuen uns auf die weitere Zusammenarbeit.\n\nBeste Grüße,\nIT-Sicherheit"""
+
+    # parameter list for template variable replacement
+    parameters = []
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.format(container=container, template=template, parameters=parameters, name="format_email_body_1")
+
+    filter_3(container=container)
+
+    return
+
+
+@phantom.playbook_block()
+def filter_3(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("filter_3() called")
+
+    # collect filtered artifact ids and results for 'if' condition 1
+    matched_artifacts_1, matched_results_1 = phantom.condition(
+        container=container,
+        conditions=[
+            ["artifact:*.name", "==", "fromEmail"]
+        ],
+        name="filter_3:condition_1",
+        delimiter=None)
+
+    # call connected blocks if filtered artifacts or results
+    if matched_artifacts_1 or matched_results_1:
+        playbook_send_email_2(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+
+    return
+
+
+@phantom.playbook_block()
+def playbook_send_email_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("playbook_send_email_2() called")
+
+    filtered_artifact_0_data_filter_3 = phantom.collect2(container=container, datapath=["filtered-data:filter_3:condition_1:artifact:*.cef.fromEmail"])
+    format_email_body_1 = phantom.get_format_data(name="format_email_body_1")
+    format_email_subjekt = phantom.get_format_data(name="format_email_subjekt")
+
+    filtered_artifact_0__cef_fromemail = [item[0] for item in filtered_artifact_0_data_filter_3]
+
+    inputs = {
+        "email_body": format_email_body_1,
+        "email_subject": format_email_subjekt,
+        "email_recipient": filtered_artifact_0__cef_fromemail,
+    }
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    # call playbook "is_if/send_email", returns the playbook_run_id
+    playbook_run_id = phantom.playbook("is_if/send_email", container=container, name="playbook_send_email_2", callback=playbook_send_email_2_callback, inputs=inputs)
+
+    return
+
+
+@phantom.playbook_block()
+def playbook_send_email_2_callback(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("playbook_send_email_2_callback() called")
+
+    
+    # Downstream End block cannot be called directly, since execution will call on_finish automatically.
+    # Using placeholder callback function so child playbook is run synchronously.
+
 
     return
 

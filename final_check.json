@@ -90,14 +90,54 @@
                     "targetPort": "6_in"
                 },
                 {
-                    "id": "port_4_to_port_10",
+                    "id": "port_4_to_port_11",
                     "sourceNode": "4",
                     "sourcePort": "4_out",
-                    "targetNode": "10",
-                    "targetPort": "10_in"
+                    "targetNode": "11",
+                    "targetPort": "11_in"
+                },
+                {
+                    "id": "port_11_to_port_12",
+                    "sourceNode": "11",
+                    "sourcePort": "11_out",
+                    "targetNode": "12",
+                    "targetPort": "12_in"
+                },
+                {
+                    "id": "port_12_to_port_13",
+                    "sourceNode": "12",
+                    "sourcePort": "12_out",
+                    "targetNode": "13",
+                    "targetPort": "13_in"
+                },
+                {
+                    "id": "port_13_to_port_14",
+                    "sourceNode": "13",
+                    "sourcePort": "13_out",
+                    "targetNode": "14",
+                    "targetPort": "14_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_14_to_port_15",
+                    "sourceNode": "14",
+                    "sourcePort": "14_out",
+                    "targetNode": "15",
+                    "targetPort": "15_in"
+                },
+                {
+                    "id": "port_15_to_port_1",
+                    "sourceNode": "15",
+                    "sourcePort": "15_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
                 }
             ],
-            "hash": "a3f7e0c35ce3efa2a135aa4c38691e12ee387410",
+            "hash": "ece2d26e2b4d1fae217cc27dc50bc6ed5976a49b",
             "nodes": {
                 "0": {
                     "data": {
@@ -113,7 +153,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 190,
-                    "y": -6.394884621840902e-14
+                    "y": -1.2789769243681803e-13
                 },
                 "1": {
                     "data": {
@@ -128,18 +168,18 @@
                     "id": "1",
                     "type": "end",
                     "warnings": {},
-                    "x": 190,
-                    "y": 1280
+                    "x": 260,
+                    "y": 1760
                 },
-                "10": {
+                "11": {
                     "data": {
                         "advanced": {
                             "join": [],
                             "refreshNotableData": true
                         },
-                        "functionId": 2,
-                        "functionName": "promote_to_case_2",
-                        "id": "10",
+                        "functionId": 3,
+                        "functionName": "promote_to_case_3",
+                        "id": "11",
                         "selectMore": false,
                         "tab": "apis",
                         "type": "utility",
@@ -169,7 +209,8 @@
                                             "UC22 tier 1 to tier 2",
                                             "UC22 tier 2 to tier 3",
                                             "9000 Las Vegas",
-                                            "UC 31 Malware Alert"
+                                            "UC 31 Malware Alert",
+                                            "E-Mail mit Anhang"
                                         ],
                                         "description": "",
                                         "label": "template",
@@ -197,16 +238,137 @@
                         "utilityType": "api",
                         "values": {
                             "promote": {
-                                "template": null
+                                "_internal": [
+                                    "container",
+                                    "trace"
+                                ],
+                                "template": "E-Mail mit Anhang"
                             }
                         }
                     },
                     "errors": {},
-                    "id": "10",
+                    "id": "11",
                     "type": "utility",
                     "warnings": {},
                     "x": -40,
-                    "y": 1024.5
+                    "y": 1044.5
+                },
+                "12": {
+                    "data": {
+                        "advanced": {
+                            "customName": "format email Subjekt",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "functionId": 3,
+                        "functionName": "format_email_subjekt",
+                        "id": "12",
+                        "parameters": [
+                            "container:id"
+                        ],
+                        "template": "[{0}] - Faszinierende Entdeckung: Unsere tiefgehende Untersuchung des verd\u00e4chtigen Inhalts nimmt Fahrt auf!\n",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "12",
+                    "type": "format",
+                    "warnings": {},
+                    "x": -40,
+                    "y": 1140
+                },
+                "13": {
+                    "data": {
+                        "advanced": {
+                            "customName": "format email body",
+                            "customNameId": 1,
+                            "join": []
+                        },
+                        "functionId": 4,
+                        "functionName": "format_email_body_1",
+                        "id": "13",
+                        "parameters": [],
+                        "template": "Sehr geehrte Damen und Herren,\n\nich m\u00f6chte Sie \u00fcber spannende Fortschritte in unserer Analyse des verd\u00e4chtigen Inhalts informieren. Wir sind nun in der Lage, tiefere Einblicke zu gewinnen, die bedeutende Implikationen f\u00fcr unser Projekt haben k\u00f6nnten.\n\nIn K\u00fcrze teilen wir detailliertere Ergebnisse mit Ihnen. Bitte behandeln Sie diese Informationen bis dahin vertraulich. Wir sch\u00e4tzen Ihre Unterst\u00fctzung und freuen uns auf die weitere Zusammenarbeit.\n\nBeste Gr\u00fc\u00dfe,\nIT-Sicherheit",
+                        "type": "format"
+                    },
+                    "errors": {},
+                    "id": "13",
+                    "type": "format",
+                    "warnings": {},
+                    "x": -40,
+                    "y": 1264.5
+                },
+                "14": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "==",
+                                        "param": "artifact:*.name",
+                                        "value": "fromEmail"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "logic": "and"
+                            }
+                        ],
+                        "functionId": 3,
+                        "functionName": "filter_3",
+                        "id": "14",
+                        "type": "filter"
+                    },
+                    "errors": {},
+                    "id": "14",
+                    "type": "filter",
+                    "warnings": {},
+                    "x": 40,
+                    "y": 1424.5
+                },
+                "15": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 2,
+                        "functionName": "playbook_send_email_2",
+                        "id": "15",
+                        "inputs": {
+                            "email_body": {
+                                "datapaths": [
+                                    "format_email_body_1:formatted_data"
+                                ],
+                                "deduplicate": false
+                            },
+                            "email_recipient": {
+                                "datapaths": [
+                                    "filtered-data:filter_3:condition_1:artifact:*.cef.fromEmail"
+                                ],
+                                "deduplicate": false
+                            },
+                            "email_subject": {
+                                "datapaths": [
+                                    "format_email_subjekt:formatted_data"
+                                ],
+                                "deduplicate": false
+                            }
+                        },
+                        "playbookName": "send_email",
+                        "playbookRepo": 32,
+                        "playbookRepoName": "is_if",
+                        "playbookType": "data",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "15",
+                    "type": "playbook",
+                    "warnings": {},
+                    "x": -20,
+                    "y": 1584.5
                 },
                 "2": {
                     "data": {
@@ -501,7 +663,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-29T13:46:08.422234+00:00",
+    "create_time": "2023-11-29T13:51:37.829005+00:00",
     "draft_mode": false,
     "labels": [
         "*"
