@@ -166,6 +166,7 @@ def unzip_file(artifact_id=None, container_id=None, default_tag=None, default_se
         parent_archive_name = file_name
         file_extension = parent_archive_name.split('.')[-1].lower()  # Extracting file extension
         try:
+            phantom.debug(f"PWD {pwd}")
             prefix = parent_archive_name.split('.')[0]  # Prefix based on file name
             pwd = pwd.encode()  # Example password
             
