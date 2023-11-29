@@ -107,29 +107,30 @@ def filter_file_artifact_with_tag_pwd_protected(action=None, success=None, conta
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        zip_extract_2(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+        unzip_file_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
 
 @phantom.playbook_block()
-def zip_extract_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
-    phantom.debug("zip_extract_2() called")
+def unzip_file_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("unzip_file_1() called")
 
     id_value = container.get("id", None)
-    filtered_artifact_0_data_filter_file_artifact_with_tag_pwd_protected = phantom.collect2(container=container, datapath=["filtered-data:filter_file_artifact_with_tag_pwd_protected:condition_1:artifact:*.cef.vaultId","filtered-data:filter_file_artifact_with_tag_pwd_protected:condition_1:artifact:*.id"])
-    check_prompt_status_result_data = phantom.collect2(container=container, datapath=["check_prompt_status:action_result.data.*.response.password","check_prompt_status:action_result.parameter.context.artifact_id"], action_results=results)
+    label_value = container.get("label", None)
+    filtered_artifact_0_data_filter_file_artifact_with_tag_pwd_protected = phantom.collect2(container=container, datapath=["filtered-data:filter_file_artifact_with_tag_pwd_protected:condition_1:artifact:*.id","filtered-data:filter_file_artifact_with_tag_pwd_protected:condition_1:artifact:*.id"])
+
+    filtered_artifact_0__id = [item[0] for item in filtered_artifact_0_data_filter_file_artifact_with_tag_pwd_protected]
 
     parameters = []
 
-    # build parameters list for 'zip_extract_2' call
-    for filtered_artifact_0_item_filter_file_artifact_with_tag_pwd_protected in filtered_artifact_0_data_filter_file_artifact_with_tag_pwd_protected:
-        for check_prompt_status_result_item in check_prompt_status_result_data:
-            parameters.append({
-                "container": id_value,
-                "vault_id": filtered_artifact_0_item_filter_file_artifact_with_tag_pwd_protected[0],
-                "password": check_prompt_status_result_item[0],
-            })
+    parameters.append({
+        "artifact_id": filtered_artifact_0__id,
+        "container_id": id_value,
+        "default_tag": "unpacked",
+        "default_severity": "Low",
+        "default_label": label_value,
+    })
 
     ################################################################################
     ## Custom Code Start
@@ -141,7 +142,7 @@ def zip_extract_2(action=None, success=None, container=None, results=None, handl
     ## Custom Code End
     ################################################################################
 
-    phantom.custom_function(custom_function="is_if/zip_extract", parameters=parameters, name="zip_extract_2")
+    phantom.custom_function(custom_function="is_if/unzip_file", parameters=parameters, name="unzip_file_1")
 
     return
 

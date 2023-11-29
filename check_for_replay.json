@@ -50,14 +50,14 @@
                             "index": 0
                         }
                     ],
-                    "id": "port_5_to_port_7",
+                    "id": "port_5_to_port_8",
                     "sourceNode": "5",
                     "sourcePort": "5_out",
-                    "targetNode": "7",
-                    "targetPort": "7_in"
+                    "targetNode": "8",
+                    "targetPort": "8_in"
                 }
             ],
-            "hash": "fe9a325b8e991277955dc5c12eed86866414d27b",
+            "hash": "ee8895db1dcbfb05eab0c58854e5f9fa893fb6ff",
             "nodes": {
                 "0": {
                     "data": {
@@ -73,7 +73,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 1000,
-                    "y": 279.9999999999999
+                    "y": 279.9999999999998
                 },
                 "1": {
                     "data": {
@@ -185,6 +185,7 @@
                             {
                                 "comparisons": [
                                     {
+                                        "conditionIndex": 1,
                                         "op": "==",
                                         "param": "",
                                         "value": ""
@@ -248,77 +249,99 @@
                     "x": 720,
                     "y": 920
                 },
-                "7": {
+                "8": {
                     "data": {
                         "advanced": {
                             "join": []
                         },
                         "customFunction": {
                             "draftMode": false,
-                            "name": "zip_extract",
+                            "name": "unzip_file",
                             "repoName": "is_if"
                         },
-                        "functionId": 2,
-                        "functionName": "zip_extract_2",
-                        "id": "7",
+                        "functionId": 1,
+                        "functionName": "unzip_file_1",
+                        "id": "8",
                         "selectMore": false,
                         "type": "utility",
                         "utilities": {
-                            "zip_extract": {
-                                "description": "Extract all files recursively from a .zip archive. Add the extracted files to the vault and return the vault IDs of the extracted files. Provide a password if needed to decrypt.",
+                            "unzip_file": {
+                                "description": "This Python script unpacks ZIP and RAR files that can be protected by an optional password. It handles a list of file paths with corresponding passwords, adds a prefix-based renaming scheme to the unzipped files and calculates their SHA256 and MD5 hash values. The results are saved in a JSON format containing the path, file name, name of the original archive and the calculated hash values. The script also supports unpacking files without a password.",
                                 "fields": [
                                     {
-                                        "dataTypes": [
-                                            "phantom container id"
-                                        ],
-                                        "description": "The container that extracted files will be added to. Should be a container ID or a container dictionary.",
-                                        "inputType": "item",
-                                        "label": "container",
-                                        "name": "container",
-                                        "placeholder": "container:id",
+                                        "dataTypes": [],
+                                        "description": "A list of Artifat IDs. These artifacts must contain the following information: VaultID. Optionally a password.",
+                                        "inputType": "list",
+                                        "label": "artifact_id",
+                                        "name": "artifact_id",
+                                        "placeholder": "",
                                         "renderType": "datapath",
                                         "required": false
                                     },
                                     {
                                         "dataTypes": [],
-                                        "description": "The vault ID of the zip archive to be unzipped.",
+                                        "description": "",
                                         "inputType": "item",
-                                        "label": "vault_id",
-                                        "name": "vault_id",
-                                        "placeholder": "artifact:*.cef.vaultId",
+                                        "label": "container_id",
+                                        "name": "container_id",
+                                        "placeholder": "",
                                         "renderType": "datapath",
                                         "required": false
                                     },
                                     {
                                         "dataTypes": [],
-                                        "description": "The password to use for decryption of the zip archive if necessary.",
+                                        "description": "",
                                         "inputType": "item",
-                                        "label": "password",
-                                        "name": "password",
-                                        "placeholder": "infected",
+                                        "label": "default_tag",
+                                        "name": "default_tag",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "",
+                                        "inputType": "item",
+                                        "label": "default_severity",
+                                        "name": "default_severity",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "",
+                                        "inputType": "item",
+                                        "label": "default_label",
+                                        "name": "default_label",
+                                        "placeholder": "",
                                         "renderType": "datapath",
                                         "required": false
                                     }
                                 ],
-                                "label": "zip_extract",
-                                "name": "zip_extract"
+                                "label": "unzip_file",
+                                "name": "unzip_file"
                             }
                         },
                         "utilityType": "custom_function",
                         "values": {
-                            "zip_extract": {
-                                "container": "container:id",
-                                "password": "check_prompt_status:action_result.data.*.response.password",
-                                "vault_id": "filtered-data:filter_file_artifact_with_tag_pwd_protected:condition_1:artifact:*.cef.vaultId"
+                            "unzip_file": {
+                                "artifact_id": [
+                                    "filtered-data:filter_file_artifact_with_tag_pwd_protected:condition_1:artifact:*.id"
+                                ],
+                                "container_id": "container:id",
+                                "default_label": "container:label",
+                                "default_severity": "Low",
+                                "default_tag": "unpacked"
                             }
                         }
                     },
                     "errors": {},
-                    "id": "7",
+                    "id": "8",
                     "type": "utility",
                     "warnings": {},
-                    "x": 680,
-                    "y": 1160
+                    "x": 660,
+                    "y": 1084.5
                 }
             },
             "notes": ""
@@ -330,7 +353,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-27T16:00:22.333293+00:00",
+    "create_time": "2023-11-29T12:59:26.606200+00:00",
     "draft_mode": false,
     "labels": [
         "*"
