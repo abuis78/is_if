@@ -45,25 +45,6 @@
                     "targetPort": "5_in"
                 },
                 {
-                    "conditions": [
-                        {
-                            "index": 0
-                        }
-                    ],
-                    "id": "port_5_to_port_9",
-                    "sourceNode": "5",
-                    "sourcePort": "5_out",
-                    "targetNode": "9",
-                    "targetPort": "9_in"
-                },
-                {
-                    "id": "port_9_to_port_12",
-                    "sourceNode": "9",
-                    "sourcePort": "9_out",
-                    "targetNode": "12",
-                    "targetPort": "12_in"
-                },
-                {
                     "id": "port_12_to_port_1",
                     "sourceNode": "12",
                     "sourcePort": "12_out",
@@ -100,9 +81,28 @@
                     "sourcePort": "14_out",
                     "targetNode": "1",
                     "targetPort": "1_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_5_to_port_15",
+                    "sourceNode": "5",
+                    "sourcePort": "5_out",
+                    "targetNode": "15",
+                    "targetPort": "15_in"
+                },
+                {
+                    "id": "port_15_to_port_12",
+                    "sourceNode": "15",
+                    "sourcePort": "15_out",
+                    "targetNode": "12",
+                    "targetPort": "12_in"
                 }
             ],
-            "hash": "ee8895db1dcbfb05eab0c58854e5f9fa893fb6ff",
+            "hash": "698718d707696f949cbb58686d3763b929c36c8d",
             "nodes": {
                 "0": {
                     "data": {
@@ -118,7 +118,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 190,
-                    "y": 0
+                    "y": -6.394884621840902e-14
                 },
                 "1": {
                     "data": {
@@ -351,6 +351,121 @@
                     "x": 340,
                     "y": 1016
                 },
+                "15": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "unzip_file_pwd",
+                            "repoName": "is_if"
+                        },
+                        "functionId": 1,
+                        "functionName": "unzip_file_pwd_1",
+                        "id": "15",
+                        "selectMore": false,
+                        "type": "utility",
+                        "utilities": {
+                            "unzip_file_pwd": {
+                                "description": "This Python script unpacks ZIP and RAR files that can be protected by an optional password. It handles a list of file paths with corresponding passwords, adds a prefix-based renaming scheme to the unzipped files and calculates their SHA256 and MD5 hash values. The results are saved in a JSON format containing the path, file name, name of the original archive and the calculated hash values. The script also supports unpacking files without a password.",
+                                "fields": [
+                                    {
+                                        "dataTypes": [],
+                                        "description": "A list of Artifat IDs. These artifacts must contain the following information: VaultID. Optionally a password.",
+                                        "inputType": "list",
+                                        "label": "artifact_id",
+                                        "name": "artifact_id",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "",
+                                        "inputType": "item",
+                                        "label": "container_id",
+                                        "name": "container_id",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "",
+                                        "inputType": "item",
+                                        "label": "default_tag",
+                                        "name": "default_tag",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "",
+                                        "inputType": "item",
+                                        "label": "default_severity",
+                                        "name": "default_severity",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "",
+                                        "inputType": "item",
+                                        "label": "default_label",
+                                        "name": "default_label",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "",
+                                        "inputType": "item",
+                                        "label": "pwd",
+                                        "name": "pwd",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "unzip_file_pwd",
+                                "name": "unzip_file_pwd"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "unzip_file": {
+                                "artifact_id": [
+                                    "filtered-data:filter_file_artifact_with_tag_pwd_protected:condition_1:artifact:*.id"
+                                ],
+                                "container_id": "container:id",
+                                "default_label": "container:label",
+                                "default_severity": "Low",
+                                "default_tag": "unpacked",
+                                "pwd": "check_prompt_status:action_result.data.0.response.password"
+                            },
+                            "unzip_file_pwd": {
+                                "artifact_id": [
+                                    "filtered-data:filter_file_artifact_with_tag_pwd_protected:condition_1:artifact:*.id"
+                                ],
+                                "container_id": "container:id",
+                                "default_label": "container:label",
+                                "default_severity": "Low",
+                                "default_tag": "unpacked",
+                                "pwd": "check_prompt_status:action_result.data.0.response.password"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "15",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 10,
+                    "y": 824.5
+                },
                 "2": {
                     "data": {
                         "action": "check status",
@@ -511,125 +626,6 @@
                     "warnings": {},
                     "x": 60,
                     "y": 656
-                },
-                "9": {
-                    "data": {
-                        "advanced": {
-                            "join": []
-                        },
-                        "customFunction": {
-                            "draftMode": false,
-                            "name": "unzip_file",
-                            "repoName": "is_if"
-                        },
-                        "functionId": 2,
-                        "functionName": "unzip_file_2",
-                        "id": "9",
-                        "selectMore": false,
-                        "type": "utility",
-                        "utilities": {
-                            "unzip_file": {
-                                "description": "This Python script unpacks ZIP and RAR files that can be protected by an optional password. It handles a list of file paths with corresponding passwords, adds a prefix-based renaming scheme to the unzipped files and calculates their SHA256 and MD5 hash values. The results are saved in a JSON format containing the path, file name, name of the original archive and the calculated hash values. The script also supports unpacking files without a password.",
-                                "fields": [
-                                    {
-                                        "dataTypes": [],
-                                        "description": "A list of Artifat IDs. These artifacts must contain the following information: VaultID. Optionally a password.",
-                                        "inputType": "list",
-                                        "label": "artifact_id",
-                                        "name": "artifact_id",
-                                        "placeholder": "",
-                                        "renderType": "datapath",
-                                        "required": false
-                                    },
-                                    {
-                                        "dataTypes": [],
-                                        "description": "",
-                                        "inputType": "item",
-                                        "label": "container_id",
-                                        "name": "container_id",
-                                        "placeholder": "",
-                                        "renderType": "datapath",
-                                        "required": false
-                                    },
-                                    {
-                                        "dataTypes": [],
-                                        "description": "",
-                                        "inputType": "item",
-                                        "label": "default_tag",
-                                        "name": "default_tag",
-                                        "placeholder": "",
-                                        "renderType": "datapath",
-                                        "required": false
-                                    },
-                                    {
-                                        "dataTypes": [],
-                                        "description": "",
-                                        "inputType": "item",
-                                        "label": "default_severity",
-                                        "name": "default_severity",
-                                        "placeholder": "",
-                                        "renderType": "datapath",
-                                        "required": false
-                                    },
-                                    {
-                                        "dataTypes": [],
-                                        "description": "",
-                                        "inputType": "item",
-                                        "label": "default_label",
-                                        "name": "default_label",
-                                        "placeholder": "",
-                                        "renderType": "datapath",
-                                        "required": false
-                                    },
-                                    {
-                                        "dataTypes": [],
-                                        "description": "",
-                                        "inputType": "item",
-                                        "label": "pwd",
-                                        "name": "pwd",
-                                        "placeholder": "",
-                                        "renderType": "datapath",
-                                        "required": false
-                                    }
-                                ],
-                                "label": "unzip_file",
-                                "name": "unzip_file"
-                            }
-                        },
-                        "utilityType": "custom_function",
-                        "values": {
-                            "debug": {
-                                "input_1": [
-                                    "check_prompt_status:action_result.data.0.response.password"
-                                ],
-                                "input_10": null,
-                                "input_2": null,
-                                "input_3": null,
-                                "input_4": null,
-                                "input_5": null,
-                                "input_6": null,
-                                "input_7": null,
-                                "input_8": null,
-                                "input_9": null
-                            },
-                            "unzip_file": {
-                                "artifact_id": [
-                                    "filtered-data:filter_file_artifact_with_tag_pwd_protected:condition_1:artifact:*.id"
-                                ],
-                                "container_id": "container:id",
-                                "default_label": "container:label",
-                                "default_severity": "Low",
-                                "default_tag": "unpacked",
-                                "pwd": "check_prompt_status:action_result.data.0.response.password"
-                            }
-                        }
-                    },
-                    "errors": {},
-                    "id": "9",
-                    "type": "utility",
-                    "warnings": {},
-                    "x": 0,
-                    "y": 852
                 }
             },
             "notes": ""
@@ -641,7 +637,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-29T13:23:56.691497+00:00",
+    "create_time": "2023-11-29T13:38:37.969883+00:00",
     "draft_mode": false,
     "labels": [
         "*"

@@ -110,46 +110,7 @@ def filter_file_artifact_with_tag_pwd_protected(action=None, success=None, conta
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        unzip_file_2(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
-
-    return
-
-
-@phantom.playbook_block()
-def unzip_file_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
-    phantom.debug("unzip_file_2() called")
-
-    id_value = container.get("id", None)
-    label_value = container.get("label", None)
-    filtered_artifact_0_data_filter_file_artifact_with_tag_pwd_protected = phantom.collect2(container=container, datapath=["filtered-data:filter_file_artifact_with_tag_pwd_protected:condition_1:artifact:*.id","filtered-data:filter_file_artifact_with_tag_pwd_protected:condition_1:artifact:*.id"])
-    check_prompt_status_result_data = phantom.collect2(container=container, datapath=["check_prompt_status:action_result.data.0.response.password","check_prompt_status:action_result.parameter.context.artifact_id"], action_results=results)
-
-    filtered_artifact_0__id = [item[0] for item in filtered_artifact_0_data_filter_file_artifact_with_tag_pwd_protected]
-
-    parameters = []
-
-    # build parameters list for 'unzip_file_2' call
-    for check_prompt_status_result_item in check_prompt_status_result_data:
-        parameters.append({
-            "artifact_id": filtered_artifact_0__id,
-            "container_id": id_value,
-            "default_tag": "unpacked",
-            "default_severity": "Low",
-            "default_label": label_value,
-            "pwd": check_prompt_status_result_item[0],
-        })
-
-    ################################################################################
-    ## Custom Code Start
-    ################################################################################
-
-    # Write your custom code here...
-
-    ################################################################################
-    ## Custom Code End
-    ################################################################################
-
-    phantom.custom_function(custom_function="is_if/unzip_file", parameters=parameters, name="unzip_file_2", callback=playbook_detonate_file_1)
+        unzip_file_pwd_1(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
@@ -221,16 +182,16 @@ def artifact_update_4(action=None, success=None, container=None, results=None, h
     # build parameters list for 'artifact_update_4' call
     for filtered_artifact_0_item_get_scheduler_artifact in filtered_artifact_0_data_get_scheduler_artifact:
         parameters.append({
-            "artifact_id": filtered_artifact_0_item_get_scheduler_artifact[0],
             "name": None,
+            "tags": None,
             "label": "pending",
             "severity": None,
             "cef_field": None,
             "cef_value": None,
-            "cef_data_type": None,
-            "tags": None,
-            "overwrite_tags": None,
             "input_json": None,
+            "artifact_id": filtered_artifact_0_item_get_scheduler_artifact[0],
+            "cef_data_type": None,
+            "overwrite_tags": None,
         })
 
     ################################################################################
@@ -244,6 +205,45 @@ def artifact_update_4(action=None, success=None, container=None, results=None, h
     ################################################################################
 
     phantom.custom_function(custom_function="community/artifact_update", parameters=parameters, name="artifact_update_4")
+
+    return
+
+
+@phantom.playbook_block()
+def unzip_file_pwd_1(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("unzip_file_pwd_1() called")
+
+    id_value = container.get("id", None)
+    label_value = container.get("label", None)
+    filtered_artifact_0_data_filter_file_artifact_with_tag_pwd_protected = phantom.collect2(container=container, datapath=["filtered-data:filter_file_artifact_with_tag_pwd_protected:condition_1:artifact:*.id","filtered-data:filter_file_artifact_with_tag_pwd_protected:condition_1:artifact:*.id"])
+    check_prompt_status_result_data = phantom.collect2(container=container, datapath=["check_prompt_status:action_result.data.0.response.password","check_prompt_status:action_result.parameter.context.artifact_id"], action_results=results)
+
+    filtered_artifact_0__id = [item[0] for item in filtered_artifact_0_data_filter_file_artifact_with_tag_pwd_protected]
+
+    parameters = []
+
+    # build parameters list for 'unzip_file_pwd_1' call
+    for check_prompt_status_result_item in check_prompt_status_result_data:
+        parameters.append({
+            "artifact_id": filtered_artifact_0__id,
+            "container_id": id_value,
+            "default_tag": "unpacked",
+            "default_severity": "Low",
+            "default_label": label_value,
+            "pwd": check_prompt_status_result_item[0],
+        })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.custom_function(custom_function="is_if/unzip_file_pwd", parameters=parameters, name="unzip_file_pwd_1", callback=playbook_detonate_file_1)
 
     return
 
