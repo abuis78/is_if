@@ -33,13 +33,6 @@
                     "targetPort": "4_in"
                 },
                 {
-                    "id": "port_4_to_port_1",
-                    "sourceNode": "4",
-                    "sourcePort": "4_out",
-                    "targetNode": "1",
-                    "targetPort": "1_in"
-                },
-                {
                     "conditions": [
                         {
                             "index": 1
@@ -95,9 +88,16 @@
                     "sourcePort": "9_out",
                     "targetNode": "6",
                     "targetPort": "6_in"
+                },
+                {
+                    "id": "port_4_to_port_10",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "10",
+                    "targetPort": "10_in"
                 }
             ],
-            "hash": "d676b0a1b1363058ecb3597f26d1ea085eae5f77",
+            "hash": "a3f7e0c35ce3efa2a135aa4c38691e12ee387410",
             "nodes": {
                 "0": {
                     "data": {
@@ -113,7 +113,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 190,
-                    "y": 0
+                    "y": -6.394884621840902e-14
                 },
                 "1": {
                     "data": {
@@ -130,6 +130,83 @@
                     "warnings": {},
                     "x": 190,
                     "y": 1280
+                },
+                "10": {
+                    "data": {
+                        "advanced": {
+                            "join": [],
+                            "refreshNotableData": true
+                        },
+                        "functionId": 2,
+                        "functionName": "promote_to_case_2",
+                        "id": "10",
+                        "selectMore": false,
+                        "tab": "apis",
+                        "type": "utility",
+                        "utilities": {
+                            "promote": {
+                                "description": "",
+                                "fields": [
+                                    {
+                                        "choices": [
+                                            "Network Indicator Enrichment",
+                                            "Data Breach",
+                                            "Risk Response",
+                                            "Risk Investigation",
+                                            "Suspicious Email",
+                                            "9001_test_uc",
+                                            "Vulnerability Disclosure",
+                                            "9003_test_uc",
+                                            "NIST 800-61",
+                                            "Response Template 1",
+                                            "Account Compromise",
+                                            "Workbook Name",
+                                            "Self-Replicating Malware",
+                                            "9002_test_uc",
+                                            "9004_test_uc",
+                                            "9005_test_uc",
+                                            "9006_check",
+                                            "UC22 tier 1 to tier 2",
+                                            "UC22 tier 2 to tier 3",
+                                            "9000 Las Vegas",
+                                            "UC 31 Malware Alert"
+                                        ],
+                                        "description": "",
+                                        "label": "template",
+                                        "name": "template",
+                                        "placeholder": "Select a template",
+                                        "renderType": "dropdown",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "container",
+                                        "required": false
+                                    },
+                                    {
+                                        "hidden": true,
+                                        "name": "trace",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "promote to case",
+                                "name": "promote",
+                                "refreshNotableData": true
+                            }
+                        },
+                        "utilityType": "api",
+                        "values": {
+                            "promote": {
+                                "template": null
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "10",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": -40,
+                    "y": 1024.5
                 },
                 "2": {
                     "data": {
@@ -255,8 +332,8 @@
                     "id": "4",
                     "type": "utility",
                     "warnings": {},
-                    "x": 0,
-                    "y": 1132
+                    "x": -40,
+                    "y": 900
                 },
                 "5": {
                     "data": {
@@ -424,7 +501,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T22:45:27.419380+00:00",
+    "create_time": "2023-11-29T13:46:08.422234+00:00",
     "draft_mode": false,
     "labels": [
         "*"

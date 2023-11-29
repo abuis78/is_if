@@ -97,6 +97,8 @@ def set_severity_1(action=None, success=None, container=None, results=None, hand
 
     container = phantom.get_container(container.get('id', None))
 
+    promote_to_case_2(container=container)
+
     return
 
 
@@ -236,6 +238,27 @@ def filter_scan_successful(action=None, success=None, container=None, results=No
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
         format_email_body(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+
+    return
+
+
+@phantom.playbook_block()
+def promote_to_case_2(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("promote_to_case_2() called")
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.promote()
+
+    container = phantom.get_container(container.get('id', None))
 
     return
 
