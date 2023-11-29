@@ -1,4 +1,4 @@
-def unzip_file(artifact_id=None, container_id=None, default_tag=None, default_severity=None, default_label=None, pwd=None, **kwargs):
+def unzip_file(artifact_id=None, container_id=None, default_tag=None, default_severity=None, default_label=None, **kwargs):
     """
     This Python script unpacks ZIP and RAR files that can be protected by an optional password. It handles a list of file paths with corresponding passwords, adds a prefix-based renaming scheme to the unzipped files and calculates their SHA256 and MD5 hash values. The results are saved in a JSON format containing the path, file name, name of the original archive and the calculated hash values. The script also supports unpacking files without a password.
     
@@ -8,7 +8,6 @@ def unzip_file(artifact_id=None, container_id=None, default_tag=None, default_se
         default_tag
         default_severity
         default_label
-        pwd
     
     Returns a JSON-serializable object that implements the configured data paths:
         
@@ -88,13 +87,11 @@ def unzip_file(artifact_id=None, container_id=None, default_tag=None, default_se
 
     def add_prefix_and_extract(zip_ref, extract_to, prefix, parent_archive_name,default_tag,default_severity,default_label,container_id, password=None):
         """Extract files from zip, add a prefix, calculate hashes, and add to results."""
-        phantom.debug(f"password: {password}")
         # Create a unique subfolder for extracted files
         unique_subfolder = f"{extract_to}{prefix}_{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}/"
         os.makedirs(unique_subfolder, exist_ok=True)
         if password:
-            #zip_ref.setpassword(password.encode())
-            zip_ref.setpassword(password)
+            zip_ref.setpassword(password.encode())
             
         # Process each file in the archive
         for member in zip_ref.namelist():
@@ -167,9 +164,8 @@ def unzip_file(artifact_id=None, container_id=None, default_tag=None, default_se
         parent_archive_name = file_name
         file_extension = parent_archive_name.split('.')[-1].lower()  # Extracting file extension
         try:
-            phantom.debug(f"PWD {pwd}")
             prefix = parent_archive_name.split('.')[0]  # Prefix based on file name
-            pwd = pwd.encode()  # Example password
+            pwd = "Sonne1234".encode()  # Example password
             
 
             # Process ZIP files
@@ -179,10 +175,7 @@ def unzip_file(artifact_id=None, container_id=None, default_tag=None, default_se
                         zip_ref.extractall(pwd=pwd)
                     else:
                         zip_ref.extractall()
-                    if pwd == None:
-                        add_prefix_and_extract(zip_ref, extract_to, prefix, parent_archive_name,default_tag,default_severity,default_label,container_id)
-                    else:
-                        add_prefix_and_extract(zip_ref, extract_to, prefix, parent_archive_name,default_tag,default_severity,default_label,container_id,pwd)
+                    add_prefix_and_extract(zip_ref, extract_to, prefix, parent_archive_name,default_tag,default_severity,default_label,container_id,"Sonne1234")
             else:
                 phantom.debug(f"File format of {parent_archive_name} is not supported.")
 
