@@ -107,7 +107,7 @@ def filter_file_artifact_with_tag_pwd_protected(action=None, success=None, conta
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        debug_3(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+        unzip_file_2(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
@@ -119,7 +119,7 @@ def unzip_file_2(action=None, success=None, container=None, results=None, handle
     id_value = container.get("id", None)
     label_value = container.get("label", None)
     filtered_artifact_0_data_filter_file_artifact_with_tag_pwd_protected = phantom.collect2(container=container, datapath=["filtered-data:filter_file_artifact_with_tag_pwd_protected:condition_1:artifact:*.id","filtered-data:filter_file_artifact_with_tag_pwd_protected:condition_1:artifact:*.id"])
-    check_prompt_status_result_data = phantom.collect2(container=container, datapath=["check_prompt_status:action_result.data.response.password","check_prompt_status:action_result.parameter.context.artifact_id"], action_results=results)
+    check_prompt_status_result_data = phantom.collect2(container=container, datapath=["check_prompt_status:action_result.data.0.response.password","check_prompt_status:action_result.parameter.context.artifact_id"], action_results=results)
 
     filtered_artifact_0__id = [item[0] for item in filtered_artifact_0_data_filter_file_artifact_with_tag_pwd_protected]
 

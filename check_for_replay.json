@@ -50,14 +50,14 @@
                             "index": 0
                         }
                     ],
-                    "id": "port_5_to_port_10",
+                    "id": "port_5_to_port_9",
                     "sourceNode": "5",
                     "sourcePort": "5_out",
-                    "targetNode": "10",
-                    "targetPort": "10_in"
+                    "targetNode": "9",
+                    "targetPort": "9_in"
                 }
             ],
-            "hash": "9f70f5ffacf95265deec1e1706d87156bd946729",
+            "hash": "8a64d43aca1504e382eb0965ac1a4caef677511d",
             "nodes": {
                 "0": {
                     "data": {
@@ -266,7 +266,11 @@
                     "errors": {},
                     "id": "10",
                     "type": "utility",
-                    "warnings": {},
+                    "warnings": {
+                        "config": [
+                            "Reconfigure invalid datapath."
+                        ]
+                    },
                     "x": 960,
                     "y": 1084.5
                 },
@@ -515,7 +519,9 @@
                         "utilityType": "custom_function",
                         "values": {
                             "debug": {
-                                "input_1": null,
+                                "input_1": [
+                                    "check_prompt_status:action_result.data.0.response.password"
+                                ],
                                 "input_10": null,
                                 "input_2": null,
                                 "input_3": null,
@@ -534,18 +540,14 @@
                                 "default_label": "container:label",
                                 "default_severity": "Low",
                                 "default_tag": "unpacked",
-                                "pwd": "check_prompt_status:action_result.data.response.password"
+                                "pwd": "check_prompt_status:action_result.data.0.response.password"
                             }
                         }
                     },
                     "errors": {},
                     "id": "9",
                     "type": "utility",
-                    "warnings": {
-                        "config": [
-                            "Reconfigure invalid datapath."
-                        ]
-                    },
+                    "warnings": {},
                     "x": 660,
                     "y": 1080
                 }
@@ -559,7 +561,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-29T13:15:56.368490+00:00",
+    "create_time": "2023-11-29T13:16:23.074010+00:00",
     "draft_mode": false,
     "labels": [
         "*"
