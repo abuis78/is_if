@@ -637,7 +637,7 @@ def filter_vault_artifact(action=None, success=None, container=None, results=Non
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        unzip_file_6(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+        unzip_file_7(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
@@ -672,7 +672,7 @@ def unzip_file_6(action=None, success=None, container=None, results=None, handle
     ## Custom Code End
     ################################################################################
 
-    phantom.custom_function(custom_function="is_if/unzip_file", parameters=parameters, name="unzip_file_6", callback=playbook_detonate_file_1)
+    phantom.custom_function(custom_function="is_if/unzip_file", parameters=parameters, name="unzip_file_6")
 
     return
 
@@ -735,6 +735,42 @@ def playbook_extract__dkim_1(action=None, success=None, container=None, results=
 
     # call playbook "is_if/extract_ DKIM", returns the playbook_run_id
     playbook_run_id = phantom.playbook("is_if/extract_ DKIM", container=container, name="playbook_extract__dkim_1", callback=filter_check_if_artifact_name_is_vault_artifact, inputs=inputs)
+
+    return
+
+
+@phantom.playbook_block()
+def unzip_file_7(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("unzip_file_7() called")
+
+    id_value = container.get("id", None)
+    label_value = container.get("label", None)
+    filtered_artifact_0_data_filter_vault_artifact = phantom.collect2(container=container, datapath=["filtered-data:filter_vault_artifact:condition_1:artifact:*.id","filtered-data:filter_vault_artifact:condition_1:artifact:*.id"])
+
+    filtered_artifact_0__id = [item[0] for item in filtered_artifact_0_data_filter_vault_artifact]
+
+    parameters = []
+
+    parameters.append({
+        "artifact_id": filtered_artifact_0__id,
+        "container_id": id_value,
+        "default_tag": "unpacked",
+        "default_severity": "Low",
+        "default_label": label_value,
+        "pwd": None,
+    })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.custom_function(custom_function="is_if/unzip_file", parameters=parameters, name="unzip_file_7", callback=playbook_detonate_file_1)
 
     return
 

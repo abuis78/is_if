@@ -174,25 +174,6 @@
                     "targetPort": "23_in"
                 },
                 {
-                    "conditions": [
-                        {
-                            "index": 0
-                        }
-                    ],
-                    "id": "port_23_to_port_24",
-                    "sourceNode": "23",
-                    "sourcePort": "23_out",
-                    "targetNode": "24",
-                    "targetPort": "24_in"
-                },
-                {
-                    "id": "port_24_to_port_25",
-                    "sourceNode": "24",
-                    "sourcePort": "24_out",
-                    "targetNode": "25",
-                    "targetPort": "25_in"
-                },
-                {
                     "id": "port_25_to_port_1",
                     "sourceNode": "25",
                     "sourcePort": "25_out",
@@ -212,9 +193,28 @@
                     "sourcePort": "26_out",
                     "targetNode": "2",
                     "targetPort": "2_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_23_to_port_27",
+                    "sourceNode": "23",
+                    "sourcePort": "23_out",
+                    "targetNode": "27",
+                    "targetPort": "27_in"
+                },
+                {
+                    "id": "port_27_to_port_25",
+                    "sourceNode": "27",
+                    "sourcePort": "27_out",
+                    "targetNode": "25",
+                    "targetPort": "25_in"
                 }
             ],
-            "hash": "bf5e0094478f23895f744868b797d7a3ee2344f5",
+            "hash": "c8dc2cd8f23fdc3a408aacc67f9c232155530c82",
             "nodes": {
                 "0": {
                     "data": {
@@ -230,7 +230,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 190,
-                    "y": -6.394884621840902e-14
+                    "y": -1.2789769243681803e-13
                 },
                 "1": {
                     "data": {
@@ -893,8 +893,8 @@
                     "id": "23",
                     "type": "filter",
                     "warnings": {},
-                    "x": 400,
-                    "y": 2528
+                    "x": 380,
+                    "y": 2540
                 },
                 "24": {
                     "data": {
@@ -986,9 +986,17 @@
                     "errors": {},
                     "id": "24",
                     "type": "utility",
-                    "warnings": {},
-                    "x": 340,
-                    "y": 2708
+                    "warnings": {
+                        "config": [
+                            "Reconfigure invalid datapath.",
+                            "The referenced custom function has changed. Reconfigure this block to use the updated parameters."
+                        ],
+                        "context": [
+                            "Connect block to playbook flow."
+                        ]
+                    },
+                    "x": 640,
+                    "y": 2700
                 },
                 "25": {
                     "data": {
@@ -1042,6 +1050,111 @@
                     "warnings": {},
                     "x": 170,
                     "y": 936
+                },
+                "27": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "unzip_file",
+                            "repoName": "is_if"
+                        },
+                        "functionId": 7,
+                        "functionName": "unzip_file_7",
+                        "id": "27",
+                        "selectMore": false,
+                        "type": "utility",
+                        "utilities": {
+                            "unzip_file": {
+                                "description": "This Python script unpacks ZIP and RAR files that can be protected by an optional password. It handles a list of file paths with corresponding passwords, adds a prefix-based renaming scheme to the unzipped files and calculates their SHA256 and MD5 hash values. The results are saved in a JSON format containing the path, file name, name of the original archive and the calculated hash values. The script also supports unpacking files without a password.",
+                                "fields": [
+                                    {
+                                        "dataTypes": [],
+                                        "description": "A list of Artifat IDs. These artifacts must contain the following information: VaultID. Optionally a password.",
+                                        "inputType": "list",
+                                        "label": "artifact_id",
+                                        "name": "artifact_id",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "",
+                                        "inputType": "item",
+                                        "label": "container_id",
+                                        "name": "container_id",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "",
+                                        "inputType": "item",
+                                        "label": "default_tag",
+                                        "name": "default_tag",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "",
+                                        "inputType": "item",
+                                        "label": "default_severity",
+                                        "name": "default_severity",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "",
+                                        "inputType": "item",
+                                        "label": "default_label",
+                                        "name": "default_label",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "",
+                                        "inputType": "item",
+                                        "label": "pwd",
+                                        "name": "pwd",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "unzip_file",
+                                "name": "unzip_file"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "unzip_file": {
+                                "artifact_id": [
+                                    "filtered-data:filter_vault_artifact:condition_1:artifact:*.id"
+                                ],
+                                "container_id": "container:id",
+                                "default_label": "container:label",
+                                "default_severity": "Low",
+                                "default_tag": "unpacked",
+                                "pwd": null
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "27",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 320,
+                    "y": 2700
                 },
                 "3": {
                     "data": {
@@ -1416,7 +1529,7 @@
                     "type": "utility",
                     "warnings": {},
                     "x": 170,
-                    "y": 327.99999999999994
+                    "y": 327.9999999999999
                 },
                 "9": {
                     "data": {
@@ -1453,7 +1566,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-28T22:55:29.702968+00:00",
+    "create_time": "2023-11-29T13:28:41.598229+00:00",
     "draft_mode": false,
     "labels": [
         "*"
