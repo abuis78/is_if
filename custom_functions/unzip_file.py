@@ -93,7 +93,8 @@ def unzip_file(artifact_id=None, container_id=None, default_tag=None, default_se
         unique_subfolder = f"{extract_to}{prefix}_{datetime.datetime.now().strftime('%Y%m%d%H%M%S')}/"
         os.makedirs(unique_subfolder, exist_ok=True)
         if password:
-            zip_ref.setpassword(password.encode())
+            #zip_ref.setpassword(password.encode())
+            zip_ref.setpassword(password)
             
         # Process each file in the archive
         for member in zip_ref.namelist():
