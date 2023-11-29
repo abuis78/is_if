@@ -50,14 +50,14 @@
                             "index": 0
                         }
                     ],
-                    "id": "port_5_to_port_8",
+                    "id": "port_5_to_port_9",
                     "sourceNode": "5",
                     "sourcePort": "5_out",
-                    "targetNode": "8",
-                    "targetPort": "8_in"
+                    "targetNode": "9",
+                    "targetPort": "9_in"
                 }
             ],
-            "hash": "ee8895db1dcbfb05eab0c58854e5f9fa893fb6ff",
+            "hash": "39a9adf0df32674bd30a1286051a521c0053fa9f",
             "nodes": {
                 "0": {
                     "data": {
@@ -73,7 +73,7 @@
                     "type": "start",
                     "warnings": {},
                     "x": 1000,
-                    "y": 279.9999999999998
+                    "y": 279.99999999999966
                 },
                 "1": {
                     "data": {
@@ -249,7 +249,7 @@
                     "x": 720,
                     "y": 920
                 },
-                "8": {
+                "9": {
                     "data": {
                         "advanced": {
                             "join": []
@@ -259,9 +259,9 @@
                             "name": "unzip_file",
                             "repoName": "is_if"
                         },
-                        "functionId": 1,
-                        "functionName": "unzip_file_1",
-                        "id": "8",
+                        "functionId": 2,
+                        "functionName": "unzip_file_2",
+                        "id": "9",
                         "selectMore": false,
                         "type": "utility",
                         "utilities": {
@@ -317,6 +317,16 @@
                                         "placeholder": "",
                                         "renderType": "datapath",
                                         "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "",
+                                        "inputType": "item",
+                                        "label": "pwd",
+                                        "name": "pwd",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
                                     }
                                 ],
                                 "label": "unzip_file",
@@ -332,16 +342,17 @@
                                 "container_id": "container:id",
                                 "default_label": "container:label",
                                 "default_severity": "Low",
-                                "default_tag": "unpacked"
+                                "default_tag": "unpacked",
+                                "pwd": "check_prompt_status:action_result.data.response.password"
                             }
                         }
                     },
                     "errors": {},
-                    "id": "8",
+                    "id": "9",
                     "type": "utility",
                     "warnings": {},
                     "x": 660,
-                    "y": 1084.5
+                    "y": 1080
                 }
             },
             "notes": ""
@@ -353,7 +364,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-29T12:59:26.606200+00:00",
+    "create_time": "2023-11-29T13:03:59.830437+00:00",
     "draft_mode": false,
     "labels": [
         "*"
