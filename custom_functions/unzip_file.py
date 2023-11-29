@@ -167,7 +167,7 @@ def unzip_file(artifact_id=None, container_id=None, default_tag=None, default_se
         file_extension = parent_archive_name.split('.')[-1].lower()  # Extracting file extension
         try:
             prefix = parent_archive_name.split('.')[0]  # Prefix based on file name
-            #pwd = "Sonne1234".encode()  # Example password
+            pwd = pwd.encode()  # Example password
             
 
             # Process ZIP files
@@ -177,7 +177,7 @@ def unzip_file(artifact_id=None, container_id=None, default_tag=None, default_se
                         zip_ref.extractall(pwd=pwd)
                     else:
                         zip_ref.extractall()
-                    add_prefix_and_extract(zip_ref, extract_to, prefix, parent_archive_name,default_tag,default_severity,default_label,container_id,'Sonne1234')
+                    add_prefix_and_extract(zip_ref, extract_to, prefix, parent_archive_name,default_tag,default_severity,default_label,container_id,pwd)
             else:
                 phantom.debug(f"File format of {parent_archive_name} is not supported.")
 
