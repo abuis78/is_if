@@ -50,14 +50,14 @@
                             "index": 0
                         }
                     ],
-                    "id": "port_5_to_port_9",
+                    "id": "port_5_to_port_10",
                     "sourceNode": "5",
                     "sourcePort": "5_out",
-                    "targetNode": "9",
-                    "targetPort": "9_in"
+                    "targetNode": "10",
+                    "targetPort": "10_in"
                 }
             ],
-            "hash": "39a9adf0df32674bd30a1286051a521c0053fa9f",
+            "hash": "08ad8b785948378685718936428d9653cf87edc7",
             "nodes": {
                 "0": {
                     "data": {
@@ -90,6 +90,185 @@
                     "warnings": {},
                     "x": 960,
                     "y": 1280
+                },
+                "10": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "customFunction": {
+                            "draftMode": false,
+                            "name": "debug",
+                            "repoName": "community"
+                        },
+                        "functionId": 3,
+                        "functionName": "debug_3",
+                        "id": "10",
+                        "selectMore": false,
+                        "type": "utility",
+                        "utilities": {
+                            "debug": {
+                                "description": "Print debug messages with the type and value of 0-10 different inputs. This is useful for checking the values of input data or the outputs of other playbook blocks.",
+                                "fields": [
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_1",
+                                        "name": "input_1",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_2",
+                                        "name": "input_2",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_3",
+                                        "name": "input_3",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_4",
+                                        "name": "input_4",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_5",
+                                        "name": "input_5",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_6",
+                                        "name": "input_6",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_7",
+                                        "name": "input_7",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_8",
+                                        "name": "input_8",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_9",
+                                        "name": "input_9",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            "*"
+                                        ],
+                                        "description": "",
+                                        "inputType": "list",
+                                        "label": "input_10",
+                                        "name": "input_10",
+                                        "placeholder": "",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    }
+                                ],
+                                "label": "debug",
+                                "name": "debug"
+                            }
+                        },
+                        "utilityType": "custom_function",
+                        "values": {
+                            "debug": {
+                                "input_1": [
+                                    "check_prompt_status:action_result.data.response.password"
+                                ],
+                                "input_10": null,
+                                "input_2": null,
+                                "input_3": null,
+                                "input_4": null,
+                                "input_5": null,
+                                "input_6": null,
+                                "input_7": null,
+                                "input_8": null,
+                                "input_9": null
+                            },
+                            "unzip_file": {
+                                "artifact_id": [
+                                    "filtered-data:filter_file_artifact_with_tag_pwd_protected:condition_1:artifact:*.id"
+                                ],
+                                "container_id": "container:id",
+                                "default_label": "container:label",
+                                "default_severity": "Low",
+                                "default_tag": "unpacked",
+                                "pwd": "check_prompt_status:action_result.data.response.password"
+                            }
+                        }
+                    },
+                    "errors": {},
+                    "id": "10",
+                    "type": "utility",
+                    "warnings": {},
+                    "x": 960,
+                    "y": 1084.5
                 },
                 "2": {
                     "data": {
@@ -335,6 +514,18 @@
                         },
                         "utilityType": "custom_function",
                         "values": {
+                            "debug": {
+                                "input_1": null,
+                                "input_10": null,
+                                "input_2": null,
+                                "input_3": null,
+                                "input_4": null,
+                                "input_5": null,
+                                "input_6": null,
+                                "input_7": null,
+                                "input_8": null,
+                                "input_9": null
+                            },
                             "unzip_file": {
                                 "artifact_id": [
                                     "filtered-data:filter_file_artifact_with_tag_pwd_protected:condition_1:artifact:*.id"
@@ -350,7 +541,14 @@
                     "errors": {},
                     "id": "9",
                     "type": "utility",
-                    "warnings": {},
+                    "warnings": {
+                        "config": [
+                            "Reconfigure invalid datapath."
+                        ],
+                        "context": [
+                            "Connect block to playbook flow."
+                        ]
+                    },
                     "x": 660,
                     "y": 1080
                 }
@@ -364,7 +562,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-29T13:03:59.830437+00:00",
+    "create_time": "2023-11-29T13:15:21.713714+00:00",
     "draft_mode": false,
     "labels": [
         "*"

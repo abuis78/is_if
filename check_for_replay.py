@@ -107,7 +107,7 @@ def filter_file_artifact_with_tag_pwd_protected(action=None, success=None, conta
 
     # call connected blocks if filtered artifacts or results
     if matched_artifacts_1 or matched_results_1:
-        unzip_file_2(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
+        debug_3(action=action, success=success, container=container, results=results, handle=handle, filtered_artifacts=matched_artifacts_1, filtered_results=matched_results_1)
 
     return
 
@@ -147,6 +147,44 @@ def unzip_file_2(action=None, success=None, container=None, results=None, handle
     ################################################################################
 
     phantom.custom_function(custom_function="is_if/unzip_file", parameters=parameters, name="unzip_file_2")
+
+    return
+
+
+@phantom.playbook_block()
+def debug_3(action=None, success=None, container=None, results=None, handle=None, filtered_artifacts=None, filtered_results=None, custom_function=None, **kwargs):
+    phantom.debug("debug_3() called")
+
+    check_prompt_status_result_data = phantom.collect2(container=container, datapath=["check_prompt_status:action_result.data.response.password","check_prompt_status:action_result.parameter.context.artifact_id"], action_results=results)
+
+    check_prompt_status_result_item_0 = [item[0] for item in check_prompt_status_result_data]
+
+    parameters = []
+
+    parameters.append({
+        "input_1": check_prompt_status_result_item_0,
+        "input_2": None,
+        "input_3": None,
+        "input_4": None,
+        "input_5": None,
+        "input_6": None,
+        "input_7": None,
+        "input_8": None,
+        "input_9": None,
+        "input_10": None,
+    })
+
+    ################################################################################
+    ## Custom Code Start
+    ################################################################################
+
+    # Write your custom code here...
+
+    ################################################################################
+    ## Custom Code End
+    ################################################################################
+
+    phantom.custom_function(custom_function="community/debug", parameters=parameters, name="debug_3")
 
     return
 
