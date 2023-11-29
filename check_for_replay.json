@@ -55,9 +55,47 @@
                     "sourcePort": "5_out",
                     "targetNode": "9",
                     "targetPort": "9_in"
+                },
+                {
+                    "id": "port_9_to_port_12",
+                    "sourceNode": "9",
+                    "sourcePort": "9_out",
+                    "targetNode": "12",
+                    "targetPort": "12_in"
+                },
+                {
+                    "id": "port_12_to_port_1",
+                    "sourceNode": "12",
+                    "sourcePort": "12_out",
+                    "targetNode": "1",
+                    "targetPort": "1_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 1
+                        }
+                    ],
+                    "id": "port_4_to_port_13",
+                    "sourceNode": "4",
+                    "sourcePort": "4_out",
+                    "targetNode": "13",
+                    "targetPort": "13_in"
+                },
+                {
+                    "conditions": [
+                        {
+                            "index": 0
+                        }
+                    ],
+                    "id": "port_13_to_port_14",
+                    "sourceNode": "13",
+                    "sourcePort": "13_out",
+                    "targetNode": "14",
+                    "targetPort": "14_in"
                 }
             ],
-            "hash": "8a64d43aca1504e382eb0965ac1a4caef677511d",
+            "hash": "36bcf6834079e8d9b45ffa08d58a096d4858a35f",
             "nodes": {
                 "0": {
                     "data": {
@@ -89,36 +127,140 @@
                     "type": "end",
                     "warnings": {},
                     "x": 960,
-                    "y": 1280
+                    "y": 1420
                 },
-                "10": {
+                "12": {
+                    "data": {
+                        "advanced": {
+                            "join": []
+                        },
+                        "functionId": 1,
+                        "functionName": "playbook_detonate_file_1",
+                        "id": "12",
+                        "inputs": {},
+                        "playbookName": "detonate_file",
+                        "playbookRepo": 32,
+                        "playbookRepoName": "is_if",
+                        "playbookType": "data",
+                        "synchronous": true,
+                        "type": "playbook"
+                    },
+                    "errors": {},
+                    "id": "12",
+                    "type": "playbook",
+                    "warnings": {},
+                    "x": 660,
+                    "y": 1260
+                },
+                "13": {
+                    "data": {
+                        "advanced": {
+                            "customName": "get scheduler artifact",
+                            "customNameId": 0,
+                            "join": []
+                        },
+                        "conditions": [
+                            {
+                                "comparisons": [
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "==",
+                                        "param": "artifact:*.name",
+                                        "value": "scheduled playbook"
+                                    },
+                                    {
+                                        "conditionIndex": 0,
+                                        "op": "==",
+                                        "param": "artifact:*.label",
+                                        "value": "complete"
+                                    }
+                                ],
+                                "conditionIndex": 0,
+                                "logic": "and"
+                            }
+                        ],
+                        "functionId": 4,
+                        "functionName": "get_scheduler_artifact",
+                        "id": "13",
+                        "type": "filter"
+                    },
+                    "errors": {},
+                    "id": "13",
+                    "type": "filter",
+                    "warnings": {},
+                    "x": 1180,
+                    "y": 984.5
+                },
+                "14": {
                     "data": {
                         "advanced": {
                             "join": []
                         },
                         "customFunction": {
                             "draftMode": false,
-                            "name": "debug",
+                            "name": "artifact_update",
                             "repoName": "community"
                         },
-                        "functionId": 3,
-                        "functionName": "debug_3",
-                        "id": "10",
+                        "functionId": 4,
+                        "functionName": "artifact_update_4",
+                        "id": "14",
                         "selectMore": false,
                         "type": "utility",
                         "utilities": {
-                            "debug": {
-                                "description": "Print debug messages with the type and value of 0-10 different inputs. This is useful for checking the values of input data or the outputs of other playbook blocks.",
+                            "artifact_update": {
+                                "description": "Update an artifact with the specified attributes. All parameters are optional, except that an artifact_id must be provided and if one of cef_field or cef_value is provided then they must both be provided. Supports all fields available in /rest/artifact. Add any unlisted inputs as dictionary keys in input_json. Unsupported keys will automatically be dropped.",
                                 "fields": [
                                     {
                                         "dataTypes": [
-                                            "*"
+                                            "phantom artifact id"
                                         ],
-                                        "description": "",
-                                        "inputType": "list",
-                                        "label": "input_1",
-                                        "name": "input_1",
-                                        "placeholder": "",
+                                        "description": "ID of the artifact to update, which is required unless artifact_id is a key within input_json",
+                                        "inputType": "item",
+                                        "label": "artifact_id",
+                                        "name": "artifact_id",
+                                        "placeholder": "1234",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "Change the name of the artifact.",
+                                        "inputType": "item",
+                                        "label": "name",
+                                        "name": "name",
+                                        "placeholder": "artifact",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [
+                                            ""
+                                        ],
+                                        "description": "Change the label of the artifact.",
+                                        "inputType": "item",
+                                        "label": "label",
+                                        "name": "label",
+                                        "placeholder": "events",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "Change the severity of the artifact. Typically this is either \"High\", \"Medium\", or \"Low\".",
+                                        "inputType": "item",
+                                        "label": "severity",
+                                        "name": "severity",
+                                        "placeholder": "Medium",
+                                        "renderType": "datapath",
+                                        "required": false
+                                    },
+                                    {
+                                        "dataTypes": [],
+                                        "description": "The name of the CEF field to populate in the artifact, such as \"destinationAddress\" or \"sourceDnsDomain\". Required only if cef_value is provided.",
+                                        "inputType": "item",
+                                        "label": "cef_field",
+                                        "name": "cef_field",
+                                        "placeholder": "destinationAddress",
                                         "renderType": "datapath",
                                         "required": false
                                     },
@@ -126,153 +268,81 @@
                                         "dataTypes": [
                                             "*"
                                         ],
-                                        "description": "",
-                                        "inputType": "list",
-                                        "label": "input_2",
-                                        "name": "input_2",
-                                        "placeholder": "",
+                                        "description": "The value of the CEF field to populate in the artifact, such as the IP address, domain name, or file hash. Required only if cef_field is provided.",
+                                        "inputType": "item",
+                                        "label": "cef_value",
+                                        "name": "cef_value",
+                                        "placeholder": "192.0.2.192",
                                         "renderType": "datapath",
                                         "required": false
                                     },
                                     {
-                                        "dataTypes": [
-                                            "*"
-                                        ],
-                                        "description": "",
-                                        "inputType": "list",
-                                        "label": "input_3",
-                                        "name": "input_3",
-                                        "placeholder": "",
+                                        "dataTypes": [],
+                                        "description": "The CEF data type of the data in cef_value. For example, this could be \"ip\", \"hash\", or \"domain\". Optional, but only operational if cef_field is provided.",
+                                        "inputType": "item",
+                                        "label": "cef_data_type",
+                                        "name": "cef_data_type",
+                                        "placeholder": "ip",
                                         "renderType": "datapath",
                                         "required": false
                                     },
                                     {
-                                        "dataTypes": [
-                                            "*"
-                                        ],
-                                        "description": "",
-                                        "inputType": "list",
-                                        "label": "input_4",
-                                        "name": "input_4",
-                                        "placeholder": "",
+                                        "dataTypes": [],
+                                        "description": "A comma-separated list of tags to apply to the artifact, which is optional.",
+                                        "inputType": "item",
+                                        "label": "tags",
+                                        "name": "tags",
+                                        "placeholder": "tag1, tag2, tag3",
                                         "renderType": "datapath",
                                         "required": false
                                     },
                                     {
-                                        "dataTypes": [
-                                            "*"
-                                        ],
-                                        "description": "",
-                                        "inputType": "list",
-                                        "label": "input_5",
-                                        "name": "input_5",
-                                        "placeholder": "",
+                                        "dataTypes": [],
+                                        "description": "Optional input. Either True or False with default as False. If set to True, existing tags on the indicator record will be replaced by the provided input. If set to False, the new tags will be appended to the existing indicator tags.",
+                                        "inputType": "item",
+                                        "label": "overwrite_tags",
+                                        "name": "overwrite_tags",
+                                        "placeholder": "True or False",
                                         "renderType": "datapath",
                                         "required": false
                                     },
                                     {
-                                        "dataTypes": [
-                                            "*"
-                                        ],
-                                        "description": "",
-                                        "inputType": "list",
-                                        "label": "input_6",
-                                        "name": "input_6",
-                                        "placeholder": "",
-                                        "renderType": "datapath",
-                                        "required": false
-                                    },
-                                    {
-                                        "dataTypes": [
-                                            "*"
-                                        ],
-                                        "description": "",
-                                        "inputType": "list",
-                                        "label": "input_7",
-                                        "name": "input_7",
-                                        "placeholder": "",
-                                        "renderType": "datapath",
-                                        "required": false
-                                    },
-                                    {
-                                        "dataTypes": [
-                                            "*"
-                                        ],
-                                        "description": "",
-                                        "inputType": "list",
-                                        "label": "input_8",
-                                        "name": "input_8",
-                                        "placeholder": "",
-                                        "renderType": "datapath",
-                                        "required": false
-                                    },
-                                    {
-                                        "dataTypes": [
-                                            "*"
-                                        ],
-                                        "description": "",
-                                        "inputType": "list",
-                                        "label": "input_9",
-                                        "name": "input_9",
-                                        "placeholder": "",
-                                        "renderType": "datapath",
-                                        "required": false
-                                    },
-                                    {
-                                        "dataTypes": [
-                                            "*"
-                                        ],
-                                        "description": "",
-                                        "inputType": "list",
-                                        "label": "input_10",
-                                        "name": "input_10",
-                                        "placeholder": "",
+                                        "dataTypes": [],
+                                        "description": "Optional parameter to modify any extra attributes of the artifact. Input_json will be merged with other inputs. In the event of a conflict, input_json will take precedence.",
+                                        "inputType": "item",
+                                        "label": "input_json",
+                                        "name": "input_json",
+                                        "placeholder": "{\"source_data_identifier\": \"1234\", \"data\": \"5678\"}",
                                         "renderType": "datapath",
                                         "required": false
                                     }
                                 ],
-                                "label": "debug",
-                                "name": "debug"
+                                "label": "artifact_update",
+                                "name": "artifact_update"
                             }
                         },
                         "utilityType": "custom_function",
                         "values": {
-                            "debug": {
-                                "input_1": [
-                                    "check_prompt_status:action_result.data.0.response.password"
-                                ],
-                                "input_10": null,
-                                "input_2": null,
-                                "input_3": null,
-                                "input_4": null,
-                                "input_5": null,
-                                "input_6": null,
-                                "input_7": null,
-                                "input_8": null,
-                                "input_9": null
-                            },
-                            "unzip_file": {
-                                "artifact_id": [
-                                    "filtered-data:filter_file_artifact_with_tag_pwd_protected:condition_1:artifact:*.id"
-                                ],
-                                "container_id": "container:id",
-                                "default_label": "container:label",
-                                "default_severity": "Low",
-                                "default_tag": "unpacked",
-                                "pwd": "check_prompt_status:action_result.data.response.password"
+                            "artifact_update": {
+                                "artifact_id": "filtered-data:get_scheduler_artifact:condition_1:artifact:*.id",
+                                "cef_data_type": null,
+                                "cef_field": null,
+                                "cef_value": null,
+                                "input_json": null,
+                                "label": "pending",
+                                "name": null,
+                                "overwrite_tags": null,
+                                "severity": null,
+                                "tags": null
                             }
                         }
                     },
                     "errors": {},
-                    "id": "10",
+                    "id": "14",
                     "type": "utility",
-                    "warnings": {
-                        "config": [
-                            "Reconfigure invalid datapath."
-                        ]
-                    },
-                    "x": 960,
-                    "y": 1084.5
+                    "warnings": {},
+                    "x": 1120,
+                    "y": 1164.5
                 },
                 "2": {
                     "data": {
@@ -347,6 +417,8 @@
                 "4": {
                     "data": {
                         "advanced": {
+                            "customName": "decission prompt",
+                            "customNameId": 0,
                             "join": []
                         },
                         "conditions": [
@@ -375,13 +447,14 @@
                                     }
                                 ],
                                 "conditionIndex": 1,
+                                "customName": "pending",
                                 "display": "Else",
                                 "logic": "and",
                                 "type": "else"
                             }
                         ],
                         "functionId": 1,
-                        "functionName": "decision_1",
+                        "functionName": "decission_prompt",
                         "id": "4",
                         "type": "decision"
                     },
@@ -389,8 +462,8 @@
                     "id": "4",
                     "type": "decision",
                     "warnings": {},
-                    "x": 1070,
-                    "y": 784.5
+                    "x": 1060,
+                    "y": 780
                 },
                 "5": {
                     "data": {
@@ -561,7 +634,7 @@
         "schema": "5.0.10",
         "version": "6.1.1.211"
     },
-    "create_time": "2023-11-29T13:16:23.074010+00:00",
+    "create_time": "2023-11-29T13:23:56.691497+00:00",
     "draft_mode": false,
     "labels": [
         "*"
